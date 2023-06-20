@@ -1,0 +1,166 @@
+SSA AI State Engine
+
+Personality traits tracked:
+	Accuracy
+	Focus (determination to stay on one target)
+	Interest in primary goal (vs smaller targets)
+	Randomness (how much other stats vary unpredictable)
+	Respect for wingleader (doesn't matter who it is)
+	Bravery (at what point do they pull out?)
+	Team spirit (will they help others in trouble?)
+	Ego (will they ask for help?)
+
+Ships track the following stats:
+	Frame (this is how it looks)
+	Maneuverability (how quickly it responds to turns)
+	Firepower
+	Speed (uncertain due to railed nature of game)
+	Shield strength
+	Upgradeability (how much the powerups increase power)
+	Weapon Accuracy (how much they drift)
+
+	-Performance decreases with damage
+
+States:
+	No Status (flying on wing)
+	Aquiring target (target identified)
+	Pursuing target (with lock)
+	Pursuing primary target
+	Withdrawing
+
+Always check stats with randomness factor when making determinations
+
+No Status:
+	If Wingleader requests assistance, check respect, acquire target
+	If Team needs assistance, check team spirit, acquire target
+	If a target is in view, check interest. If FAIL, acquire new target
+	If primary target in view, check interest*2, acquire target
+
+Acquiring Target:
+	Check determination, if fail, check as for on wing
+	If primary target in range and is not target in question, check interest, then
+		acquire primary if pass
+	Check for lockon, change to pursuing if pass
+
+Pursuing target:
+	Check determination, if fail, check for as on wing
+	Check primary as in acquiring
+	If target destroyed, return on-wing
+
+Primary Target:
+	Check interest and determination, if fail, check for other targets as on wing
+	Check for assistance as in on wing, pass with determination as well
+
+Withdrawing:
+	No change, just trying to escape area
+
+In all phases, check if being attacked. If rapid drop in shields, check ego and call for 
+assistance, check bravery to see if it's time to withdraw.
+
+If being attacked by player, warn player about friendly fire, then check respect and
+determine whether to return fire
+
+--
+SSA Character AI notes
+
+Kilor the Lion - Aggressive and focused on the goal
+	Accuracy 		- 80
+	Focus 			- 85
+	Interest in primary goal- 85
+	Randomness 		- 10
+	Respect for wingleader 	- 90
+	Bravery 		- 95
+	Team spirit 		- 90
+	Ego 			- 90
+
+Victor the Fox - Evasive, interested in goal and defenses
+	Accuracy 		- 85
+	Focus 			- 95
+	Interest in primary goal- 95
+	Randomness 		- 15
+	Respect for wingleader 	- 75
+	Bravery 		- 85
+	Team spirit 		- 80
+	Ego 			- 95
+
+Jupiter the Griffon - Cautious
+	Accuracy 		- 90
+	Focus 			- 80
+	Interest in primary goal- 60
+	Randomness 		- 5
+	Respect for wingleader 	- 80
+	Bravery 		- 75
+	Team spirit 		- 70
+	Ego 			- 70
+
+Kik-Mi-7x the Cyborg - A little wild, unfocused
+	Accuracy 		- 55
+	Focus 			- 35
+	Interest in primary goal- 10
+	Randomness 		- 25
+	Respect for wingleader 	- 45
+	Bravery 		- 55
+	Team spirit 		- 30
+	Ego 			- 15
+
+Beep the Dolphin - Deliberate and determined
+	Accuracy 		- 90
+	Focus 			- 90
+	Interest in primary goal- 20
+	Randomness 		- 5
+	Respect for wingleader 	- 90
+	Bravery 		- 90
+	Team spirit 		- 90
+	Ego 			- 70
+
+Gord the human - Random
+	Accuracy 		- 50
+	Focus 			- 50
+	Interest in primary goal- 50
+	Randomness 		- 50
+	Respect for wingleader 	- 50
+	Bravery 		- 25
+	Team spirit 		- 50
+	Ego 			- 25
+
+Lawrence the human - Direct and focused
+	Accuracy 		- 85
+	Focus 			- 90
+	Interest in primary goal- 85
+	Randomness 		- 15
+	Respect for wingleader 	- 70
+	Bravery 		- 80
+	Team spirit 		- 65
+	Ego 			- 80
+
+Zumi the Human - Determined and intent
+	Accuracy 		- 95
+	Focus 			- 95
+	Interest in primary goal- 95
+	Randomness 		- 5
+	Respect for wingleader 	- 55
+	Bravery 		- 85
+	Team spirit 		- 55
+	Ego 			- 95
+
+Captain C the Human - Focused and brave
+	Accuracy 		- 85
+	Focus 			- 95
+	Interest in primary goal- 25
+	Randomness 		- 5
+	Respect for wingleader 	- 85
+	Bravery 		- 95
+	Team spirit 		- 85
+	Ego 			- 90
+
+Shadow the Dragon - Dangerous and strong
+	Accuracy 		- 90
+	Focus 			- 90
+	Interest in primary goal- 75
+	Randomness 		- 10
+	Respect for wingleader 	- 40
+	Bravery 		- 80
+	Team spirit 		- 30
+	Ego 			- 65
+
+Bonus characters to be defined.

@@ -1,0 +1,64 @@
+
+*******
+
+COMPUTER (always a reasonable monotone - computers don't get excited or bored. They simply report facts.)
+
+"All scans confirm civilian status. Repeat. Scan confirms enemy vessels are not armed."
+
+"Working..."
+
+"Security Alert! Qwertian (qwer-she-an) encrypted transmission detected during scan."
+
+"Signal carrier lost."
+
+"Processing... (pause) Data transfer complete. (brief pause) Data acknowledged."
+
+"Incoming message from Tarian (tar-ee-an) Headquarters:"
+
+"Primary target aquired."
+
+"Warning: Shields at fifty percent power."
+
+"Warning: Severe ship damage."
+
+"Warning: Enemy lock-on detected."
+
+"Evasive maneuvers: Weapon charging."
+
+"Incoming transmission from enemy craft."
+
+*******
+
+MISSION 2 - Enemy voice (commanding and no-nonsense.)
+"Attention Incoming Ships! This is the Vorakian military carrier Scorzar (score-zar). Identify yourselves. Repeat: identify yourselves immediately."
+
+*******
+
+MISSION 5 - Cruise Fleet
+
+(the operator is understandably scared in the first transmission, as a fleet of fighters appeared out of nowhere and started attacking without warning.)
+"Alert! Attacking vessels! This is the Tarian (Tar-ee-an) cruise fleet Yorick. We are an unarmed civilian cruise fleet! Please break off your attack!"
+
+(the attack has not stopped, so as of this message the operator is even MORE scared, trying desperately to negotiate a stop, to save himself and the passengers.)
+"Repeat! Attacking vessels! We are an UNARMED CIVILIAN fleet! We will surrender and permit boarding! Please break off your attack!"
+
+(now the attack has caused the loss of one of the ships. It's obviously too late to reason with the attackers, so the operator is making a last-ditch, panicked call for help.)
+"Mayday! Mayday! All Tarian-friendly vessels! This is the civilian cruise fleet Yorick! We are under attack by unidentified pirates! We have lost one vessel already! Please assist!"
+
+*******
+
+Mission 8 - Chase
+(this is a message from Tarian headquarters authorizing capture or destruction of the General)
+
+"Mercenary Force Space Acer, this is Tarian headquarters. We have received your message and verified the data therein. In agreement with the Vorakians we are requesting your services to detain or detroy the invading Qwertian forces. Standard fees for your services will be paid. Inform when mission accomplished."
+
+*******
+
+BAD ENDING
+(this is a reporter on a telecast stating the current status of the war. It's a standard news broadcast, and hints some more at what the player missed. It fades in and out, so read the lines as if you were in the middle of a broadcast report.)
+
+"...has now declared a state of emergency, as the unprovoked war escalates to  all-out destruction, with both forces suffering heavy losses. Although there have been uncomfirmed rumours of Qwertian (qwer-she-an) broadcasts in the area, both leaders have commented that they are too busy with the war effort to devote resources to investigating these..."
+
+*******
+
+

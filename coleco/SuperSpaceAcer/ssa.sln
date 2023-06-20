@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ssa", "ssa\ssa.vcxproj", "{19ED3B08-3BD2-412C-B97E-8E578349662A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "packboss", "packboss\packboss.vcxproj", "{5623D5E8-E324-4BB4-A905-324A3E740296}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19ED3B08-3BD2-412C-B97E-8E578349662A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{19ED3B08-3BD2-412C-B97E-8E578349662A}.Debug|Win32.Build.0 = Debug|Win32
+		{19ED3B08-3BD2-412C-B97E-8E578349662A}.Release|Win32.ActiveCfg = Release|Win32
+		{19ED3B08-3BD2-412C-B97E-8E578349662A}.Release|Win32.Build.0 = Release|Win32
+		{5623D5E8-E324-4BB4-A905-324A3E740296}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5623D5E8-E324-4BB4-A905-324A3E740296}.Debug|Win32.Build.0 = Debug|Win32
+		{5623D5E8-E324-4BB4-A905-324A3E740296}.Release|Win32.ActiveCfg = Release|Win32
+		{5623D5E8-E324-4BB4-A905-324A3E740296}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

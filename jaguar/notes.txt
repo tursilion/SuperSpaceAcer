@@ -1,0 +1,89 @@
+SSA Concepts
+------------
+-Texture map only every second pixel, can then light source by changing
+colours of the underlying polygons
+
+-analog control
+
+-in-cockpit view
+
+-aliens who kamikaze and swerve into you at the last second
+
+-a midboss who is a space satelite with mirrors that reflect a simulated starfield
+
+-gratuitious video footage on CD, such as running around the house with the "Doom-Cam", using Doom sounds for opening doors and creatures like Rocky (Gord's house)
+
+-background? A car lot with a road running to it? In space?
+
+-voxel-mapping routines used for the planet surfaces
+
+-enemies/shots/obstacles and so on which are not lined up on the Y-axis can be masked out (like non-selectable options in menus).. perhaps a different colour for above/below?
+
+-Scroll text at end uses the curly apostrophes... near the end mention 'Do you notice that we used *real* apostrophes with curly tails?'
+
+-using the sight of Moving Target to chase the stick man around
+
+-Llama space invaders
+
+-asteroids with the ship and programmer heads as the rocks 
+
+-pacman chasing the ship as an intermission? (maybe some sort of subtle pac-man-esque screen where you can clear dots, then blink maze if it's done?)
+
+-programmer heads as hidden bosses
+
+-school busses
+
+-stars turning into chickens a la Mega Man 2
+
+-boom mikes being lowered during cinemas
+
+-happy faces appearing in the 0's and sticking out tongues
+
+-32 digit score
+
+-people who refused to star in this game
+
+-comment during attract that the ship is an economy model
+
+-weird bosses like the Sunny Raystation
+
+-3DO mode of 7fps?
+
+-code to make first boss run in fear with big eyes and yelping sound
+
+-While boss blowing up, panning of camera around behind boss, then panning to watch player fly off past it
+
+-rotating ship view during attract mode a la ST version
+
+-different death effects (disintegrate, ambulance, transporter, etc)
+
+-Konami 30-man code works
+
+-flame trails on engines?
+
+-rotating transparent vector views of the boss before each level
+
+-1/150 chance that on boot up the title page comes up as "The Adventures of Fluffy the Bear and Friends" instead, complete with cute music. On button press, display, '(Ok, ok... just kidding)' and start with normal intro.
+
+-Random debris in space, including EGM magazines
+
+-hidden eagle under wing
+
+-hidden lion icon for greet screen
+
+-In credits:
+People who have Helped
+Gordon Haddrell
+Steve Brent
+Michael Shawstad
+etc
+
+People who have *not* helped
+Jon Correll
+Bill Reboc
+With few exceptions, damn near everyong at Atari Corp (which is now defunct anyway).
+
+-Exploding intro sequence, like Jack Slater in Last Action Hero
+
+-at end of long credit list, note "This is the end of our programming day, thank you for watching", and go into a TV test pattern.
+

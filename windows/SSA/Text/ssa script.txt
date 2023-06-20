@@ -1,0 +1,303 @@
+** Beta - This information is not for release to others. For your own use only, please. **
+Super Space Acer: Extreme
+This is the general storyboard document for Super Space Acer: Extreme, including all speech and a 
+general overview of the storyline accompanying it. For specific scripts, there are 3 separate documents 
+(Player, General and Misc)
+
+VOICE-OVER for INTRODUCTION
+
+"The Tarian (Tar-ee-an) race has long been respected for their quiet peacefulness. Although they possess 
+rather advanced technology and have been space-faring for eons, they possess a refreshing lack of interest 
+in war. They have enjoyed, in this time, a valuable trade alliance with their neighbors, the Vorakians 
+(vore-ack-ee-ans), in return for a protection agreement, and some training and weapons for their own 
+defense."
+
+"It came as a great surprise to all observers when the Vorakians launched a deadly assault on the Tarians, 
+crippling their offensive capibilities in a single planet-wide attack. The Tarians were left with no choice 
+but to declare war. Their defenses were enacted, and their remaining fleet placed in orbit to protect the 
+planet as the military raced to create the weapons they needed. Further attacks came.. some were repelled, 
+some accomplished their goal. The Tarians were making progress in their building, but it seemed to many 
+to be too slow. The Tarian council decided to launch strategic offensive strikes in order to slow the 
+Vorakian war effort, long enough for their own military to complete the construction of the necessary 
+warships and weapons."
+
+"The Tarians chose not send their own valuable troops on these missions, but to recruit the assistance of 
+professionals.. the team Space Acer."
+
+"Kilor (kil-lor) - Once a proud warrior on his home planet, his family was disgraced in a massive war. 
+Unable to remain, he became a mercenary in order to survive. He is an aggressive and direct fighter."
+
+"Victor Ericson - the son of a rich aristocrat, he had the best life, and the best training money could buy. 
+He joined the ranks of Space Acer in order to prove that he's not just some 'pretty flyboy'."
+
+"Jupiter Orion - a skilled and accurate pilot, he prefers not to talk much about his past, though some of the 
+other pilots rumor about a past life as a male model. He is relatively good natured out of the cockpit."
+
+"Shadow - a dark-tempered pilot as dangerous out of the cockpit as he is in. Some say his parents were 
+killed when he was very young, but he doesn't take well to questioning. Being in his sights.. in any 
+situation.. is a bad thing."
+
+"Beep - from an aquatic world, Beep is an unlikely fighter pilot. He is a deliberate and focused pilot, but 
+often far too cheerful. His quick reflexes and accuracy make him a valuable member."
+
+"Binky - a brilliant scientist, who discarded his dying body and transplanted his brain into a mechanical 
+body. Some would say the transplant made him just a little unstable, and Binky himself can not tell you 
+why he is now a mercenary... it just 'seemed like the thing to do.'"
+
+"Wombat - a direct and often sarcastic character, he is also a direct and skilled pilot. Tends not to waver 
+from his goal until accomplished. If you want an opinion, ask. If you want to destroy a target, he can do 
+that, too."
+
+"Zumi (zoo-me) - a deadly combination of beauty and skill, Zumi is a force to be reckoned with. Her 
+accuracy is among the best and she is as adept at attacking defending forces as attacking the primary 
+target."
+
+"Gord - a wildcard in every sense of the word. Gord tends to fly randomly, attack and break off of targets 
+at random, and even his skills seem random. His major strength, however, is that the randomness seems 
+to work for him. Some say that he controls random events himself, a rumor he is happy to encourage."
+
+"Captain C - while he fancies himself a superhero from the distant and long-passed Communist Russia, he 
+is neither Soviet nor Communist, and in fact has never even been to Earth. However, it is difficult to 
+convince him that these facts are important, and so he carries on. Despite this, he is an extraordinary pilot 
+with deliberate handling."
+
+(title) "SUPER SPACE ACER ... EXTREME!"
+
+MISSION 1 - end ongoing battle
+(General) - "Thank you for responding so quickly! We've been under attack by the Voraks (vore-aks), a 
+foul race apparently bent on our destruction! They've been streaking in and attacking our cruisers and 
+colonies. We do not have adequate facilities for space-based combat, so we need you to make surgical 
+strikes aimed at disabling their space forces, so that we can move our troops in."
+"Your first mission is to end an attack already in progress! The Vorak forces are currently attacking a 
+peaceful colony near your position. We want you to get in there and take them down! This is a test, to see 
+if you are as good as you claim to be. You should have the element of surprise. Good luck!"
+(Wingleader acknowledge instructions) - Affirmative, General. We’re on our way.
+[Mission opens - flying up towards ruined city, which is the arena for this battle. There are a set number 
+of enemy craft, which are the only enemies.]
+(Wingleader introduces start of mission) - All forces ready? There they are!
+(Wingleader orders Status Check)
+MISSION 2 - take out transport
+(General) - "We have located one of their smaller transport ships nearby - carrying fighters. You can 
+expect up to 20 fighters inside this ship. We believe they are moving into position for a new assault. 
+Avenge our colony and take this ship down!"
+
+(Wingleader acknowledge instructions) - No problem, General. Downloading data... team: maintain radio 
+silence for approach. 
+[Deep Space, approaching rather large carrier ship. Up to 20 fighters will emerge from this mothership. 
+It’s own defenses are regular cannons.]
+
+(Enemy voice (commanding and no-nonsense.)) - "Attention Incoming Ships! This is the Vorakian 
+military carrier Scorzar (score-zar). Identify yourselves. Repeat: identify yourselves immediately."
+
+ (Wingleader introduces start of mission) - They’ve seen us! Move in quickly and take them out.
+(Wingleader orders Status Check)
+MISSION 3 - take out launch site
+
+(General) - "I'm impressed! Your next mission is a surgical strike against the Oceania world. This planet 
+serves as a weapons manufacturing and storage facility. It also has a launch site capable of interplanetary 
+missiles! We want you to go in and take out the launch structure. It will be well guarded."
+(Wingleader acknowledge instructions) - Understood, General.  
+[Open over ocean surface, gentle waves. Will approach large missile launch facility at end of mission. 
+There are surface ships and turrets firing cannons and the odd rocket, as well as aerial support.]
+(Wingleader introduces start of mission) - Stay together and stay on course!
+[Upon appearance of launch facility. Fires seeking rockets and lasers, has aerial and surface support. ]
+(Wingleader announces target) - There’s the launch facility! Take it out!
+(Wingleader orders Status Check)
+MISSION 4 - desert canyon dam
+(General) - "Your next target is on the Microft (My-croft) world. The world is a desert with only a few 
+large water sources. The Vorakians (vor-ak-ee-ans) have dammed the largest one in order to generate 
+power for their military bases. Our troops are prepared to begin their assault on this world, and we require 
+you to prepare the site. You will have to fly through a deep canyon to the dam in order to avoid heavy 
+surface protection. Your target will be the power generating dam at the end of the canyon. If you do find 
+any targets in the canyon, feel free to attack, but they are not your primary concern."
+
+(Wingleader acknowledges instructions) - We’re on it, General.  
+[Flying in long, narrow and winding canyon. There is some ground and wall-mounted defenses, but it’s 
+mostly a flying exercise. Small river at bottom of canyon. Ceiling at top of canyon to prevent cheating.]
+(Wingleader acknowledges start of mission) - Stay close and watch the walls! Keep your eyes open for 
+enemy fire, there isn’t much room to maneuver!
+[At end of canyon, there is a large dam in the way. It will only take a few shots to take it out (the 
+alternative is to slam into it… missing is not an alternative. Dam breaks up with water gushing out as 
+craft pull up.]
+(Wingleader on dam destruction) - It’s breaking up! All craft, pull up!
+(Wingleader orders Status Check)
+MISSION 5 - troop transports?
+[Last mission where withdrawal is permitted… and it is required for the right ending.]
+(General) - "Our plan is nearly complete. Your next mission will be enroute to the Vorakian homeworld. 
+There is a fleet of five troop transports moving together. They are travelling incognito (in-cog-nee-toe), 
+and may attempt to convince you that they are civilian. You MUST stop these carriers from reaching their 
+destination."
+
+(Wingleader acknowledges instructions) - Roger, General.  
+[Deep space, 5 large craft, different style than the motherships previously seen. They have no weapons.]
+(Wingleader introduces start of mission) - There they are... I don’t think we’ve been spotted. Let’s finish 
+them before they can launch fighter support.
+[At first few hits:]
+(the operator is understandably scared in the first transmission, as a fleet of fighters appeared out of 
+nowhere and started attacking without warning.)
+"Alert! Attacking vessels! This is the Tarian (Tar-ee-an) cruise fleet Yorick. We are an unarmed civilian 
+cruise fleet! Please break off your attack!"
+
+[After a little more damage (50% to a vessel?)]
+(the attack has not stopped, so as of this message the operator is even MORE scared, trying desperately to 
+negotiate a stop, to save himself and the passengers.)
+"Repeat! Attacking vessels! We are an UNARMED CIVILIAN fleet! We will surrender and permit 
+boarding! Please break off your attack!"
+
+[a short time later]
+(Wingman commenting) - Strange.. they haven’t launched any defenses yet.
+
+[Still more time - final warning (75% damage?)]
+(Computer) - "All scans confirm civilian status. Repeat. Scan confirms enemy vessels are not armed."
+
+[finally, one enemy vessel destroyed]
+(now the attack has caused the loss of one of the ships. It's obviously too late to reason with the attackers, 
+so the operator is making a last-ditch, panicked call for help.)
+"Mayday! Mayday! All Tarian-friendly vessels! This is the civilian cruise fleet Yorick! We are under 
+attack by unidentified pirates! We have lost one vessel already! Please assist!"
+
+[At this point friendly fighters begin to warp in, and will continue to do so until all cruise vessels are 
+destroyed.]
+(Wingleader orders Status Check)
+MISSION 6a - final assault - this is the bad end
+
+[in this mission, the player did NOT learn the General's true nature.. he is still the 'good guy']
+(General) - "This is your final mission - an assault on the Vorakian homeworld. We are interested in the 
+destruction of their primary military headquarters. Our own fighters will be poised to eliminate their 
+backup centers during the confusion you create with the destruction of central HQ. You can expect heavy 
+defenses."
+
+(Wingleader acknowledges instructions) - You’ve got it, General.  
+[Flying over a desert area with military structures, camps, missile bases, laser towers, air and ground 
+support.]
+(Wingleader introduces start of mission) - This is the big one, guys. Stay alert and let’s take it home!
+[Final target is a large building similar to NDHQ Ottawa with mounted defenses. When building is 
+destroyed, it crumbles around a large mech who begins an attack. He has rockets and a laser, and prefers 
+to walk, but can fly for short hops. Will punch ships that get too close for heavy damage.]
+(Wingman, expressing surprise) - What’s THAT?
+(Wingleader, seeing new target) - New primary target! Let’s punch a couple of holes in that thing!
+(Wingleader orders Status Check)
+Bad End
+[Awards ceremony in a large room. Camera pans from the side, around the room, from near the back. 
+This will fade in and out as the camera pans.]
+(General) - "...and thanks to the superb, professional flying of this tactical fighter squadron, we have 
+achieved our goals, with the battle against the Voraks finally turned in our favour. To them we award..."
+
+[Near the end of the pan, the camera reaches a television news broadcast. This fades in as the General 
+fades out, and fades out itself as the screen fades to black.]
+(Reporter) - "...has now declared a state of emergency, as the unprovoked war escalates to  all-out 
+destruction, with both forces suffering heavy losses. Although there have been uncomfirmed rumours of 
+Qwertian (qwer-she-an) broadcasts in the area, both leaders have commented that they are too busy with 
+the war effort to devote resources to investigating these..."
+
+MISSION 6b - A new plan - this is the proper path
+[This is set in deep space after the aborted attack on the civilian vessels.]
+(Wingleader, musing in cinema) - Why would we be sent against an unarmed civilian vessel? (pause) 
+Computer! Scan for and decode any encoded Vorakian transmissions.
+(Computer) - "Working..."
+(Wingman, noting computer pause) - Maybe we were wrong...?
+(Wingleader, replying) - I don’t think so...
+[Computer beeps]
+(Wingleader, computer indicated results) - Ah ha! We may have some answers.  
+(Computer) - "Security Alert! Qwertian (qwer-she-an) encrypted transmission detected during scan."
+(Wingleader, shocked) - Qwertians! (Qwer - she - ans) What are those war-mongers doing here? 
+Computer - decrypt transmission!  
+(Computer) - "Working..."
+[message in General’s voice fades in from random blips as code is broken]
+(General) - "...<evil chuckle>, yes, my lord, neither side is aware of our interference. The details we 
+planted have both sides believing the mercenary force Space Acer was hired by the other side. The 
+mercenaries are even now striking a civilian fleet - I am sure that will be the final catalyst to the all-out 
+war we seek."
+
+[indecipherable sounds, too low and rumbly]
+(General) - "No, my lord, they are but fools. They would not realize in time, even if they cared to. As a 
+bonus, both sides of the battle will be engaged in destroying them, cleaning up for us, if you will. I 
+estimate we can move our primary forces into both worlds in less than a scalair (ska-lair)."
+
+[more indecipherable. This one fades back into the random blips and fades out quickly.]
+(General) - "Our current location is in the Vexsar (vex-sar) system, but we are preparing  to relocate our 
+fleet to..."
+
+(Computer) - "Signal carrier lost."
+
+(Wingleader, having heard the team was being used) - I’ve heard enough.  Team, what say we show the 
+‘General’ our appreciation at being part of his little game?
+(Wingman, just agree, optionally comment) - Yeah!
+(Wingleader) - But first, Computer! Transmit intercepted message to both Tarian and Vorakian 
+Headquarters. Include all relevant data.
+(Computer) - "Processing... (pause) Data transfer complete. (brief pause) Data acknowledged."
+
+(Wingleader, commanding new course) - Set course for Vexsar! Engage warp drives!
+[Finally, the level. The warp is like a long, multicoloured star/coloured streak tube, spinning away. There 
+are rocks and random electrical activity to beware of, as well as assorted debris.]
+(Wingleader, after warp) - Okay, we’re in range. Disengage warp!
+[Graphics show warp returning to deep space. A very large ship is in the distance.]
+(Wingleader orders Status Check)
+MISSION 7 - confrontation
+[Ships continue moving forward in space towards the General’s ship.. this mission continues smoothly 
+from the last. There is an asteroid belt in the background.]
+(Wingleader, introducing mission) - We’re moving in... ah! They’ve detected our arrival.
+(General) - (at this point, the General does not yet know he has been found out.. so he is still playing good 
+guy.)
+"Space Acer! What a surprise... why did you not report your last mission?"
+
+(Wingleader, replying to General) - We don’t appreciate playing games, General. We know what you’re 
+up to. We aren’t going to take it.  
+(General) - "(pause) Then you'll die."
+
+[Many small fighters swarm out of the mothership. Likewise, the mothership fires large barrages of 
+missiles and lasers at the player. After a bit of attack (perhaps after circling the mothership?):]
+(Wingleader, after a bit of attack) - The primary target is the main generator at the rear of the mothership. 
+Try to focus on that!
+[Mothership explodes and disintegrates. As it breaks up, the General escapes into the nearby asteroid belt, 
+shouting taunts.]
+(General) - (after the battle, the General tries escaping in a small ship as his main ship explodes. He is 
+angry and somewhat anxious, so his speech should be loud and fast.)
+"You fools! I'll personally see you all dead!"
+
+(Wingleader orders status check)
+MISSION 8 - Chase
+[The team is paused after the destruction of the main ship.]
+(Computer) - "Incoming message from Tarian Headquarters:"
+
+(Tarian HQ) - "Mercenary Force Space Acer, this is Tarian headquarters. We have received your message 
+and verified the data therein. In agreement with the Vorakians we are requesting your services to detain or 
+detroy the invading Qwertian forces. Standard fees for your services will be paid. Inform when mission 
+accomplished."
+
+(Wingleader, after reply from Tarian HQ, noting escaping General) - You heard them, team. Let’s get 
+him!
+[A fast and tight chase through a dense asteroid field. Towards the end a star becomes visible just outside 
+it. There are no weapons, but small asteroids may be broken up.]
+(General) - "Still alive, fools? Follow me if you dare!"
+
+[Wingleader orders status check]
+Mission 9 - Artificial Star
+[Upon exit of the asteroid belt, the General’s ship flies straight into a star.]
+(Wingman, upon exitting asteroid field) - He’s headed straight for that star!
+[Flight is over a large artificial star, with flares and fireballs the only obstacles. The General flies into a 
+flaming cave, and the team follows. The cave is tight and very fast.. the General disappears around a few 
+bends. Finally, the team emerges into a large cavern, but it’s empty.]
+(Wingleader)  - No! We’ve lost him! Check all scanners!
+[The General bursts through a flaming wall in a huge, flame-coated Phoenix ship.]
+(Wingman as General bursts into view) - Look out!
+(General) - "There is no escape now! Prepare to die!"
+
+[Phoenix attacks with fireballs and lasers. The central cockpit is an obvious target in it’s design, otherwise 
+it’s all flame covered.]
+
+(Wingleader) - Primary target is the central navigation module! Don’t get too close!
+[As the phoenix is destroyed, it breaks up and falls into the ‘lava’.]
+(General) - "No! It can not be! Nooooooooooooo!!!!"
+
+[brief pause, then cave begins to shake, flaming debris falls from roof]
+(Computer) - Warning! Artificial Star stabilization unit damaged. Collapse and nova explosion imminent.
+(Wingleader: ) Emergency maneuvers! Maximum thrust, we’ve got to get out of here!
+[VERY fast retreat through the cave as it begins to break up and collapse]
+All Clear!
+[Space, flying away from star as many prominences and explosions rock it, followed by the star collapsing 
+and then a massive nova, rocking the craft a bit as the shockwave passes. Ships may celebrate with a few 
+barrel rolls after that]
+(Wingleader) - Mission Accomplished! Repeat, Mission Accomplished! Great Work, team. Let’s get out 
+of here.
+[Credits rolls, with flashbacks to scenes in the actual game.]

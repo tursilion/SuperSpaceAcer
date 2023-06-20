@@ -1,0 +1,280 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Project.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\Project.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROJECT_DIALOG DIALOGEX 0, 0, 268, 137
+STYLE WS_POPUP | WS_VISIBLE | WS_BORDER
+EXSTYLE WS_EX_APPWINDOW
+FONT 10, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,7,6,254,124
+    CONTROL         136,IDC_STATIC,"Static",SS_BITMAP,92,19,154,39
+    CONTROL         137,IDC_STATIC,"Static",SS_BITMAP,92,62,156,51
+    CONTROL         131,IDC_Anim,"Static",SS_BITMAP,17,33,63,70
+END
+
+IDD_FRMSETTINGS_DIALOG DIALOG DISCARDABLE  0, 0, 362, 202
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select 3D Device"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,304,181,50,14
+    PUSHBUTTON      "&Test",IDC_Test,7,181,50,14
+    CONTROL         "List1",IDC_LIST1,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,7,21,348,65
+    LTEXT           "Detected 3D Devices - Select One",IDC_STATIC,7,7,348,10
+    PUSHBUTTON      "Cancel",IDC_Cancel,205,181,50,14
+    CONTROL         "List2",IDC_LIST2,"SysListView32",LVS_LIST | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOCOLUMNHEADER | 
+                    WS_BORDER | WS_TABSTOP,7,102,348,63
+    LTEXT           "Available Modes - Select One",IDC_STATIC,7,91,125,10
+    PUSHBUTTON      "&Help",IDC_myHELP,106,181,50,14
+END
+
+IDD_TESTSCREEN_DIALOG DIALOG DISCARDABLE  0, 0, 128, 73
+STYLE WS_POPUP
+FONT 18, "MS Sans Serif"
+BEGIN
+    CONTROL         131,IDC_STATIC,"Static",SS_BITMAP,3,3,36,38
+    LTEXT           "You should be able to see\nthis document and read\nthis text. If you can, then\nthis graphics mode works\nand can be used for the\ngame.",
+                    IDC_STATIC,43,3,82,52
+    LTEXT           "Please wait 10 Seconds...",IDC_STATIC,3,60,122,9
+END
+
+IDD_FRMHELP_DIALOG DIALOG DISCARDABLE  0, 0, 137, 131
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Device Selection..."
+FONT 10, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,80,110,50,14
+    LTEXT           "It's known that not all graphics modes will work with all graphics cards. Therefore you must test the mode you wish to use before running the game. Certain combinations will not work with hardware ",
+                    IDC_STATIC,7,7,123,42
+    LTEXT           "(for example, 3DFX cards can not perform hardware acceleration in any depth except 16 bits, although they provide other modes). Although nearly every mode will work with Software Emulation, be aware that Software mode is *very* slow. :)",
+                    IDC_STATIC,7,49,123,59
+END
+
+IDD_FRMGAME_DIALOG DIALOG DISCARDABLE  0, 0, 320, 201
+STYLE DS_SYSMODAL | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "TursiSoft\0"
+            VALUE "FileDescription", "Super Space Acer - PC Version\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "SSA\0"
+            VALUE "LegalCopyright", "This Production is Copyright (C) 2000 Mike Brent/TursiSoft.\0"
+            VALUE "LegalTrademarks", "SSA, Super Space Acer are trademarks of Mike Brent, licensed to TursiSoft. \0"
+            VALUE "OriginalFilename", "Project.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Super Space Acer\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROJECT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 261
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_FRMSETTINGS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 355
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 195
+    END
+
+    IDD_TESTSCREEN_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 125
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 69
+    END
+
+    IDD_FRMHELP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 130
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 124
+    END
+
+    IDD_FRMGAME_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_Ship1               BITMAP  DISCARDABLE     "res\\ssa.bmp"
+IDB_Ship2               BITMAP  DISCARDABLE     "res\\ship2.bmp"
+IDB_Ship3               BITMAP  DISCARDABLE     "res\\ship3.bmp"
+IDB_Ship4               BITMAP  DISCARDABLE     "res\\ship4.bmp"
+IDB_Title               BITMAP  DISCARDABLE     "res\\title.bmp"
+IDB_Copyright           BITMAP  DISCARDABLE     "res\\copyright.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDP_SOCKETS_INIT_FAILED "Windows sockets initialization failed.\nNetwork play will not be available."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Project.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

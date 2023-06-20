@@ -1,0 +1,103 @@
+Super Space Acer - Extreme engine - system scalable
+object definition. 
+
+Version 0.1 - Definately subject to change.
+
+--------------------------------------------------
+(abstract sample - doesn't draw anything useful)
+
+[SSA OBJECT 1.0]
+
+#include <stdheader.h>
+
+#define NEW replace-string
+
+UNITSPERMETER 10;
+
+SURFACE {
+BASECOLOR r,g,b;
+BITMAP <picture.bmp> ;
+GLOSSINESS 99%;
+} MYSURFACE;
+
+PRIORITY 0;
+USE MYSURFACE;
+TRIANGLE (x,y,z)-(x,y,z)-(x,y,z);
+STRIP (x,y,z)-(x,y,z)-(x,y,z)-(x,y,z)-(x,y,z)-(x,y,z);
+
+PRIORITY 1;
+USE MYSURFACE;
+TRIANGLE (x,y,z)-(x,y,z)-(x,y,z);
+
+END
+
+---------------------------------------------------
+[SSA OBJECT 1.0]
+Must be the first instruction in any file
+
+#include <file>
+Includes the specified file as if it were part of this one
+
+#define <name> <string>
+Preprocesses each line of the file as it's read with the
+requested substituion. No variables are allowed and the
+expansion is only done once. ;)
+
+UNITSPERMETER x;
+The indicates the scale of the object, and is an integer 
+between 1 and 10000. The scale of an object therefore
+ranges from 2 meters to 20kms. Servers may adjust
+undesired scales, so be warned.
+
+SURFACE { } <name>;
+Defines a surface type which will be used for texturing.
+Allows the following commands:
+
+	BASECOLOR (R,G,B);
+	This keyword is mandatory.
+	It is the flat shade color used under any textures,
+	or if texturing is too expensive. RGB is expressed
+	as 24-bit, each value 0-255 (0x00-0xff)
+
+	BITMAP <picture.bmp>;
+	Assigns a bitmap to this surface. The bitmap will
+	be stretched onto the object. This keyword is optional.
+
+	GLOSSINESS X;
+	Specifies the glossiness of this object, used to
+	merge in the environment map. The '%' is optional
+	and the value is from 0-100. The default is 0.
+
+PRIORITY x;
+Specifies the priority of the following polygons. Priority
+'0' specifies mandatory polygons and should be kept as low
+as possible. Objects with too many mandatory polygons for
+the system load will be displayed as blocks to prevent
+degrading the other objects. The default priority is 0,
+therefore use of this option is important. The maximum
+priority is 253 (254 used for textures, and 255 used for 
+environment mapping.) Internally the server will
+maintain an estimation of overall load and render all objects
+at the same detail level.
+
+USE <surface>;
+Specifies the surface definition to be used for all polygons
+following. This option will parse across Priority levels
+but it is recommended that it be re-specified for each
+level defined for future compatibility.
+
+TRIANGLE (x,y,z)-(x,y,z)-(x,y,z);
+This defines one of the two primitives available - the triangle.
+The triangle is added to the model based on the provided
+co-ordinates. They are integer values with the origin representing
+the center of the model. World co-ordinates for the model range
+from -10000 to +10000 on all axis. Triangles should be defined
+clockwise for hidden surface detection and texturing. 
+
+STRIP (x,y,z)-(x,y,z)-(x,y,z)-(x,y,z)-(x,y,z);
+This defines a triangle strip. The first two points must be defined
+as if going clockwise around the first triangle, and the remainder
+of the points in a zig-zag. Strips are a more effective way to
+reproduce large rows of triangles. Otherwise they are handled the
+same way.
+

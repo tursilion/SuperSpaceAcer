@@ -1,0 +1,97 @@
+** Beta - This information is not for release to others. For your own use
+only, please. **
+
+Super Space Acer: Extreme
+
+Script for the evil General.
+
+Please keep in mind, whilst doing these voices, that the player believes the General is a GOOD guy. You might want to put a little bit of an evil 'happy' into your voice, if you can do that, until the time comes.
+
+The battle is between two previously peaceful races, the Voraks, and the Tarians. The General proposes to be of the Tarian race, and has recruited the Space Acer team to assist in the neutralization of strategic parts of the Vorak force in order to help their war effort.
+
+So he says.
+
+In reality, he is a member of the Qwertian military. The Qwertians are war-mongers by nature, and have taking to starting wars between other races, then moving in to clean up and take over *both* worlds. The player does not know this till late in the game, and then only if they take the clues and use them appropriately.
+
+Pronounciation of certain words will be listed in brackets. Do not read anything in brackets. Please pause 3-5 seconds between phrases if recording to audio tape. If recording to WAV, include a text file describing all the filenames you used (use this one, if you like), and record the clips at 11khz, 8-bit, mono. Please use WAV format and ZIP the files together, then FTP to neteng.bc.ca, and put in the /incoming directory. Email me at tursi@neteng.bc.ca to tell me they are ready.
+
+Please ensure your voice is loud, clear, un-distorted and free from static. The background should be silent. I may be editting the sounds for special effects and I need as clean a source as possible.
+
+You may ad-lib, but only to a *small* extent. I want the words to be fairly close to what I have written here.
+
+Here we go:
+
+MISSION 1 - Test skills
+"Thank you for responding so quickly! We've been under attack by the Voraks (vore-aks), a foul race apparently bent on our destruction! They've been streaking in and attacking our cruisers and colonies. We do not have adequate facilities for space-based combat, so we need you to make surgical strikes aimed at disabling their space forces, so that we can move our troops in."
+
+"Your first mission is to end an attack already in progress! The Vorak forces are currently attacking a peaceful colony near your position. We want you to get in there and take them down! This is a test, to see if you are as good as you claim to be. You should have the element of surprise. Good luck!"
+
+MISSION 2 - Counter-strike
+"We have located one of their smaller transport ships nearby - carrying fighters. You can expect up to 20 fighters inside this ship. We believe they are moving into position for a new assault. Avenge our colony and take this ship down!"
+
+MISSION 3 - Oceania
+"I'm impressed! Your next mission is a surgical strike against the Oceania world. This planet serves as a weapons manufacturing and storage facility. It also has a launch site capable of interplanetary missiles! We want you to go in and take out the launch structure. It will be well guarded."
+
+MISSION 4 - Desert Canyon
+"Your next target is on the Microft (My-croft) world. The world is a desert with only a few large water sources. The Vorakians (vor-ak-ee-ans) have dammed the largest one in order to generate power for their military bases. Our troops are prepared to begin their assault on this world, and we require you to prepare the site. You will have to fly through a deep canyon to the dam in order to avoid heavy surface protection. Your target will be the power generating dam at the end of the canyon. If you do find any targets in the canyon, feel free to attack, but they are not your primary concern."
+
+MISSION 5 - Turning Point
+"Our plan is nearly complete. Your next mission will be enroute to the Vorakian homeworld. There is a fleet of five troop transports moving together. They are travelling incognito (in-cog-nee-toe), and may attempt to convince you that they are civilian. You MUST stop these carriers from reaching their destination."
+
+MISSION 6a - Final Assault
+(in this mission, the player did NOT learn the General's true nature.. he is still the 'good guy')
+"This is your final mission - an assault on the Vorakian homeworld. We are interested in the destruction of their primary military headquarters. Our own fighters will be poised to eliminate their backup centers during the confusion you create with the destruction of central HQ. You can expect heavy defenses."
+
+BAD ENDING - Awards Ceremony
+(This will fade in and out, just speak it as if you were in the middle of a speech)
+"...and thanks to the superb, professional flying of this tactical fighter squadron, we have achieved our goals, with the battle against the Voraks finally turned in our favour. To them we award..."
+
+MISSION 6b - A New Plan
+(this is an intercepted transmission by the player, of the General reporting to his own high command, back at Qwertia.)
+
+"...<evil chuckle>, yes, my lord, neither side is aware of our interference. The details we planted have both sides believing the mercenary force Space Acer was hired by the other side. The mercenaries are even now striking a civilian fleet - I am sure that will be the final catalyst to the all-out war we seek."
+
+"No, my lord, they are but fools. They would not realize in time, even if they cared to. As a bonus, both sides of the battle will be engaged in destroying them, cleaning up for us, if you will. I estimate we can move our primary forces into both worlds in less than a scalair (ska-lair)."
+
+"Our current location is in the Vexsar (vex-sar) system, but we are preparing  to relocate our fleet to..."
+
+MISSION 7 - Confrontation
+(at this point, the General does not yet know he has been found out.. so he is still playing good guy.)
+
+"Space Acer! What a surprise... why did you not report your last mission?"
+
+(now he is told that Space Acer knows what's going on, from now on he's mean.)
+
+"(pause) Then you'll die."
+
+(after the battle, the General tries escaping in a small ship as his main ship explodes. He is angry and somewhat anxious, so his speech should be loud and fast.)
+
+"You fools! I'll personally see you all dead!"
+
+MISSION 8 - Chase
+(the chase is through a dense asteroid belt, at the end he accelerates towards a secret base on an artificial star. He has a very powerful weapon there, and so is very confident.)
+
+"Still alive, fools? Follow me if you dare!"
+
+MISSION 9 - Artificial Star
+(at the end of a chase over the surface, then into a tight tunnel of flame, the general is lost from sight, then re-appears controlling a massive flaming phoenix)
+
+"There is no escape now! Prepare to die!"
+
+(upon destruction)
+
+"No! It can not be! Nooooooooooooo!!!!"
+
+MISC PHRASES
+
+(Upon the player withdrawing from a mission. The General is rather smug.)
+"Too much for you, eh? We'll accept this failure, but not another one. Your ships have been repaired and are ready to go. Perhaps this next mission will be better suited to you."
+
+(Upon withdrawing a second time. This time the General is somewhat ticked.)
+"Backed out again? We will repair your ships, but I must insist that you return and complete the mission. Failure will not be accepted again."
+
+(Third withdrawal, game over)
+"This incompetence is simply unacceptable. Your services are obviously overrated, and are no
+longer required. Good bye."
+
+That's it.

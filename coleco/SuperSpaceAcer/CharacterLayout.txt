@@ -1,0 +1,84 @@
+VRAM map
+--------
+ >0000	Screen Image Table
+ >0300	Sprite Descriptor Table
+ >0380	Color Table
+ >03A0	(Unused)
+ >03C0	Color Table 2 (all white on transparent)
+ >03E0	(Unused)
+ >0800	Sprite Pattern Table
+ >1000	Pattern table (scroll 0)
+ >1800	Pattern table (scroll 2)
+ >2000	Pattern table (scroll 4)
+ >2800	Pattern table (scroll 6)
+ >3000	(Unused)
+ >3D00	wraparound memory overwritten by boss draw code
+
+SPRITE PATTERNS
+---------------
+0-3	- enemy type 1 (saucer)
+4-7	- enemy type 2 (jet)
+8-11	- enemy type 3 (mine)
+12-27	- enemy type 4 (helicopter - 4 frames)
+28-43 	- enemy type 5 (swirly - 4 frames)
+44-47	- enemy type 6 (bomb)
+48-51	- bomb explosion
+52-75	- enemy explosion (6 frames)
+76-83	- Boss engine (2 frames)
+84-87	- enemy shot
+88-91	- pulse cannon small
+92-95 	- pulse cannon medium
+96-99	- pulse cannon big
+100-103 - player flame big
+104-107	- player flame small
+108-123 - player ship straight
+124-139 - player shield straight
+140-155	- player ship left
+156-171	- player shield left
+172-187	- player ship right
+188-203	- player shield right
+204-207 - mine 'tips'
+
+208-211 - 3 way straight
+212-215 - 3 way left 1
+216-219 - 3 way left 2
+220-223 - 3 way right 1
+224-227 - 3 way right 2
+
+228-231 - cockpit (empty sprite)
+
+232-247 -
+
+248-251	- powerup and player explosion (copied from character patterns, not initialized)
+
+NOTE: extra graphics for shield are swapped in and out as needed.
+
+CHARACTER PATTERNS
+------------------
+0		- shield powerup
+1		- pulse wave powerup
+2		- 3 way powerup
+3-6		- small star (2 pixel movement)
+7		- small ship (lives) (copied up to char 40)
+
+--red--
+8-12	- explosion animation
+13-15	-
+--end red--
+
+16-31	-
+
+32-120	- ASCII Character set (copied from ROM)
+	-	40 is replaced with the player ship icon for life counter (since chars < 33 are overwritten by stars)
+121-255	- boss pattern (last 7 bytes of ASCII stolen - this makes 'x' boss colored and steals 'y,z')
+
+SPRITES
+-------
+0-3 	- Player ship
+4 	- powerup
+8-16	- enemies + shots
+17 	- player flame
+18-21 	- player shield
+22-30 	- player shots
+31	- mine tips
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{19ED3B08-3BD2-412C-B97E-8E578349662A}</ProjectGuid>
+    <RootNamespace>ssa</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccProvider>SAK</SccProvider>
+    <Keyword>MakeFileProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>15.0.28307.799</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <NMakeBuildCommandLine>make</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>make clean all</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>make clean</NMakeCleanCommandLine>
+    <NMakeOutput>C:\WORK\coleco\tursi\SuperSpaceAcer\ssa\ssa.rom</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <NMakeBuildCommandLine />
+    <NMakeReBuildCommandLine />
+    <NMakeCleanCommandLine />
+    <NMakeOutput>ssa.exe</NMakeOutput>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Image Include="boss1.bmp" />
+    <Image Include="boss2.bmp" />
+    <Image Include="boss3.bmp" />
+    <Image Include="boss4.bmp" />
+    <Image Include="boss5.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\title2\ship1_c.c" />
+    <ClCompile Include="..\title2\ship1_p.c" />
+    <ClCompile Include="..\title2\ship2_c.c" />
+    <ClCompile Include="..\title2\ship2_p.c" />
+    <ClCompile Include="..\title2\ship3_c.c" />
+    <ClCompile Include="..\title2\ship3_p.c" />
+    <ClCompile Include="..\title2\ship4_c.c" />
+    <ClCompile Include="..\title2\ship4_p.c" />
+    <ClCompile Include="bg.c" />
+    <ClCompile Include="boss.c" />
+    <ClCompile Include="boss1.c" />
+    <ClCompile Include="boss2.c" />
+    <ClCompile Include="boss3.c" />
+    <ClCompile Include="boss4.c" />
+    <ClCompile Include="boss5.c" />
+    <ClCompile Include="difficulty.c" />
+    <ClCompile Include="enemy.c" />
+    <ClCompile Include="font.c" />
+    <ClCompile Include="human.c" />
+    <ClCompile Include="music.c" />
+    <ClCompile Include="newfont.c" />
+    <ClCompile Include="songpack1.c" />
+    <ClCompile Include="songpack2.c" />
+    <ClCompile Include="songpack3.c" />
+    <ClCompile Include="songpack4.c" />
+    <ClCompile Include="songpack5.c" />
+    <ClCompile Include="songpack6.c" />
+    <ClCompile Include="ssd_inc.c" />
+    <ClCompile Include="string.c" />
+    <ClCompile Include="superspaceacer.c" />
+    <ClCompile Include="titlepage.c" />
+    <ClCompile Include="title_c.c" />
+    <ClCompile Include="title_p.c" />
+    <ClCompile Include="trampolines.c" />
+    <ClCompile Include="wineasy.c" />
+    <ClCompile Include="winhard.c" />
+    <ClCompile Include="winmed.c" />
+    <ClCompile Include="zenith_end_c.c" />
+    <ClCompile Include="zenith_end_p.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\setup.bat" />
+    <None Include="crt0.map" />
+    <None Include="crt0.s" />
+    <None Include="Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\TODO.txt" />
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\halt.h" />
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\kscan.h" />
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\player.h" />
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\sound.h" />
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\string.h" />
+    <ClInclude Include="..\..\..\..\coleco\libti99coleco\vdp.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="trampoline.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

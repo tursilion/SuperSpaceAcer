@@ -1,0 +1,34 @@
+Tables tracked by SSA for engine:
+
+*Object_Index[MAX_OBJECTS]
+
+Object
+{	int type;
+	int x, y, z;
+	int roll, yaw, pitch;
+	int x_speed, y_speed, z_speed;
+	int x_accel, y_accel, z_accel;
+	*ambient_sound;
+	*ambient_sound_channel;
+}
+
+Sound
+{	*data;
+	int x, y, z;
+}
+
+Bitmap
+{	// Windows 24-bit BMP format, for convenience with tools
+	// Draw color 255,0,255 as transparent
+}
+
+-------------------------------------------
+DLL functions:
+
+draw_world(*Object_Index[]);
+play_sound(*Sound);
+
+draw_bitmap(*bitmap, x, y);	(expectation of 640x480, this should scale where needed)
+				(and antialias, if it's that way ;) )
+
+load_level(x);			(load the required graphics for the specified level)

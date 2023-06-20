@@ -1,0 +1,94 @@
+** Beta - This information is not for release to others. For your own use only, please. **
+Super Space Acer: Extreme
+Each player has to say the following phrases. Feel free to adlib any phrase that has the same meaning or effect, in fact, *please do*. If recording on tape, please leave 3-5 seconds of silence between phrases, and try to keep background noise to an absolute minimum. If recording on computer, please record at 8 bit, 11khz, mono, preferably in WAV format. In both cases, please speak loudly and clearly, without distortion, static, or clipping.  The audio (may) be altered to make it sound more like radio transmissions, and I need as clear an original sample as possible so they all come out the same. If you're using audio tape, email me for the address (tursi@neteng.bc.ca). If you are recording on the PC, ZIP the files up and upload with anonymous FTP to neteng.bc.ca, in the incoming directory (and email me to tell me it's there.) DO NOT EMAIL THE ZIP TO ME. Thanks.
+Please read each section header, or label your WAV files accordingly, so that I know what each sound is intended for (IE: CRITCAL1.WAV, CRITICAL2.WAV). Include a text file with the ZIP, if possible, telling me what each filename is. (You could include this file and just fill in the filenames.) I would like 2-3 phrases for each line with an asterix (*), in order to have some variety in the speech. The phrases I provide are *samples* only. Be creative.
+Please note, your character can potentially be chosen as either a wingman OR the wingleader, thus, both sets of phrases are mixed together.
+MISSION 1 - end ongoing battle
+(Wingleader acknowledge instructions) - Affirmative, General. We're on our way.
+(Wingleader introduces start of mission) - All forces ready? There they are!
+MISSION 2 - take out transport
+(Wingleader acknowledge instructions) - No problem, General. Downloading data... team: maintain radio silence for approach. 
+ (Wingleader introduces start of mission) - They've seen us! Move in quickly and take them out.
+MISSION 3 - take out launch site
+(Wingleader acknowledge instructions) - Understood, General.  
+(Wingleader introduces start of mission) - Stay together and stay on course!
+(Wingleader announces target) - There's the launch facility! Take it out!
+MISSION 4 - desert canyon dam
+(Wingleader acknowledges instructions) - We're on it, General.  
+(Wingleader acknowledges start of mission) - Stay close and watch the walls! Keep your eyes open for enemy fire, there isn't much room to maneuver!
+(Wingleader on dam destruction) - It's breaking up! All craft, pull up!
+MISSION 5 - troop transports?
+(Wingleader acknowledges instructions) - Roger, General.  
+(Wingleader introduces start of mission) - There they are... I don't think we've been spotted. Let's finish them before they can launch fighter support.
+(Wingman commenting) - Strange.. they haven't launched any defenses yet.
+MISSION 6a - final assault - this is the bad end
+(Wingleader acknowledges instructions) - You've got it, General.  
+(Wingleader introduces start of mission) - This is the big one, guys. Stay alert and let's take it home!
+(Wingman, expressing surprise) - What's THAT?
+(Wingleader, seeing new target) - New primary target! Let's punch a couple of holes in that thing!
+MISSION 6b - A new plan - this is the proper path
+(Wingleader, musing in cinema) - Why would we be sent against an unarmed civilian vessel? (pause) Computer! Scan for and decode any encoded Vorakian transmissions.
+(Wingman, noting computer pause) - Maybe we were wrong...?
+(Wingleader, replying) - I don't think so...
+(Wingleader, computer indicated results) - Ah ha! We may have some answers.  
+(Wingleader, shocked) - Qwertians! (Qwer - she - ans) What are those war-mongers doing here? Computer - decrypt transmission!  
+(Wingleader, having heard the team was being used) - I've heard enough.  Team, what say we show the 'General' our appreciation at being part of his little game?
+(Wingman, just agree, optionally comment) - Yeah!
+(Wingleader) - But first, Computer! Transmit intercepted message to both Tarian and Vorakian Headquarters. Include all relevant data.
+(Wingleader, commanding new course) - Set course for Vexsar! Engage warp drives!
+(Wingleader, after warp) - Okay, we're in range. Disengage warp!
+MISSION 7 - confrontation
+(Wingleader, introducing mission) - We're moving in... ah! They've detected our arrival.
+(Wingleader, replying to General) - We don't appreciate playing games, General. We know what you're up to. We aren't going to take it.  
+(Wingleader, after a bit of attack) - The primary target is the main generator at the rear of the mothership. Try to focus on that!
+MISSION 8 - Chase
+(Wingleader, after reply from Tarian HQ, noting escaping General) - You heard them, team. Let's get him!
+Mission 9 - Artificial Star
+(Wingman, upon exitting asteroid field) - He's headed straight for that star!
+(after flight over artificial star and into flaming tunnel, Wingleader)  - No! We've lost him! Check all scanners!
+(Wingman as General bursts into view) - Look out!
+(Wingleader) - Primary target is the central navigation module! Don't get too close!
+(After destruction, computer warns of collapse of artificial star. Wingleader: ) Emergency maneuvers! Maximum thrust, we've got to get out of here!
+All Clear!
+(Wingleader) - Mission Accomplished! Repeat, Mission Accomplished! Great Work, team. Let's get out of here.
+IN-GAME Phrases (2-3 of each of these, as marked)
+WINGLEADER
+(ready...) - Get ready...
+(begin level) - Let's do it!
+(request status*) - All craft, report status.
+(order retreat*) - All craft, pull out!
+(order attack) - Break and attack!
+(order wing) - Stay on my wing!
+(order primary target attack) - Attack primary target!
+(order cover) - Cover me!
+(order defense elimination) - Attack target defenses!
+(names of characters) 
+* Gord
+* Wombat
+* Zumi  (zoo-me)
+* Kik-Mi 7  (kick-me-seven)
+* Captain C (may say as 'Captain' or 'Cap')
+* Kilor   (kil - lore) (lion)
+* Victor	(fox)
+* Shadow	(dragon)
+* Jupiter	(griffon)
+* Beep    (dolphin)
+			
+
+WINGMAN
+(hit by friendly fire (player)*) - Watch it!
+(fed up with friendly fire*) - All right, that's it!
+(request assitance*) - I'm in a bit of trouble here!
+(taking heavy fire (panic?)*) - I'm taking a lot of heat here!
+(pulling out*) - I've got to pull out!
+(going down - will cut off with static*) - AAAAAAAAAAAHHHHHHH!
+(shot down an enemy*) - Yeah! Got one!
+(report perfect status*) - Not a scratch on me!
+(report ok status*) - I'm doing fine.
+(report poor status*) - I got rather shot up there.
+(report critical status*) - I am *not* doing well.
+(general command acknowledge*) - Roger that.
+(identification*) - Kilor here.
+(being pursued/locked*) - Can't shake him!
+(thanks*) - Thanks.
+

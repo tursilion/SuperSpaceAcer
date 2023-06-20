@@ -1,0 +1,106 @@
+** Beta - This information is not for release to others. For your own use
+only, please. **
+
+Super Space Acer: Extreme
+
+Script for Miscellaneous parts.
+
+Pronounciation of certain words will be listed in brackets. Do not read anything in brackets. Please pause 3-5 seconds between phrases if recording to audio tape. If recording to WAV, include a text file describing all the filenames you used (use this one, if you like), and record the clips at 11khz, 8-bit, mono. Please use WAV format and ZIP the files together, then FTP to neteng.bc.ca, and put in the /incoming directory. Email me at tursi@neteng.bc.ca to tell me they are ready.
+
+Please ensure your voice is loud, clear, un-distorted and free from static. The background should be silent. I may be editting the sounds for special effects and I need as clean a source as possible.
+
+Phrases marked with an asterix (*) I would like 2 or 3 different phrases for, to add variety to the in-game speech.
+
+Adlibs are permitted and welcome, if you'd like to say something differently.
+
+*******
+
+COMPUTER (always a reasonable monotone - computers don't get excited or bored. They simply report facts.)
+
+"All scans confirm civilian status. Repeat. Scan confirms enemy vessels are not armed."
+
+"Working..."
+
+"Security Alert! Qwertian (qwer-she-an) encrypted transmission detected during scan."
+
+"Signal carrier lost."
+
+"Processing... (pause) Data transfer complete. (brief pause) Data acknowledged."
+
+"Incoming message from Tarian Headquarters:"
+
+"Primary target aquired."
+
+"Warning: Shields at fifty percent power."
+
+"Warning: Severe ship damage."
+
+"Warning: Enemy lock-on detected."
+
+"Evasive maneuvers: Laser charging."
+
+"Incoming transmission from enemy craft."
+
+*******
+
+MISSION 2 - Enemy voice (commanding and no-nonsense.)
+"Attention Incoming Ships! This is the Vorakian military carrier Scorzar (score-zar). Identify yourselves. Repeat: identify yourselves immediately."
+
+*******
+
+MISSION 5 - Cruise Fleet
+
+(the operator is understandably scared in the first transmission, as a fleet of fighters appeared out of nowhere and started attacking without warning.)
+"Alert! Attacking vessels! This is the Tarian (Tar-ee-an) cruise fleet Yorick. We are an unarmed civilian cruise fleet! Please break off your attack!"
+
+(the attack has not stopped, so as of this message the operator is even MORE scared, trying desperately to negotiate a stop, to save himself and the passengers.)
+"Repeat! Attacking vessels! We are an UNARMED CIVILIAN fleet! We will surrender and permit boarding! Please break off your attack!"
+
+(now the attack has caused the loss of one of the ships. It's obviously too late to reason with the attackers, so the operator is making a last-ditch, panicked call for help.)
+"Mayday! Mayday! All Tarian-friendly vessels! This is the civilian cruise fleet Yorick! We are under attack by unidentified pirates! We have lost one vessel already! Please assist!"
+
+*******
+
+Mission 8 - Chase
+(this is a message from Tarian headquarters authorizing capture or destruction of the General)
+
+"Mercenary Force Space Acer, this is Tarian headquarters. We have received your message and verified the data therein. In agreement with the Vorakians we are requesting your services to detain or destroy the invading Qwertian forces. Standard fees for your services will be paid. Inform when mission accomplished."
+
+*******
+
+BAD ENDING
+(this is a reporter on a telecast stating the current status of the war. It's a standard news broadcast, and hints some more at what the player missed. It fades in and out, so read the lines as if you were in the middle of a broadcast report.)
+
+"...has now declared a state of emergency, as the unprovoked war escalates to all-out destruction, with both forces suffering heavy losses. Although there have been uncomfirmed rumours of Qwertian (qwer-she-an) broadcasts in the area, both leaders have commented that they are too busy with the war effort to devote resources to investigating these..."
+
+*******
+
+VOICE-OVER for INTRODUCTION
+
+"The Tarian (Tar-ee-an) race has long been respected for their quiet peacefulness. Although they possess rather advanced technology and have been space-faring for eons, they possess a refreshing lack of interest in war. They have enjoyed, in this time, a valuable trade alliance with their neighbors, the Vorakians (vore-ack-ee-ans), in return for a protection agreement, and some training and weapons for their own defense."
+
+"It came as a great surprise to all observers when the Vorakians launched a deadly assault on the Tarians, crippling their offensive capibilities in a single planet-wide attack. The Tarians were left with no choice but to declare war. Their defenses were enacted, and their remaining fleet placed in orbit to protect the planet as the military raced to create the weapons they needed. Further attacks came.. some were repelled, some accomplished their goal. The Tarians were making progress in their building, but it seemed to many to be too slow. The Tarian council decided to launch strategic offensive strikes in order to slow the Vorakian war effort, long enough for their own military to complete the construction of the necessary warships and weapons."
+
+"The Tarians chose not send their own valuable troops on these missions, but to recruit the assistance of professionals.. the team Space Acer."
+
+"Kilor (kil-lor) - Once a proud warrior on his home planet, his family was disgraced in a massive war. Unable to remain, he became a mercenary in order to survive. He is an agressive and direct fighter."
+
+"Victor Ericson - the son of a rich aristocrat, he had the best life, and the best training money could buy. He joined the ranks of Space Acer in order to prove that he's not just some 'pretty flyboy'."
+
+"Jupiter Orion - a skilled and accurate pilot, he prefers not to talk much about his past, though some of the other pilots rumour about a past life as a male model. He is relatively good natured out of the cockpit."
+
+"Shadow - a dark-tempered pilot as dangerous out of the cockpit as he is in. Some say his parents were killed when he was very young, but he doesn't take well to questioning. Being in his sights.. in any situation.. is a bad thing."
+
+"Beep - from an aquatic world, Beep is an unlikely fighter pilot. He is a deliberate and focused pilot, but often far too cheerful. His quick reflexes and accuracy make him a valuable member."
+
+"Binky - a brilliant scientist, who discarded his dying body and transplanted his brain into a mechanical body. Some would say the transplant made him just a little unstable, and Binky himself can not tell you why he is now a mercenary... it just 'seemed like the thing to do.'"
+
+"Wombat - a direct and often sarcastic character, he is also a direct and skilled pilot. Tends not to waver from his goal until accomplished. If you want an opinion, ask. If you want to destroy a target, he can do that, too."
+
+"Zumi (zoo-me) - a deadly combination of beauty and skill, Zumi is a force to be reckoned with. Her accuracy is among the best and she is as adept at attacking defending forces as attacking the primary target."
+
+"Gord - a wildcard in every sense of the word. Gord tends to fly randomly, attack and break off of targets at random, and even his skills seem random. He has major strength, however, the randomness seems to work for him. Some say that he controls random events himself, a rumour he is happy to encourage."
+
+"Captain C - while he fancies himself a superhero from the distant and long-passed Communist Russia, he is neither Soviet nor Communist, and in fact has never even been to Earth. However, it is difficult to convince him that these facts are important, and so he carries on. Despite this, he is an extraordinary pilot with deliberate handling."
+
+(title) "SUPER SPACE ACER ... EXTREME!"
