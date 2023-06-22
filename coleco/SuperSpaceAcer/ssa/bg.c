@@ -12,7 +12,8 @@
 #define SMALL_STAR_LAST		7
 #define NUM_SMALL_STARS		6
 
-uint8 str[NUM_SMALL_STARS], stc[NUM_SMALL_STARS], sto[NUM_SMALL_STARS];		// star row, col, offset
+//uint8 str[NUM_SMALL_STARS], stc[NUM_SMALL_STARS], sto[NUM_SMALL_STARS];		// star row, col, offset
+uint8 stdata[NUM_SMALL_STARS*3];    // strided array so we can use faster(?) pointer math
 extern unsigned char tmpbuf[32];
 
 // do the background effect
@@ -33,7 +34,8 @@ void background() {
 	SpriteTab[14].col = x;
 	SpriteTab[15].col = x;
 
-	// TODO: just a dumb test to remove
+#if 0
+	// TODO: just a dumb test to remove - makes a scrolling background
 	x=cnt&7;
 	tmpbuf[(x+0)&7]=0;
 	tmpbuf[(x+1)&7]=0;
@@ -45,34 +47,36 @@ void background() {
 	tmpbuf[(x+7)&7]=0;
 	patcpy(0, 32);
 	// end test
+#endif
 
 	/* move small stars */
 	// Note that there are three speeds of small stars - 1/2 frame, 1 frame, and 2 per frame
 	for (b=(cnt&1)?0:NUM_SMALL_STARS/3; b<NUM_SMALL_STARS; b++) {
-		x=gchar(str[b],stc[b]);
-		if (b >= (NUM_SMALL_STARS/3)*2) ++sto[b];	// move 'med' stars by 2
-		++sto[b];
-		if (sto[b] > SMALL_STAR_LAST) {
+        uint8 *p = &stdata[b*3];
+		x=gchar(*p,*(p+1));
+		if (b >= (NUM_SMALL_STARS/3)*2) (*(p+2))++;	// move 'med' stars by 2
+		(*(p+2))++;
+		if (*(p+2) > SMALL_STAR_LAST) {
 			// erase old, if it's not hidden
 			if (x < 8) {
-				xchar(str[b],stc[b],32);
+				xchar(*p,*(p+1),32);
 			}
 
 			// update to new character
-			sto[b] = SMALL_STAR_FIRST;
-			if (++str[b] == 24) {
-				str[b]=0; 
-				stc[b]=(rndnum()&0x1f);
+			*(p+2) = SMALL_STAR_FIRST;
+			if (++(*p) == 24) {
+				*p=0; 
+				*(p+1)=(rndnum()&0x1f);
 			}
 
 			// get what's at the new position
-			x=gchar(str[b],stc[b]);
+			x=gchar(*p,*(p+1));
 			if (x == 32) x=0;	// so the main case doesn't need an OR
 		}
 		// still have the old x if we didn't move, else we have the new one
 		// draw if not obscured
 		if (x<8) {
-			xchar(str[b],stc[b],sto[b]);
+			xchar(*p,*(p+1),*(p+2));
 		}
 	}
 }
@@ -94,8 +98,9 @@ void initstars() {
 	unsigned char a;
 
 	for (a=0; a<NUM_SMALL_STARS; a++) { 
-		str[a]=rndnum()&0x1f; if (str[a] > 23) str[a]-=24;
-		stc[a]=rndnum()&0x1f;
-		sto[a]=SMALL_STAR_FIRST;
+        stdata[a*3]=rndnum()&0x1f; 
+        if (stdata[a*3] > 23) stdata[a*3]-=24;
+		stdata[a*3+1]=rndnum()&0x1f;
+		stdata[a*3+2]=SMALL_STAR_FIRST;
 	}
 }

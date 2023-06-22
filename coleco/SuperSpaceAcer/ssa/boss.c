@@ -746,225 +746,241 @@ void PrepareBoss(unsigned char idx, unsigned char r) {
 	}
 }
 
+
+
 // hard-coded boss draw functions are nearly twice as
 // fast as the looping version, and we optimize a bit
 // by skipping empty space.
 // Note that the draw functions all have one more character
 // than the count, because the shifting makes all chars 2 wide
+// the compiler is optimizing these as "ld a,#<constant> ; out (_VDPWD),a"
+// To that end, maybe we can save a few nops? ld a,# is 7 cycles, each
+// nop is 4. out is 11. We need 29. So we have 18 cycles in instruction,
+// and need 3 nops to get to 30. Safe delay is 5, so let's do our own
+// and get the boss draw just a bit faster.
+
+inline void BOSS_SAFE_DELAY(void) {	
+__asm
+	nop
+	nop
+	nop
+__endasm;
+}
+
 #define EDGEBLANKA			\
 	if (bd>0) {				\
 		VDPWD=32;			\
-		VDP_SAFE_DELAY();	\
+		BOSS_SAFE_DELAY();	\
 		VDPWD=32;			\
-		VDP_SAFE_DELAY();	\
+		BOSS_SAFE_DELAY();	\
 	}
 
 #define EDGEBLANKB			\
 	if (bd<0) {				\
 		VDPWD=32;			\
-		VDP_SAFE_DELAY();	\
+		BOSS_SAFE_DELAY();	\
 		VDPWD=32;			\
 	}
 
 #define LINECHAR		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR2		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR4		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR5		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR6		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR7		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR8		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR9		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR10		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR12		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 #define LINECHAR14		\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();	\
+	BOSS_SAFE_DELAY();	\
 	VDPWD=ch++;			\
-	VDP_SAFE_DELAY();
+	BOSS_SAFE_DELAY();
 
 inline void BOSS_SET_ADDRESS_WRITE(unsigned int x)	{	VDPWA=((x)&0xff); VDPWA=((((x)>>8)&0x3f)|0x40); }
 

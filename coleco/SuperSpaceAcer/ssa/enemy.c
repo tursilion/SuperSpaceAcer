@@ -1,3 +1,79 @@
+// Looks like we have lost:
+// - enemy generators
+// - beamgen enemy (except for the definition)
+// - jets diving left or right as they get close
+// my notes from November 2016:
+/*
+So how do the generators work? The game supports 1-3 at a time, depending on the difficulty and the level you're on. 
+Each generator is mostly independent, more on that in a moment. Each generator further tracks the following data: 
+horizontal position, countdown timer, maximum timer, movement speed, count of enemies remaining, and type of enemy 
+to generate. They are always positioned at the top of the screen because, in SSA, all enemies begin life at the top 
+of the screen.
+
+In order to guarantee the RNG, the generators are checked at fixed points in the level progression -- right now every 
+32 frames the next generator is checked. (Although because I do this with bitmasking, and there are only 3 generators, 
+every fourth check does nothing. Also, in levels that don't have all three generators out, those idle generators end 
+up doing nothing as well. This is partly for the difficulty curve and partly to control CPU time.)
+
+If we check and determine that the generator of interest this frame is idle, and it's allowed to start (again, due to 
+level and difficulty), then we set the RNG based (mostly) on the current level distance counter. Then we create the 
+generator randomly, setting up its position, timer, speed, count and type. The position is where enemies will be 
+dispatched (horizontally), the timer is how many frames between enemy dispatches, the speed is how far (and which 
+way) the generator moves every frame, the count is how many enemies will be dispatched before the generator returns
+to idle, and the type is what type of enemy that will be. These last two values are constrained by the level and
+difficulty settings. The timer is also constrained by the enemy type in order to keep a reasonable minimum spacing. 
+In effect, it's a rudimentary particle system generator.
+
+There's one additional catch -- to avoid overlap of enemies from being too common a thing, we check the spacing 
+against the other generators and reset the position if it's too close to one of them.
+
+During the enemy processing frame, generators are updated. The update is very simple - the speed is added to the 
+position (and wraps around natively with no need to check, since we have 256 pixels across), then the timer is 
+counted down. When it reaches zero, the generator calls the enemy spawn function, and decrements its count. When 
+the count reaches zero, the generator goes idle and will be awakened the next time the distance update reaches it.
+
+Enemy spawn is straight-forward now. We know the type of enemy, and we know where it will start. We also know 
+it's legal for the level and don't need to check that anymore either. But there are still two things to check.
+One is whether there is a legal slot to spawn the enemy in -- both the game engine and the difficulty constrain
+this. If a free slot is not available, then the opportunity to spawn is discarded. (This is why on the easier 
+difficulties you will see more enemies if you shoot them than if you don't!) A second check is also performed 
+for overlap - if the generator is too close to one of the other generators, it's deferred rather than discarded, 
+on the assumption that the generators will move apart.
+
+The overlap avoidance code actually created an interesting bug that only occurred in my testing midway through 
+the medium difficulty level (it might still be there, I didn't finish fixing it... but I didn't see it tonight.) 
+Anyway... about halfway through the stage, enemies stopped appearing, and only spawned one enemy every long time 
+right at the edge until the boss came out. I was a little baffled and added debug to show me where the generators
+were. And at the magic point, I watched generators 1 and 2 chase each other across the screen. They had started
+wrapped around (255 and 1) so passed the creation range check, but were moving the same direction at the same 
+speed, and so were always too close to spawn -- except for the one frame where they were split at the edge of 
+the screen again. (Earlier, before I put the test in the generator startup code, I'd seen a similar case where
+two generators started right beside each other with a speed of zero. Never moved, and couldn't spawn, so the
+stage stayed empty.)
+
+Anyway, I'm also proud of the beamgens. SSA uses all the available sprites and the game engine is limited 
+in the number of enemies it allows - 6 enemies, each with their own shot. It was not intended to support a 
+single enemy with two widely spread parts, so I was going to implement it as two enemies. But I was getting 
+really concerned about how to find empty slots and tracking the two indexes, and ultimately I went for a 
+flicker approach where the generator parts alternate each frame. This worked surprisingly well (and you'll 
+see as a result that they still flicker on the F18A, even though no other sprites do ;) ). The beam itself 
+is just the enemy's bullet, so that was a guaranteed spare.
+
+Testing collision on the main sprite was easy, but I had to think a bit about the secondary one.. ultimately, 
+I decided to just try actually moving the enemy back and forth, and seeing if collisions lasted long enough 
+that either could be shot. Happily, the answer was yes, so all I had to do in the enemy death function was 
+check against the base X position to see whether the right or left generator was the one destroyed, and then 
+set up the enemy as a dud that looked like the remaining one. I did something very similar to this in Mario 
+Bros, actually. The bonus stage broke my enemy engine by having too many coins to collide with. Rather than 
+add a bunch of special cases, it flickers just four coins through all 10 visible ones for the sake of the 
+collision engine. It's something like 1 in 3 frames on the worst case, but the slope of Mario's jump guarantees
+contact for that long for all but the most contrived cases. (Of course, each coin you collect improves this as
+well, once you have two coins it's 1 frame in 2, and when there are only four coins left they are testing
+collision every frame).
+
+*/
+
+
 // libti99
 #include <vdp.h>
 #include <sound.h>

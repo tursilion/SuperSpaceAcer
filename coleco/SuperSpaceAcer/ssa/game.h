@@ -322,11 +322,11 @@ void handleTitlePage();
 // macros to look like the old c99
 #define screen(x) VDP_SET_REGISTER(VDP_REG_COL, x)
 // write a row of characters to the screen
-#define hchar(r, c, ch, cnt) vdpmemset(gIMAGE+(r<<5)+c, ch, cnt)
+#define hchar(r, c, ch, cnt) vdpmemset(gIMAGE+((r)<<5)+(c), ch, cnt)
 // single character hchar
-#define xchar(r, c, ch) vdpchar(gIMAGE+(r<<5)+c, ch)
+#define xchar(r, c, ch) vdpchar(gIMAGE+((r)<<5)+(c), ch)
 // read a character from the screen
-#define gchar(r, c) vdpreadchar(gIMAGE+(r<<5)+c)
+#define gchar(r, c) vdpreadchar(gIMAGE+((r)<<5)+(c))
 // set up a new sprite
 #define sprite(nn, chr, color, yy, xx) SpriteTab[nn].y=yy; SpriteTab[nn].x=xx; SpriteTab[nn].pat=chr; SpriteTab[nn].col=color
 // get sprite position (note: not pointers anymore)
