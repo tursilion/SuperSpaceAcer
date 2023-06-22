@@ -74,7 +74,7 @@ extern unsigned int nBank;
 #define gPATTERN 0x1000
 
 // dynamic sprite tables
-extern const unsigned char SPRITES[],ALTSHIELDS[];
+extern const unsigned char SPRITES[],ALTSHIELDS[],PLAYERFLAMESMALL[];
 extern const unsigned char SNOWBALL[],ALTSNOWBALL[];
 extern const unsigned char LADYBUG[],ALTLADYBUG[];
 extern const unsigned char GNAT[],ALTGNAT[];
@@ -189,7 +189,6 @@ enum {
 	
 	// enemy attacks (can't be shot)
 	ENEMY_SHOT,
-	ENEMY_SHRAPNEL,
 	ENEMY_BEAM,
 
 	// enemy engines have special handling

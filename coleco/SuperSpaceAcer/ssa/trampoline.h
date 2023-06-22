@@ -23,6 +23,8 @@ void wrapLoadZenithPic();
 void wrapgetfontbytes(unsigned char *dest, const unsigned char *src, unsigned int cnt);
 void wrapspritescore(unsigned int sprpat, unsigned int sprtab, unsigned char row, unsigned char col, unsigned char ch);
 void wrapLoadEngineSprites();
+void wrapPlayerFlameBig();
+void wrapPlayerFlameSmall();
 void wrapGameWinHard();
 void wrapGameWinMed();
 void wrapCopyShip(const unsigned char *p, const unsigned char *c);

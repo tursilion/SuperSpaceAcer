@@ -22,15 +22,21 @@ SPRITE PATTERNS
 12-27	- enemy type 4 (helicopter - 4 frames)
 28-43 	- enemy type 5 (swirly - 4 frames)
 44-47	- enemy type 6 (bomb)
+
 48-51	- bomb explosion
+
 52-75	- enemy explosion (6 frames)
+
 76-83	- Boss engine (2 frames)
+
 84-87	- enemy shot
 88-91	- pulse cannon small
 92-95 	- pulse cannon medium
 96-99	- pulse cannon big
+
 100-103 - player flame big
 104-107	- player flame small
+
 108-123 - player ship straight
 124-139 - player shield straight
 140-155	- player ship left
@@ -38,7 +44,6 @@ SPRITE PATTERNS
 172-187	- player ship right
 188-203	- player shield right
 204-207 - mine 'tips'
-
 208-211 - 3 way straight
 212-215 - 3 way left 1
 216-219 - 3 way left 2

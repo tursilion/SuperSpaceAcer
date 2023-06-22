@@ -34,6 +34,8 @@ char shotOffset;
 #define CHEAT_KILLBOSS	'7'
 #define CHEAT_OFF		'8'
 
+// these are now just flags, though FLAME_BIG is used to init the sprite
+// pattern 104 is no longer related though
 #define FLAME_BIG 100
 #define FLAME_SMALL 104
 
@@ -106,12 +108,12 @@ void player()
 	if (KSCAN_JOYY == JOY_UP) {
 		if (SHIP_R > playerYspeed) {
 			SHIP_R-=playerYspeed;
-			flst=FLAME_BIG;		// by fluke, these lock Zenith into the open wing pose. Good enough!
+			flst=FLAME_BIG;
 		}
 	} else if (KSCAN_JOYY == JOY_DOWN) {
 		if (SHIP_R < 151-playerYspeed) {
 			SHIP_R+=playerYspeed;
-			flst=FLAME_SMALL;	// by fluke, these lock Zenith into the open wing pose. Good enough!
+			flst=FLAME_SMALL;
 		}	
 	}
 
@@ -125,7 +127,11 @@ void player()
 		}
 	}
 	if (playership != SHIP_ZENITH) {
-		sppat(PLAYER_FLAME,flst);		// flame
+		if (flst == FLAME_BIG) {
+			wrapPlayerFlameBig();
+		} else {
+			wrapPlayerFlameSmall();
+		}
 	}
 	playmv();
 
@@ -415,6 +421,13 @@ void plycol() {
 						shield -= 25;
 						if (shield > 75) shield = 0;
 						hittime = 10;
+						// kill off the enemy
+						if (ent[a] < ENEMY_SAUCER) {
+							wrapnoen(a);
+						} else {
+							ep[a]=0;
+							dyen(a);
+						}
 						// TODO: trigger sfx
 					} else if (playership == SHIP_LADYBUG) {
 						if (ent[a] >= ENEMY_SAUCER) {
@@ -424,7 +437,15 @@ void plycol() {
 						} else {
 							wrapnoen(a);
 						}
-					}						
+					} else {
+						// still kill off whatever we ran into
+						if (ent[a] >= ENEMY_SAUCER) {
+							ep[a]=0;
+							dyen(a);
+						} else {
+							wrapnoen(a);
+						}
+					}
 				}
 			}
 		}
@@ -439,6 +460,13 @@ void plycol() {
 #ifndef TEST_MODE
 						a=99;
 #endif
+					} else {
+						if (ent[a] >= ENEMY_SAUCER) {
+							ep[a]=0;
+							dyen(a);
+						} else {
+							wrapnoen(a);
+						}
 					}
 				}
 			}
@@ -576,7 +604,7 @@ void playerinit() {
 	sprite(PLAYER_SPRITE+1,112,playerColor,192,128);
 	sprite(PLAYER_SPRITE+2,116,playerColor,208,112);
 	sprite(PLAYER_SPRITE+3,120,playerColor,208,128);
-	sprite(PLAYER_FLAME,100,11,224,120);
+	sprite(PLAYER_FLAME,FLAME_BIG,11,224,120);
 	sprite(PLAYER_SHIELD,124,COLOR_BLACK,192,112);
 	sprite(PLAYER_SHIELD+1,128,COLOR_BLACK,192,128);
 	sprite(PLAYER_SHIELD+2,132,COLOR_BLACK,208,112);
@@ -635,13 +663,13 @@ void dyen(unsigned char x)
 				wrapnoen(k);
 			}
 			for (k=0; k<9; k++)	{ 
-				ent[k]=ENEMY_SHRAPNEL;
+				ent[k]=ENEMY_SHOT;
 				en_func[k]=enemyshot;
 				enr[k]=r; enc[k]=c;
-				ech[k]=48;
-				eec[k]=48;
-				esc[k]=48;
-				sprite(k+ENEMY_SPRITE,48,11,r,c);
+				ech[k]=84;
+				eec[k]=84;
+				esc[k]=84;
+				sprite(k+ENEMY_SPRITE,84,11,r,c);
 				if (k<3) {
 					ers[k]=-9;
 				}

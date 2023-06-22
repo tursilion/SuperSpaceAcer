@@ -1,11 +1,7 @@
 New bugs with new compiler:
-- restart after cheating (hold up, then disable with '8') with Selena during Game Over - only get one life (or is she supposed to?)
-- horizontal ship schematic on difficulty page is corrupted
 - saucers are corrupted on stage 2 onward
 - boss 2 is corrupted and engines are in the wrong place
-- need to remove the scrolly background (would be good for an earth level though)
 - boss 5 is corrupt and engines are in the wrong place
-- Selena win screen doesn't work - just appears and then returns to title page (no credits - reset crash?)
 - part of score is erased during boss explosion (and it crashed once on the blimp with CPU overdrive)
 
 
@@ -36,7 +32,7 @@ SPRITE PATTERNS
 44-47	- enemy type 6 (bomb)
 48-51	- jet tilt left
 52-75	- enemy explosion (6 frames)
-76-83	- Boss engine (2 frames) / electric wall left/right edges
+76-83	- Boss engine (2 frames) / electric wall left/right edges <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 84-87	- enemy shot
 88-91	- pulse cannon small
 92-95	- pulse cannon medium
@@ -55,8 +51,8 @@ SPRITE PATTERNS
 216-219 - 3 way left 2
 220-223 - 3 way right 1
 224-227 - 3 way right 2
-228-231 - boss cockpit (empty sprite) / electric wall beam right
-232-247 - helicopter leaving
+228-231 - electric wall beam right (also used for boss cockpit)
+232-247 - helicopter leaving (4 frames)
 248-251	- powerup and player explosion (copied from character patterns, not initialized)
 252-255 - jet tilt right
 
@@ -152,19 +148,28 @@ bomb:		3				6 rows
 beamgen:	2				8 rows
 
 
-Generators can produce the enemies psuedo randomly. In fact, with a separate seed I can use the same random number code, but lock it down to the stage. If I seed each stage the same way each time, I will get the same patterns - however, there is the small issue of dying and rolling back. 
+Generators can produce the enemies psuedo randomly. In fact, with a separate seed I can use the same random
+number code, but lock it down to the stage. If I seed each stage the same way each time, I will get the same
+patterns - however, there is the small issue of dying and rolling back. 
 
-To solve this -- generators are checked every 50 units. The random number seed is the level*32+distance/64. This guarantees the same generator at the same point (dying may still throw off the sequence slightly, but it should fall back into line.) Multiple generators should be staggered so they don't all trigger at the same time.
+To solve this -- generators are checked every 50 units. The random number seed is the level*32+distance/64. 
+This guarantees the same generator at the same point (dying may still throw off the sequence slightly, but 
+it should fall back into line.) Multiple generators should be staggered so they don't all trigger at the
+same time.
 
-There is 1 generator per stage up to a max of 3. A generator has a horizontal position, a horizontal speed, a dispatch timer, a dispatch count, and a dispatch type.
+There is 1 generator per stage up to a max of 3. A generator has a horizontal position, a horizontal speed, 
+a dispatch timer, a dispatch count, and a dispatch type.
 
-The timer is adjusted based on the speed and the type such that it is always the number of cells away before dispatching again. This basically means setting a minimum when the generator is created.
+The timer is adjusted based on the speed and the type such that it is always the number of cells away before
+dispatching again. This basically means setting a minimum when the generator is created.
 
 Creating a generator:
 -set random seed (probably doesn't matter if we use the global seed, it will boil down to shots and powerups now)
 -horizontal starting position is random
--horizontal speed is random but should be weighted to low values. Must be signed. Full range is legal (large jumps will look random), so will need a simple way to weight it closer to zero.
--dispatch timer starts with the table above. For each 16 pixels in the speed, can subtract one. Then add a small random value to get a slope.
+-horizontal speed is random but should be weighted to low values. Must be signed. Full range is legal (large 
+ jumps will look random), so will need a simple way to weight it closer to zero.
+-dispatch timer starts with the table above. For each 16 pixels in the speed, can subtract one. Then add a 
+ small random value to get a slope.
 -Count is random. 6 enemies is the most onscreen at a time so maximum should not be much more than that.
 -type is dependent on level, but otherwise random
 
@@ -197,9 +202,9 @@ Need sound effects.
 
 Change enemy bullets to be rotating ovals instead of dots - that makes it more clear.
 
-Some minor F18A enhancements would be nice too. I was thinking extra particles from explosions and using the bitmap layer 
-for colored (and far more easily positioned) bosses. Will require a separate boss program for F18A and maybe a pre-frame 
-stub program for the special effects.
+Some minor F18A enhancements would be nice too. I was thinking extra particles from explosions and using the
+bitmap layer for colored (and far more easily positioned) bosses. Will require a separate boss program for
+F18A and maybe a pre-frame stub program for the special effects.
 
 Data all lives in dedicated banks as well - goal is to keep each bank under 8k so it fits on both systems. Doesn't matter 
 to me if we waste memory on the Coleco version - otherwise we would need to use different addresses for which half of a 

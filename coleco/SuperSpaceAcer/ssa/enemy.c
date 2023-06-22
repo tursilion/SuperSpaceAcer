@@ -330,7 +330,7 @@ void enemyengine(uint8 x) {
  
 void enemynull(uint8 x) {
 	// boss cockpit and others with no task to do
-	sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
+	//sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
 }
 
 void enemyexplosion(uint8 x) {

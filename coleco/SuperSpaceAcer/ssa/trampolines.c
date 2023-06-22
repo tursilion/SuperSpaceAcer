@@ -205,14 +205,31 @@ void wrapspritescore(unsigned int sprpat, unsigned int sprtab, unsigned char row
 }
 
 void wrapLoadEngineSprites() {
-	// load up the engine sprites and blank the cockpit
+	// load up the engine sprites
 	unsigned int old = nBank;
 
 	SWITCH_IN_BANK5;
 	vdpmemcpy(gSPRITE_PATTERNS+76*8, SPRITES+76*8, 2*4*8);
-	vdpmemset(gSPRITE_PATTERNS+228*8, 0, 4*8);
 	SWITCH_IN_PREV_BANK(old);
 }
+
+void wrapPlayerFlameBig() {
+	// set the player flame sprites to big
+	unsigned int old = nBank;
+
+	SWITCH_IN_BANK5;
+	vdpmemcpy(gSPRITE_PATTERNS+100*8, SPRITES+100*8, 4*8);
+	SWITCH_IN_PREV_BANK(old);
+} 
+
+void wrapPlayerFlameSmall() {
+	// set the player flame sprites to small
+	unsigned int old = nBank;
+
+	SWITCH_IN_BANK5;
+	vdpmemcpy(gSPRITE_PATTERNS+100*8, PLAYERFLAMESMALL, 4*8);
+	SWITCH_IN_PREV_BANK(old);
+} 
 
 void wrapCopyShip(const unsigned char *p, const unsigned char *c) {
 	unsigned int old = nBank;

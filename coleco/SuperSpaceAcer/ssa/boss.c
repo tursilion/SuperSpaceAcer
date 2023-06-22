@@ -140,7 +140,7 @@ void boss()
 	ecs[6]=0;
 	enr[6]=(BNR<<3)-32; 
 	enc[6]=(BNC<<2)-12;	// <<3>>1 == <<2
-	sprite(6+ENEMY_SPRITE, 228, 0, enr[6], enc[6]);
+	//sprite(6+ENEMY_SPRITE, 228, 0, enr[6], enc[6]); // it doesn't actually have to be on screen!
 
 	// setup rest of boss's engines
 	for (i=0; i<3; i++)	{
@@ -157,7 +157,7 @@ void boss()
 		sprite(i+ENEMY_SPRITE,76,8,enr[i],enc[i]);
 	}
 
-	// load up the engine sprites and blank the cockpit
+	// load up the engine sprites
 	wrapLoadEngineSprites();
 
 	// finally, if the background scrolling isn't on SIT >0000,
@@ -620,7 +620,7 @@ void byboss() {
 		SOUND=0xe7;
 		SOUND=0xdf;
 
-		sppat(PLAYER_FLAME,100);	// flame big
+		wrapPlayerFlameBig();
 		if ((SHIP_R<192)||(SHIP_R>200)) { 
 			SHIP_R-=6; playmv(); 
 		} else {
@@ -745,8 +745,6 @@ void PrepareBoss(unsigned char idx, unsigned char r) {
 		p-=8;
 	}
 }
-
-
 
 // hard-coded boss draw functions are nearly twice as
 // fast as the looping version, and we optimize a bit

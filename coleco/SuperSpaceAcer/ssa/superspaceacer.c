@@ -22,7 +22,7 @@
  
 // startup and init, central code
 #define SIZE_OF_CHARS		160
-#define SIZE_OF_SPRITES		1984
+#define SIZE_OF_SPRITES		2048
 #define LIVESCHAR			19
 
 // for sprite flicker, manage in CPU memory, copy up during vblank
@@ -899,7 +899,6 @@ void ispace()
 	// load the electric wall sprites
 	SWITCH_IN_BANK5;
 	vdpmemcpy(gSPRITE_PATTERNS+76*8, ELECTRICWALL, 2*4*8);
-	vdpmemcpy(gSPRITE_PATTERNS+228*8, ELECTRICWALL+8*8, 4*8);
 
 	// small stars first
 	SWITCH_IN_BANK6;
