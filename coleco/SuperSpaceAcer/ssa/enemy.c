@@ -129,7 +129,7 @@ void enout()
 				// minimum player damage is 2 for spread, 3 for pulse
 				switch (a) { 
 					case ENEMY_SAUCER:		eec[k]=0; esc[k]=0; ep[k]=2; c=COLOR_MEDGREEN; en_func[k]=enemysaucer; break;
-					case ENEMY_JET:			eec[k]=4; esc[k]=4; ep[k]=3; c=COLOR_LTBLUE; en_func[k]=enemyjet; break;
+					case ENEMY_JET:			eec[k]=4; esc[k]=4; ep[k]=3; ecs[k]=0; c=COLOR_LTBLUE; en_func[k]=enemyjet; break;
 					case ENEMY_MINE:		eec[k]=8; esc[k]=8; ep[k]=10; c=COLOR_CYAN; en_func[k]=enemymine; break;
 					case ENEMY_HELICOPTER:	eec[k]=24; esc[k]=12; ep[k]=5; c=COLOR_MAGENTA; ers[k]=(rndnum()&0x7f)+1; ecs[k]=(rndnum()&0x07); if (enc[k]>127) ecs[k]=-ecs[k]; en_func[k]=enemyhelicopter; break;
 					case ENEMY_SWIRLY:		eec[k]=40; esc[k]=28; ep[k]=8; c=COLOR_MEDRED; en_func[k]=enemyswirly; break;
@@ -164,13 +164,96 @@ void enemysaucer(uint8 x) {
 }
 
 void enemyjet(uint8 x) {
+	// since there's no animation esc is used as a flag that the turn has already happened
+	// if esc==ech, it has not
 	enr[x]+=8;
+	enc[x] += ecs[x];
+
+	if (esc[x] == ech[x]) {
+		unsigned char r,c;
+		spposn(PLAYER_SPRITE,r,c);
+		if (enr[x]+64 > r) {
+			// make a choice - left, right or turn
+			// in higher difficulties we turn towards the player more often
+			switch (nDifficulty) {
+				case DIFFICULTY_EASY:
+					switch (rndnum()&3) {
+						case 0:
+							// turn left
+							ecs[x]=-4;
+							ech[x]=48;
+							break;
+						case 1:	
+							// turn right
+							ecs[x]=4;
+							ech[x]=252;
+							break;
+						// 2/3 - do nothing
+					}
+					break;
+
+				case DIFFICULTY_MEDIUM:
+					switch (rndnum()&3) {
+						case 0:
+							// towards
+							if (c-8 > enc[x]) {
+								// turn right
+								ecs[x]=4;
+								ech[x]=252;
+							} else if (c+8 < enc[x]) {
+								// turn left
+								ecs[x]=-4;
+								ech[x]=48;
+							}
+							break;
+
+						case 1:
+							// left
+							ecs[x]=-4;
+							ech[x]=48;
+							break;
+
+						case 2:
+							// right
+							ecs[x]=4;
+							ech[x]=252;
+							break;
+
+						// 3 - nothing
+					}
+					break;
+
+				case DIFFICULTY_HARD:
+					switch (rndnum()&3) {
+						case 0:
+						case 1:
+						case 2:
+							// towards
+							if (c-8 > enc[x]) {
+								// turn right
+								ecs[x]=4;
+								ech[x]=252;
+							} else if (c+8 < enc[x]) {
+								// turn left
+								ecs[x]=-4;
+								ech[x]=48;
+							}
+							break;
+
+						// 3 - nothing
+					}
+			}
+			++esc[x];	// flag that it's done
+			// change shape now, we'll start moving next frame
+			SpriteTab[x+ENEMY_SPRITE].pat=ech[x];
+		}
+	}
 
 	if (enr[x]>191) noen(x);	// no worries for top row will invisibly wrap around!
 	if (enc[x]>239) noen(x);	// wider on right edge due to hotspot of sprite (need this to catch the bomb explosion bits)
 	if (enc[x]<5) noen(x);
 	if (ent[x] != ENEMY_NONE) {
-		SpriteTab[x+ENEMY_SPRITE].y = enr[x];
+		sploct(x+ENEMY_SPRITE, enr[x],enc[x]);
 	}
 }
 
