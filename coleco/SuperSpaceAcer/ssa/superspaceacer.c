@@ -483,7 +483,7 @@ void initSnowball() {
 	
 	shieldsOn = shieldSnowball;
 	shieldsOff = deShieldSnowball;
-	playerColor = COLOR_WHITE;
+	playerColor = COLOR_GRAY;
 	playerOffset = 8;
 	shotOffset = -8;
 	playerXspeed = 12;
@@ -991,7 +991,7 @@ void playmv()
 		}
 
 		if (shield > 70) {
-			x=COLOR_GRAY;
+			x=COLOR_WHITE;
 		} else if (shield > 40) {
 			x=COLOR_DKYELLOW;
 		} else if (shield > 0) {
