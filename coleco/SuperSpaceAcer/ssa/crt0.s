@@ -142,7 +142,7 @@
 	ei		; RST 0x38 - spinner interrupt
 	reti
 	jp nmi		; NMI
-	nop
+
 	.ascii " / / NOT"
 
 _startprog:
@@ -166,7 +166,7 @@ _startprog:
 	rst 0x0					; Restart when main() returns.
 
 	.area _BSS
-_vdpLimi:					; 0x80 - interrupt set, other bits used by library
+_vdpLimi:					; 0x80 - interrupt set, 0x01 - enabled, other bits used by library
 	.ds 1
 
     .area _CODE

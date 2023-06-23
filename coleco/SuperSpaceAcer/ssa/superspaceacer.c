@@ -991,7 +991,7 @@ void playmv()
 		}
 
 		if (shield > 70) {
-			x=COLOR_WHITE;
+			x=COLOR_GRAY;
 		} else if (shield > 40) {
 			x=COLOR_DKYELLOW;
 		} else if (shield > 0) {

@@ -5,14 +5,14 @@
 
 Value     Size      Global                        Module
 --------  --------  ----------------------------  ----------------------------
-0000CE8A  00001F10  _songpack1                    songpack1                   
+0000CF12  00001F10  _songpack1                    songpack1                   
 0000D9E9  00001C00  _songpack6                    songpack6                   
 0000D3E8  00001A80  _songpack2                    songpack2                   
 0000C00E  00001850  _songpack4                    songpack4                   
 0000C1F9  000017F0  _songpack5                    songpack5                   
 0000C00E  00001510  _songpack3                    songpack3                   
-0000CCC1  00000BA3  _TITLEP                       title_p                     
-0000C161  00000B60  _TITLEC                       title_c                     
+0000CCB4  00000BA3  _TITLEP                       title_p                     
+0000C154  00000B60  _TITLEC                       title_c                     
 0000E0FE  00000AE0  _zenithendP                   zenith_end_p                
 0000D85E  000008A0  _zenithendC                   zenith_end_c                
 0000E20F  00000880  _SHIP4C                       ship4_c                     
@@ -21,8 +21,8 @@ Value     Size      Global                        Module
 0000C88F  00000880  _SHIP2P                       ship2_p                     
 0000EA8F  00000880  _SHIP4P                       ship4_p                     
 0000C00F  00000880  _SHIP2C                       ship2_c                     
-0000D864  00000880  _SHIP1C                       ship1_c                     
-0000E0E4  00000880  _SHIP1P                       ship1_p                     
+0000D857  00000880  _SHIP1C                       ship1_c                     
+0000E0D7  00000880  _SHIP1P                       ship1_p                     
 0000CB11  00000800  _SPRITES                      ssd_inc                     
 0000DD41  000007FA  _getDifficulty                difficulty                  
 0000E791  000007A3  _TXTDAT                       ssd_inc                     
@@ -41,218 +41,218 @@ Value     Size      Global                        Module
 0000C068  0000036A  _boss                         boss                        
 0000C800  00000311  _BOSS5                        boss5                       
 000087D2  00000307  _playone                      player                      
-0000DDF1  00000300  _GNAT                         ssd_inc                     
-0000D971  00000300  _LADYBUG                      ssd_inc                     
 0000D4F1  00000300  _SNOWBALL                     ssd_inc                     
 0000EB2E  00000300  _colecofont                   font                        
+0000DDF1  00000300  _GNAT                         ssd_inc                     
+0000D971  00000300  _LADYBUG                      ssd_inc                     
 0000E271  00000300  _ZENITH                       ssd_inc                     
-0000C00E  000002F6  _enout                        enemy                       
+0000C00E  000002F9  _enout                        enemy                       
 0000D175  00000273  _dyen                         human                       
+0000CBD5  00000265  _shootplayer                  enemy                       
 0000C5A0  00000260  _BOSS4                        boss4                       
 0000C5C1  00000236  _mvshot                       human                       
 0000C1AB  00000230  _gamewineasy                  wineasy                     
-00009F46  00000228  _main                         superspaceacer              
+00009F68  00000228  _main                         superspaceacer              
 000083A1  00000213  _sfxinit                      player                      
 0000C00E  0000020F  _BOSS1                        boss1                       
 0000C00E  000001F0  _player                       human                       
 0000CC0E  000001EE  _whoded                       boss                        
-0000CBD2  000001E0  _shootplayer                  enemy                       
 0000C3D2  000001CE  _BOSS3                        boss3                       
-0000A981  000001BA  _wrapspritescore              trampolines                 
+0000A9A3  000001BA  _wrapspritescore              trampolines                 
 0000C21D  000001B5  _BOSS2                        boss2                       
 0000C00E  0000018F  _background                   bg                          
-0000C5EF  00000183  _enemyhelipause               enemy                       
+0000C5F2  00000183  _enemyhelipause               enemy                       
+0000D371  00000180  _ALTSHIELDS                   ssd_inc                     
+0000E571  00000180  _ALTZENITH                    ssd_inc                     
 0000DC71  00000180  _ALTLADYBUG                   ssd_inc                     
 0000E0F1  00000180  _ALTGNAT                      ssd_inc                     
-0000E571  00000180  _ALTZENITH                    ssd_inc                     
 0000D7F1  00000180  _ALTSNOWBALL                  ssd_inc                     
-0000D371  00000180  _ALTSHIELDS                   ssd_inc                     
 0000CE75  0000017F  _pboom                        human                       
 0000C988  00000176  _zenithTxt                    winhard                     
 0000CEC6  00000169  _zenithwin                    winhard                     
 0000C3D2  00000159  _drboss                       boss                        
 0000D375  00000158  _PrepareBoss                  boss                        
 00008160  0000014B  _getbyte_newcmd               player                      
-0000A16E  0000014A  _space                        superspaceacer              
+0000A190  0000014A  _space                        superspaceacer              
 000085B4  00000139  _stinit                       player                      
-0000945B  0000012C  _sprStart20                   superspaceacer              
-00009226  0000012C  _sprStart12                   superspaceacer              
-00008FF1  0000012C  _sprStart4                    superspaceacer              
-00009690  0000012C  _sprStart28                   superspaceacer              
+00009248  0000012C  _sprStart12                   superspaceacer              
+000096B2  0000012C  _sprStart28                   superspaceacer              
+0000947D  0000012C  _sprStart20                   superspaceacer              
+00009013  0000012C  _sprStart4                    superspaceacer              
 0000EF34  00000129  _WINTIPS                      ssd_inc                     
-0000C4CA  00000125  _enemyhelicopter              enemy                       
+0000C4CD  00000125  _enemyhelicopter              enemy                       
 0000C86D  00000123  _colchk                       human                       
 0000D1C4  00000113  _AddDamage                    boss                        
 0000D51E  0000010D  _soundtest                    difficulty                  
-0000911D  00000109  _sprStart8                    superspaceacer              
-00009587  00000109  _sprStart24                   superspaceacer              
-00009352  00000109  _sprStart16                   superspaceacer              
-00008EEB  00000106  _sprStart0                    superspaceacer              
+0000913F  00000109  _sprStart8                    superspaceacer              
+000095A9  00000109  _sprStart24                   superspaceacer              
+00009374  00000109  _sprStart16                   superspaceacer              
 0000D06F  00000106  _playerinit                   human                       
-0000A2B8  000000F7  _ispace                       superspaceacer              
-0000A6FF  000000F6  _wrapunpackboss               trampolines                 
-0000C852  000000EC  _enemyswirly                  enemy                       
-0000A43A  000000E9  _playmv                       superspaceacer              
-0000CAD5  000000E4  _enemy                        enemy                       
+00008F0D  00000106  _sprStart0                    superspaceacer              
+0000A2DA  000000F7  _ispace                       superspaceacer              
+0000A721  000000F6  _wrapunpackboss               trampolines                 
+0000C855  000000EC  _enemyswirly                  enemy                       
+0000A45C  000000E9  _playmv                       superspaceacer              
+0000CAD8  000000E4  _enemy                        enemy                       
 0000C070  000000E0  _smallcapsfont                wineasy                     
-0000C772  000000E0  _enemyhelileave               enemy                       
+0000C775  000000E0  _enemyhelileave               enemy                       
 0000E53B  000000CD  _sSkillText                   difficulty                  
 0000CB44  000000CA  _checkdamage                  boss                        
-0000C414  000000B6  _enemymine                    enemy                       
-0000C0B6  000000AB  _handleTitlePage              titlepage                   
-0000ABB7  000000A9  _wrapCopyShip                 trampolines                 
+0000C417  000000B6  _enemymine                    enemy                       
+0000ABD9  000000A9  _wrapCopyShip                 trampolines                 
 0000E6F1  000000A0  _CHARS                        ssd_inc                     
+0000C0B6  0000009E  _handleTitlePage              titlepage                   
 0000D2D7  0000009E  _AddDestroyed                 boss                        
-0000C324  0000009A  _enemysaucer                  enemy                       
+0000C327  0000009A  _enemysaucer                  enemy                       
 0000C452  00000099  _reparse                      winmed                      
-0000A523  00000097  _addscore                     superspaceacer              
-0000CDF6  00000094  _pwr                          enemy                       
+0000A545  00000097  _addscore                     superspaceacer              
+0000CE7E  00000094  _pwr                          enemy                       
 0000C026  00000090  _animate                      titlepage                   
-0000C9C2  0000008E  _enemyshot                    enemy                       
-000099AA  0000008C  _RLEUnpack                    superspaceacer              
-0000A3AF  0000008B  _gamovr                       superspaceacer              
-000097BC  00000088  _waitforstep                  superspaceacer              
-0000C93E  00000084  _enemybomb                    enemy                       
+0000C9C5  0000008E  _enemyshot                    enemy                       
+000099CC  0000008C  _RLEUnpack                    superspaceacer              
+0000A3D1  0000008B  _gamovr                       superspaceacer              
+000097DE  00000088  _waitforstep                  superspaceacer              
+0000C941  00000084  _enemybomb                    enemy                       
 00008B10  00000083  _set_graphics_raw             vdp_setgraphics             
 0000C7F7  00000076  _cheat                        human                       
-00009BC2  00000073  _initGnat                     superspaceacer              
-00008C54  00000070  _set_bitmap                   vdp_setbitmap               
-00009AF0  00000069  _initSnowball                 superspaceacer              
-00009A87  00000069  _initCruiser                  superspaceacer              
-00009B59  00000069  _initLadybug                  superspaceacer              
-00009C35  00000069  _initZenith                   superspaceacer              
-000098A7  00000063  _patcpy                       superspaceacer              
+00009BE4  00000073  _initGnat                     superspaceacer              
+00008BFE  00000070  _set_bitmap                   vdp_setbitmap               
+00009B7B  00000069  _initLadybug                  superspaceacer              
+00009C57  00000069  _initZenith                   superspaceacer              
+00009B12  00000069  _initSnowball                 superspaceacer              
+00009AA9  00000069  _initCruiser                  superspaceacer              
+000098C9  00000063  _patcpy                       superspaceacer              
 0000C00E  00000060  _gamwin                       wineasy                     
-0000AC6F  0000005C  _doMusic                      music                       
 0000CE19  0000005C  _pdie                         human                       
-0000984C  0000005B  _loadcharset                  superspaceacer              
-0000ACCB  0000005B  _StartMusic                   music                       
+0000AC91  0000005C  _doMusic                      music                       
+0000ACED  0000005B  _StartMusic                   music                       
+0000986E  0000005B  _loadcharset                  superspaceacer              
 0000C4EB  0000005A  _movesprites                  winmed                      
-0000C3BE  00000056  _enemyjet                     enemy                       
-0000CA85  00000050  _enemyexplosion               enemy                       
+0000C3C1  00000056  _enemyjet                     enemy                       
+0000CA88  00000050  _enemyexplosion               enemy                       
 0000C1AC  0000004D  _initstars                    bg                          
-00008D19  0000004C  _kscanfast                    kscanfast                   
-00008BF3  0000004B  _joystfast                    joystfast                   
-00008DF6  00000049  _vchar                        vdp_vchar                   
+00008CC3  0000004C  _kscanfast                    kscanfast                   
+00008B9D  0000004B  _joystfast                    joystfast                   
+00008E18  00000049  _vchar                        vdp_vchar                   
 00008359  00000048  _initstream                   player                      
 00008314  00000045  _getbyte_count_fixed          player                      
-00009F02  00000044  _deShieldZenith               superspaceacer              
-00009E36  00000044  _deShieldSnowball             superspaceacer              
-00009D26  00000044  _shieldLadybug                superspaceacer              
-00009DF2  00000044  _deShieldCruiser              superspaceacer              
-00009D6A  00000044  _shieldGnat                   superspaceacer              
-00009EBE  00000044  _deShieldGnat                 superspaceacer              
-00009CE2  00000044  _shieldSnowball               superspaceacer              
-00009C9E  00000044  _shieldCruiser                superspaceacer              
-00009DAE  00000044  _shieldZenith                 superspaceacer              
-00009E7A  00000044  _deShieldLadybug              superspaceacer              
+00009F24  00000044  _deShieldZenith               superspaceacer              
+00009E58  00000044  _deShieldSnowball             superspaceacer              
+00009D8C  00000044  _shieldGnat                   superspaceacer              
+00009E14  00000044  _deShieldCruiser              superspaceacer              
+00009CC0  00000044  _shieldCruiser                superspaceacer              
+00009D48  00000044  _shieldLadybug                superspaceacer              
+00009DD0  00000044  _shieldZenith                 superspaceacer              
+00009EE0  00000044  _deShieldGnat                 superspaceacer              
+00009E9C  00000044  _deShieldLadybug              superspaceacer              
+00009D04  00000044  _shieldSnowball               superspaceacer              
 0000C168  00000043  _slowcenter                   wineasy                     
 000086ED  00000042  _ststop                       player                      
 0000C411  00000041  _fontstr                      winmed                      
 0000D331  00000040  _ELECTRICWALL                 ssd_inc                     
+00008D64  00000040  _vdpinit                      vdp_ints                    
 00008795  0000003D  _stplay                       player                      
 0000C52B  0000003C  _erboss                       boss                        
-0000A947  0000003A  _wrapgetfontbytes             trampolines                 
-0000A7F5  0000003A  _winwrapgetscroll             trampolines                 
+00008DA4  0000003C  _vdpwaitvint                  vdp_waitvint                
+0000A969  0000003A  _wrapgetfontbytes             trampolines                 
+0000A817  0000003A  _winwrapgetscroll             trampolines                 
 0000C3DB  00000036  _musicvdpsync                 winmed                      
 0000875A  00000035  _restorechans                 player                      
 000082AB  00000035  _getbyte_count_run            player                      
 000082E0  00000034  _getbyte_count_inc            player                      
-0000A913  00000034  _wrapLoadZenithPic            trampolines                 
-0000CA50  00000034  _enemyengine                  enemy                       
-00009977  00000033  _intpic                       superspaceacer              
-0000A5E9  00000032  _sgrint                       superspaceacer              
-0000A5BA  0000002F  _centr                        superspaceacer              
-00008D8F  0000002F  _vdpwaitvint                  vdp_waitvint                
+0000CA53  00000034  _enemyengine                  enemy                       
+0000A935  00000034  _wrapLoadZenithPic            trampolines                 
+00009999  00000033  _intpic                       superspaceacer              
+0000A60B  00000032  _sgrint                       superspaceacer              
+0000A5DC  0000002F  _centr                        superspaceacer              
 00008131  0000002F  __divuint                                                 
-0000CDB2  0000002E  _helishoot                    enemy                       
-00008AE3  0000002D  _vdpmemread                   vdp_memread                 
-0000990A  0000002D  _patsprcpy                    superspaceacer              
-0000A8E6  0000002D  _wrapcheckdamage              trampolines                 
+0000CE3A  0000002E  _helishoot                    enemy                       
+0000992C  0000002D  _patsprcpy                    superspaceacer              
 0000C00E  0000002D  _bosscol                      boss                        
+00008AE3  0000002D  _vdpmemread                   vdp_memread                 
 0000C03B  0000002D  _BOSTAB                       boss                        
-00008E69  0000002C  _vdpmemset                    vdp_memset                  
+0000A908  0000002D  _wrapcheckdamage              trampolines                 
+00008E8B  0000002C  _vdpmemset                    vdp_memset                  
+0000A889  0000002B  _delaystars                   trampolines                 
 0000872F  0000002B  _sfxstop                      player                      
-00008BC8  0000002B  _vdpinit                      vdp_ints                    
-0000A867  0000002B  _delaystars                   trampolines                 
-00008CC4  0000002A  _vdpwriteinc                  vdp_writeinc                
-0000AB3B  0000002A  _wrapLoadEngineSprites        trampolines                 
-00008E3F  0000002A  _vdpmemcpy                    vdp_memcpy                  
+00008E61  0000002A  _vdpmemcpy                    vdp_memcpy                  
+0000AB5D  0000002A  _wrapLoadEngineSprites        trampolines                 
+00008C6E  0000002A  _vdpwriteinc                  vdp_writeinc                
+0000AB87  00000029  _wrapPlayerFlameBig           trampolines                 
 0000D01D  00000029  _playerleft                   human                       
+0000ABB0  00000029  _wrapPlayerFlameSmall         trampolines                 
 0000D046  00000029  _playerright                  human                       
-0000AB8E  00000029  _wrapPlayerFlameSmall         trampolines                 
 0000CFF4  00000029  _playerstraight               human                       
-0000AB65  00000029  _wrapPlayerFlameBig           trampolines                 
-00008EBB  00000026  __divsint                                                 
-0000A69D  00000022  _wrapcolchk                   trampolines                 
-0000A63B  00000022  _wrapnoen                     trampolines                 
-00009A65  00000022  _DelSprButPlayer              superspaceacer              
-0000C304  00000020  _sinemove                     enemy                       
-0000A847  00000020  _wrapstars                    trampolines                 
+00008EDD  00000026  __divsint                                                 
+00009A87  00000022  _DelSprButPlayer              superspaceacer              
+0000A6BF  00000022  _wrapcolchk                   trampolines                 
+0000A65D  00000022  _wrapnoen                     trampolines                 
+0000A69F  00000020  _wrapcheat                    trampolines                 
 0000D311  00000020  _PLAYERFLAMESMALL             ssd_inc                     
-0000A8C6  00000020  _wrapbackground               trampolines                 
-0000A65D  00000020  _wrapplayer                   trampolines                 
-0000A892  00000020  _wrapinitstars                trampolines                 
-0000A6BF  00000020  _wrapplycol                   trampolines                 
-00008B9D  00000020  _my_nmi                       vdp_ints                    
-0000A67D  00000020  _wrapcheat                    trampolines                 
-0000A6DF  00000020  _wrapplayerstraight           trampolines                 
-0000A61B  00000020  _wrapenemy                    trampolines                 
-0000994B  0000001F  _rndnum                       superspaceacer              
-00008CFA  0000001F  _memmove                                                  
+0000A8E8  00000020  _wrapbackground               trampolines                 
+0000A63D  00000020  _wrapenemy                    trampolines                 
+00008D39  00000020  _my_nmi                       vdp_ints                    
+0000A6E1  00000020  _wrapplycol                   trampolines                 
+0000A701  00000020  _wrapplayerstraight           trampolines                 
+0000A8B4  00000020  _wrapinitstars                trampolines                 
+0000A67F  00000020  _wrapplayer                   trampolines                 
+0000A869  00000020  _wrapstars                    trampolines                 
+0000C307  00000020  _sinemove                     enemy                       
+00008CA4  0000001F  _memmove                                                  
 0000C969  0000001F  _musicsync                    winhard                     
-00009A47  0000001E  _grf1                         superspaceacer              
-0000AD26  0000001A  _shutup                       music                       
-0000CBB9  00000019  _noen                         enemy                       
+0000996D  0000001F  _rndnum                       superspaceacer              
+00009A69  0000001E  _grf1                         superspaceacer              
+0000AD48  0000001A  _shutup                       music                       
+0000CBBC  00000019  _noen                         enemy                       
 0000C150  00000018  _easypats                     wineasy                     
+0000A851  00000018  _winwrapgetbyte               trampolines                 
 0000C00E  00000018  _ldpic                        titlepage                   
-0000A82F  00000018  _winwrapgetbyte               trampolines                 
-00008DD2  00000016  _memset                       _memset                     
-00008C3E  00000016  _vdpchar                      vdp_char                    
-0000CDE0  00000016  _enemyinit                    enemy                       
-0000A8B2  00000014  _wrapispace                   trampolines                 
-00009937  00000014  _spdall                       superspaceacer              
-00008DBE  00000013  _vdpreadchar                  vdp_readchar                
-00009A36  00000011  _target                       superspaceacer              
-0000AD5A  00000010  gsinit                        crt0                        
-00008D65  00000010  _keys                         kscanfast                   
-0000AC60  0000000F  _wrapGamWin                   trampolines                 
+0000CE68  00000016  _enemyinit                    enemy                       
+00008DF4  00000016  _memset                       _memset                     
+00008BE8  00000016  _vdpchar                      vdp_char                    
+0000A8D4  00000014  _wrapispace                   trampolines                 
+00009959  00000014  _spdall                       superspaceacer              
+00008DE0  00000013  _vdpreadchar                  vdp_readchar                
+00009A58  00000011  _target                       superspaceacer              
+00008D0F  00000010  _keys                         kscanfast                   
+0000AD7C  00000010  gsinit                        crt0                        
 0000C19D  0000000F  _stars                        bg                          
-00008D75  0000000E  _raw_vdpmemcpy                vdp_rawmemcpy               
-00008DE8  0000000E  _memcpy                                                   
-0000996A  0000000D  _cls                          superspaceacer              
-00008E97  0000000C  _strlen                                                   
-00008D83  0000000C  _raw_vdpmemset                vdp_rawmemset               
-00008B93  0000000A  _set_graphics                 vdp_setgraphics             
+0000AC82  0000000F  _wrapGamWin                   trampolines                 
+00008E0A  0000000E  _memcpy                                                   
+00008D1F  0000000E  _raw_vdpmemcpy                vdp_rawmemcpy               
+0000998C  0000000D  _cls                          superspaceacer              
+00008D2D  0000000C  _raw_vdpmemset                vdp_rawmemset               
+00008EB9  0000000C  _strlen                                                   
 0000D02F  0000000A  _gamewinhard                  winhard                     
-0000D635  0000000A  _snowballText                 difficulty                  
-00008EE1  0000000A  __get_remainder                                           
-0000D63F  0000000A  _ladybugText                  difficulty                  
-0000D649  0000000A  _gnatText                     difficulty                  
 00008AD9  0000000A  _strcpy                                                   
-0000D653  0000000A  _zenithText                   difficulty                  
+00008B93  0000000A  _set_graphics                 vdp_setgraphics             
 0000D62B  0000000A  _cruiserText                  difficulty                  
-00009844  00000008  _damage                       superspaceacer              
-00008EA3  00000008  __modschar                                                
-00008BC1  00000007  _clearUserIntHook             vdp_ints                    
-00008CEE  00000007  __moduchar                                                
+0000D635  0000000A  _snowballText                 difficulty                  
+0000D649  0000000A  _gnatText                     difficulty                  
+0000D653  0000000A  _zenithText                   difficulty                  
+00008F03  0000000A  __get_remainder                                           
+0000D63F  0000000A  _ladybugText                  difficulty                  
+00009866  00000008  _damage                       superspaceacer              
+00008EC5  00000008  __modschar                                                
+00008C98  00000007  __moduchar                                                
+00008D5D  00000007  _clearUserIntHook             vdp_ints                    
 0000878F  00000006  _allstop                      player                      
 0000D65D  00000006  _musText                      difficulty                  
-00008EAB  00000006  __modsint                                                 
-00008CF5  00000005  __moduint                                                 
-00008BBD  00000004  _setUserIntHook               vdp_ints                    
-00008EB3  00000004  __div8                                                    
-00008EB7  00000004  __div_signexte                                            
+00008ECD  00000006  __modsint                                                 
+00008C9F  00000005  __moduint                                                 
+00008ED5  00000004  __div8                                                    
+00008D59  00000004  _setUserIntHook               vdp_ints                    
+00008ED9  00000004  __div_signexte                                            
 0000812E  00000003  __divu8                                                   
-00008EB1  00000002  __divschar                                                
+00008ED3  00000002  __divschar                                                
 0000812C  00000002  __divuchar                                                
-00008E95  00000002  ___sdcc_call_iy                                           
+00008EB7  00000002  ___sdcc_call_iy                                           
 0000C06E  00000002  _reboot                       wineasy                     
-0000CA84  00000001  _enemynull                    enemy                       
-00008DD1  00000001  ___sdcc_call_hl                                           
+0000CA87  00000001  _enemynull                    enemy                       
+00008DF3  00000001  ___sdcc_call_hl                                           
 00008131  00000000  __divu16                                                  
-00008EBB  00000000  __div16                                                   
-00008DE8  00000000  ___memcpy                                                 
+00008EDD  00000000  __div16                                                   
+00008E0A  00000000  ___memcpy                                                 
 
 
  == RAM MAP ==
@@ -263,20 +263,20 @@ Value     Size      Global                        Module
 Value     Size      Global                        Module
 --------  --------  ----------------------------  ----------------------------
 00007000  00000080  _SpriteTab                    superspaceacer              
-00007186  0000007C  _music                        player                      
 00007202  0000007C  _sfx                          player                      
+00007186  0000007C  _music                        player                      
 0000708F  00000021  _tmpbuf                       superspaceacer              
 00007131  00000018  _en_func                      enemy                       
 000070B0  00000013  _stdata                       bg                          
 000070EF  0000000C  _ech                          enemy                       
-0000711F  0000000C  _ecs                          enemy                       
 00007280  0000000C  _musicout                     player                      
-00007107  0000000C  _esc                          enemy                       
-00007113  0000000C  _ers                          enemy                       
-000070FB  0000000C  _eec                          enemy                       
 000070CB  0000000C  _enr                          enemy                       
-000070D7  0000000C  _enc                          enemy                       
+00007107  0000000C  _esc                          enemy                       
 000070E3  0000000C  _ent                          enemy                       
+000070D7  0000000C  _enc                          enemy                       
+000070FB  0000000C  _eec                          enemy                       
+0000711F  0000000C  _ecs                          enemy                       
+00007113  0000000C  _ers                          enemy                       
 0000715C  0000000A  _shr                          human                       
 0000716F  00000009  _shd                          human                       
 00007166  00000009  _shc                          human                       
@@ -290,10 +290,10 @@ Value     Size      Global                        Module
 000070C9  00000002  _bossdraw                     boss                        
 000072AC  00000002  _gSprite                      vdp_setmode                 
 000072AE  00000002  _gSpritePat                   vdp_setmode                 
-0000729C  00000002  _shieldsOn                    superspaceacer              
 00007084  00000002  _x                            superspaceacer              
-00007082  00000002  _b                            superspaceacer              
+0000729C  00000002  _shieldsOn                    superspaceacer              
 0000729E  00000002  _shieldsOff                   superspaceacer              
+00007082  00000002  _b                            superspaceacer              
 00007080  00000002  _a                            superspaceacer              
 000072A1  00000002  _nBank                        superspaceacer              
 00007086  00000002  _y                            superspaceacer              

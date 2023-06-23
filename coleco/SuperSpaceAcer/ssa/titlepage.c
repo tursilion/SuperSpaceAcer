@@ -78,11 +78,10 @@ void handleTitlePage() {
 		seed++;			// random number seed
 
 		// every 4 frames, update the graphic frame
-		VDP_WAIT_VBLANK_CRU;
+		vdpwaitvint();
 		if (0 == (seed&0x03)) {
 			animate((seed>>2)&0x03);
 		}
-		VDP_CLEAR_VBLANK;
 
 		joynum=joynum==1?2:1;
 		kscanfast(joynum);

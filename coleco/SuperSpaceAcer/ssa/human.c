@@ -369,7 +369,7 @@ void plycol() {
 	/*pwrup?*/
 	if (ptp4 != POWERUP_NONE) { 
 		y=abs(pr4-r); x=abs(pc4-c);
-		if ((x<=12)&&(y<=12)) {
+		if ((x<=16)&&(y<=16)) {
 			// Player collides with powerup
 			if (ptp4==POWERUP_SHIELD) { 
 				// Shield power increase

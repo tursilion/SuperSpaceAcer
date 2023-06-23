@@ -143,8 +143,8 @@ void enout()
 	}
 
 	/*shoot?*/
-	k=rndnum()&7;
-	if (k<5) { 
+	k=rndnum()&15;
+	if (k<nDifficulty) {	// 1, 3 or 7
 		if ((ent[k+6]==ENEMY_NONE)&&((ent[k]==ENEMY_SAUCER)||(ent[k]==ENEMY_JET))) { 
 			shootplayer(k, k+6);
 		}
@@ -329,6 +329,7 @@ void enemyengine(uint8 x) {
 }
  
 void enemynull(uint8 x) {
+	(void)x;
 	// boss cockpit and others with no task to do
 	//sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
 }
@@ -407,17 +408,29 @@ void shootplayer(unsigned char en, unsigned char shot) {
 		// this code allows better aim
 		z=abs(r-enr[en])+abs(c-enc[en]);
 		if (z > 8) {
-			// don't shoot if too close to the player
-			if (z > 2) {
-				// this gets us a divisor - smaller numbers make slower speed overall
-				z>>=1;
+			if (nDifficulty != DIFFICULTY_EASY) {
+				// don't shoot if too close to the player
+				if (z > 2) {
+					// this gets us a divisor - smaller numbers make slower speed overall
+					z>>=1;
+				} else {
+					z=1;
+				}
+				y=((r-enr[en])<<2)/z;
+				ers[shot]=(char)y;
+				y=((c-enc[en])<<2)/z;
+				ecs[shot]=(char)y;
 			} else {
-				z=1;
+				// on easy mode, they only shoot straight lines
+				ers[shot]=4;
+				if (abs(c-enc[en])<16) {
+					ecs[shot]=0;
+				} else if (c>enc[en]) {
+					ecs[shot]=4;
+				} else {
+					ecs[shot]=-4;
+				}
 			}
-			y=((r-enr[en])<<2)/z;
-			ers[shot]=(char)y;
-			y=((c-enc[en])<<2)/z;
-			ecs[shot]=(char)y;
 
 			// now fill in the rest of the stuff
 			ent[shot]=ENEMY_SHOT;
