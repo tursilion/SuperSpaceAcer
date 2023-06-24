@@ -4,6 +4,8 @@
 
 // TODO: track enemy destroyed percentage (bonus per stage, overall is reported on game over or game win)
 
+// TODO: gnat is using wrong bullet and should have no flame (redefine flame as single pixel gnat bullet)
+
 /* program SUPER SPACE ACER design version 2.2 */
 /* ported to ColecoVision by M.Brent */
 //#include <stddef.h>
@@ -19,6 +21,7 @@
 
 // game
 #include "game.h"
+#include "enemy.h"
  
 // startup and init, central code
 #define SIZE_OF_CHARS		160
@@ -744,7 +747,14 @@ titleagain:
 
 	SWITCH_IN_BANK4;
 	scoremode = 0;
-	getDifficulty();	// sets scoremode
+	if (joynum != 0) {
+		getDifficulty();	// sets scoremode
+	} else {
+		// demo mode
+		nDifficulty = DIFFICULTY_EASY;
+		playership = rndnum()%5;
+		oldscore = score;
+	}
 	cls();
 	spdall();
 	// set background to black
@@ -793,6 +803,9 @@ titleagain:
 		} else {
 			pwrlvl=PWRGNAT;		// this was originally a bug in cheat mode, but I like it!!
 		}
+		if (joynum == 0) {
+			lives = 0;
+		}
 
 		distns=600;
 
@@ -805,9 +818,14 @@ titleagain:
 				boss();
 			}
 			// have to check again in case you died facing a boss
-			if (flag == PLAYER_DIED) {
-				// 2 means game over
-				gamovr();
+			if (joynum) {
+				if (flag == PLAYER_DIED) {
+					// 2 means game over
+					gamovr();
+				}
+			} else {
+				// back to title screen
+				level = 9;
 			}
 
 			// 3 means died during boss battle
@@ -818,11 +836,16 @@ titleagain:
 				distns=level*100+500; 
 			}
 		}
-		if (level==6) {
+		if ((level==6)&&(joynum)) {
 			SWITCH_IN_BANK8;
 			gamwin();
 		}
-		if (level==9) goto titleagain;		// level 9 is a flag from gamovr()
+		if (level==9) {
+			if (joynum == 0) {
+				score = oldscore;
+			}
+			goto titleagain;		// level 9 is a flag from gamovr()
+		}
 	}
 }
  

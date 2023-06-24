@@ -144,6 +144,9 @@
     <ClInclude Include="trampoline.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="boss1.bmp">

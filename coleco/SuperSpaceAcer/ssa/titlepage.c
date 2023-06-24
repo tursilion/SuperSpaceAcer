@@ -57,6 +57,7 @@ void animate(unsigned char x) {
 
 void handleTitlePage() {
 	unsigned char i;
+	unsigned int cntdown;
 
 	shutup();
 
@@ -73,9 +74,15 @@ void handleTitlePage() {
 		wrapspritescore(0x3800, 0x1b00, 0xff, 103, 0);
 	}
 
+	cntdown = 600;
 	joynum=1;
 	do {
 		seed++;			// random number seed
+
+		if (--cntdown == 0) {
+			joynum=0;	// demo mode
+			break;
+		}
 
 		// every 4 frames, update the graphic frame
 		vdpwaitvint();

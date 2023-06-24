@@ -6,6 +6,7 @@
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "enemy.h"
 
 extern const unsigned char zenithendC[];
 extern const unsigned char zenithendP[];

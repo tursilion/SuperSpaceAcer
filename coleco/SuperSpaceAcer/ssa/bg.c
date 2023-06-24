@@ -17,7 +17,7 @@ uint8 stdata[NUM_SMALL_STARS*3];    // strided array so we can use faster(?) poi
 extern unsigned char tmpbuf[32];
 
 // do the background effect
-// note the static counter cnt, and the bullet color animation
+// note the static counter cnt
 void background() {
 	// just stars today
 	unsigned char b,x;
@@ -25,14 +25,6 @@ void background() {
 
 	/* used to count half frames */
 	cnt++;
-
-	// flash the enemy bullets
-	x=12-(cnt&4);
-	SpriteTab[11].col = x;
-	SpriteTab[12].col = x;
-	SpriteTab[13].col = x;
-	SpriteTab[14].col = x;
-	SpriteTab[15].col = x;
 
 #if 0
 	// TODO: just a dumb test to remove - makes a scrolling background

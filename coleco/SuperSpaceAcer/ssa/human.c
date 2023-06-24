@@ -12,6 +12,10 @@
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "enemy.h"
+
+// used to get out of demo mode
+static void (* const reboot)()=0x802d;
 
 // color of player's ship (was white)
 unsigned char playerColor;
@@ -43,7 +47,7 @@ unsigned char joynum;
 uint8 killedby,flst;		// enemy who hit us, flame status
 uint8 pwrlvl;				// pwrlvl: 0-2 = pulse wave level 1,2,3, 4-6=3-way level 1,2,3  (3 is gnat)
 char lives;
-unsigned int score;
+unsigned int score, oldscore;	// oldscore is used as a temporary during demo play
 unsigned char scoremode;		// indicates bonus modes played via score's last digit. 0=normal, 1=gnat, 2=Zenith, 3=invisible enemies
 uint8 shr[NUM_SHOTS+1], shc[NUM_SHOTS];	// player shots row and col - shr is plus 1 so the last index can always be 0, faster searches
 int8 shd[NUM_SHOTS];					// player shot x direction (y is constant)
@@ -52,6 +56,14 @@ unsigned char hittime;				// mostly for cruiser - shakes the ship when hit
 uint8 pcr4,ptp4,pr4,pc4,p4Time;		// powerup settings
 unsigned char CanNotShoot;
 unsigned char playerXspeed, playerYspeed;
+
+// kind of a sine table, generated with blassic to look like joystick outputs
+const signed char SINEISH[128] = {
+	0,0,0,0,4,0,0,4,0,4,4,4,0,4,0,4,0,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+	4,4,4,4,4,4,0,4,0,4,4,4,0,4,0,4,0,4,0,0,4,0,0,0,0,-0,-0,-0,-4,-0,-0,-4,-0,-4,-4,
+	-4,-0,-4,-0,-4,-0,-4,-0,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,
+	-4,-4,-4,-4,-4,-4,-4,-4,-0,-4,-0,-4,-4,-4,-0,-4,-0,-4,-0,-4,-0,-0,-4,-0,-0,-0
+};
 
 void player()
 { /* move the player based on joystick 'joynum' */
@@ -76,8 +88,23 @@ void player()
 	}
 
 	// read controller
-	kscanfast(joynum);
-	joystfast(joynum);
+	if (joynum) {
+		kscanfast(joynum);
+		joystfast(joynum);
+	} else {
+		static unsigned char xcnt=0, ycnt=0;
+		kscanfast((xcnt&1)+1);
+		if (KSCAN_KEY == JOY_FIRE) {
+			score = oldscore;
+			reboot();
+		}
+
+		KSCAN_KEY = JOY_FIRE;
+		KSCAN_JOYX = SINEISH[xcnt>>1];
+		KSCAN_JOYY = SINEISH[ycnt>>1];
+		xcnt+=3;
+		ycnt+=7;
+	}
 	if (KSCAN_JOYX == JOY_LEFT) {
 		if (playership != SHIP_ZENITH) {
 			playerleft();
@@ -126,7 +153,7 @@ void player()
 			wrapcheckdamage(SHIP_R+playerOffset, SHIP_C+8, 0);	// add damage to boss body
 		}
 	}
-	if (playership != SHIP_ZENITH) {
+	if ((playership != SHIP_ZENITH)&&(playership != SHIP_GNAT)) {
 		if (flst == FLAME_BIG) {
 			wrapPlayerFlameBig();
 		} else {
@@ -643,7 +670,38 @@ void dyen(unsigned char x)
 	if (ep[x] <= 0) {
 		// no armor left
 		addscore(ent[x]);
-		if (ent[x] != ENEMY_BOMB) {
+		if (ent[x] == ENEMY_BEAMGEN) {
+			// figure out which one we destroyed
+			// TODO: sfx here
+			// based on which character it is, we know if it's left or right
+
+			// make bullet into explosion
+			// Possible bug: we assume we own the bullet by now. Only the helicopter
+			// can steal our bullet, and it shouldn't last that long...
+			ent[x+6] = ENEMY_EXPLOSION;
+			enr[x+6]=enr[x];
+			enc[x+6]=enc[x];
+			ech[x+6]=52;
+			eec[x+6]=72;
+			esc[x+6]=52;
+			en_func[x+6] = enemyexplosion;
+			sprite(x+6+ENEMY_SPRITE,ech[x+6],9, enr[x+6], enc[x+6]);
+
+			if (ech[x] == 76) {
+				// left destroyed
+				// make active on right
+				enc[x]+=96;
+				ech[x]=eec[x];
+			} else {
+				// right destroyed
+				enc[x]-=96;
+				ech[x]=esc[x];
+			}
+			ent[x]=ENEMY_DEADBEAM;
+			en_func[x]=enemydeadbeam;
+			sppat(x+ENEMY_SPRITE, ech[x]);
+			sploct(x+ENEMY_SPRITE, enr[x], enc[x]);
+		} else if (ent[x] != ENEMY_BOMB) {
 			// TODO: sfx here
 			ent[x]=ENEMY_EXPLOSION;
 			ech[x]=52;

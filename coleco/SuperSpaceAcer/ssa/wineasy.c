@@ -9,7 +9,7 @@
 #include "trampoline.h"
 
 // how to get back to the title page the lazy way
-void (* const reboot)()=0x802d;
+static void (* const reboot)()=0x802d;
 
 // lower case letters in the TI format of small uppercase (96-123)
 const unsigned char smallcapsfont[] = {

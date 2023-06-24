@@ -23,6 +23,11 @@ unsigned int  musBank;
 void doMusic() {
 	unsigned int old = nBank;
 
+	// no music in demo
+	if (joynum == 0) {
+		return;
+	}
+
 	// check whether we're playing
 	if (pDone) {
 		// loop music if needed
@@ -44,6 +49,13 @@ void doMusic() {
 
 void StartMusic(const unsigned char *p, unsigned int inBank, unsigned char idx, unsigned char bLoop) {
 	unsigned int old = nBank;
+
+	// no music in demo
+	if (joynum == 0) {
+		shutup();
+		pLoopMus = NULL;
+		return;
+	}
 
 	musBank = inBank; 
 	if (bLoop) {

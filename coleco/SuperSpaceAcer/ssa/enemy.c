@@ -81,6 +81,7 @@ collision every frame).
 
 // game
 #include "game.h"
+#include "enemy.h"
 #include "trampoline.h"
 
 // movement pattern for saucers (3-bits)
@@ -98,18 +99,6 @@ char ep[6];								// enemy power (hit points)
 void (*en_func[12])(uint8);				// pointer to enemy handler function
 unsigned char MineTipPos;
 
-void enemysaucer(uint8 x);
-void enemyjet(uint8 x);
-void enemymine(uint8 x);
-void enemyhelicopter(uint8 x);
-void enemyhelipause(uint8 x);
-void enemyhelileave(uint8 x);
-void enemyswirly(uint8 x);
-void enemybomb(uint8 x);
-void enemyshot(uint8 x);
-void enemyengine(uint8 x);
-void enemyexplosion(uint8 x);
-
 void enout()
 { /* rndly bring out a new enemy */
 	uint8 k, a;
@@ -118,7 +107,7 @@ void enout()
 	k=rndnum()&nDifficulty;
 	if (k<6) { 
 		if (ent[k]==ENEMY_NONE) { 
-			a=(rndnum()&7); if (a>5) a-=5;
+			a=(rndnum()&7); if (a>6) a-=6;
 			if (a<=level) {
 				a+=ENEMY_SAUCER;	// rebase into an enemy type
 
@@ -134,6 +123,10 @@ void enout()
 					case ENEMY_HELICOPTER:	eec[k]=24; esc[k]=12; ep[k]=5; c=COLOR_MAGENTA; ers[k]=(rndnum()&0x7f)+1; ecs[k]=(rndnum()&0x07); if (enc[k]>127) ecs[k]=-ecs[k]; en_func[k]=enemyhelicopter; break;
 					case ENEMY_SWIRLY:		eec[k]=40; esc[k]=28; ep[k]=8; c=COLOR_MEDRED; en_func[k]=enemyswirly; break;
 					case ENEMY_BOMB:		eec[k]=44; esc[k]=44; ep[k]=20; c=COLOR_DKYELLOW; en_func[k]=enemybomb; break;
+					case ENEMY_BEAMGEN:		
+						eec[k]=80; esc[k]=76; ep[k]=14; c=COLOR_GRAY; en_func[k]=enemybeamgen; 
+						if (enc[k] > 144) enc[k]-=128;
+						break;
 				} 
 				if (scoremode == 3) c=COLOR_BLACK;	// invisible enemies (TODO: if the background color changes, it may not be black)
 				ech[k]=esc[k];
@@ -172,6 +165,7 @@ void enemyjet(uint8 x) {
 	if (esc[x] == ech[x]) {
 		unsigned char r,c;
 		spposn(PLAYER_SPRITE,r,c);
+		r+=playerOffset; c+=8;		// better center (8 because add 16 for ship, -8 for enemy center)
 		if (enr[x]+64 > r) {
 			// make a choice - left, right or turn
 			// in higher difficulties we turn towards the player more often
@@ -391,6 +385,14 @@ void enemybomb(uint8 x) {
 }
 
 void enemyshot(uint8 x) {
+	static unsigned char cnt=0;
+
+	/* used to count half frames */
+	cnt++;
+
+	// flash the enemy bullets
+	SpriteTab[x+ENEMY_SPRITE].col = 12-(cnt&4);
+
 	// also shrapnel
 	enr[x]+=ers[x];
 	enc[x]+=ecs[x];
@@ -425,6 +427,100 @@ void enemyexplosion(uint8 x) {
 		return;
 	}
 	sppat(x+ENEMY_SPRITE,ech[x]);
+}
+
+void enemybeamgen(uint8 x) {
+	unsigned char max, min;
+
+	enr[x]++;	// always slow downward movement
+
+	// toggle which side it's on
+	// This is necessary because it allows the collision detection to work,
+	// but the sprite draw is a little more complex
+	if (ech[x] == esc[x]) {
+		ech[x] = eec[x];
+		min = enc[x];
+		enc[x] += 96;		// really important that the init be correct here ;)
+		max = enc[x];
+	} else {
+		ech[x] = esc[x];
+		max = enc[x];
+		enc[x] -= 96;
+		min = enc[x];
+	}
+
+	// handle the beam. If the helicopter stole it, wait for it to be free
+	if (ent[x+6] == ENEMY_NONE) {
+		// set up the beam shot
+		ent[x+6] = ENEMY_BEAM;
+		ers[x+6] = 0;
+		ecs[x+6] = 8;	// start moving right
+		en_func[x+6] = enemynull;	// we'll handle it in here
+		eec[x+6] = 228;
+		esc[x+6] = 228;
+		ech[x+6] = 228;
+		enr[x+6] = enr[x];
+		enc[x+6] = min+8;
+	} else if (ent[x+6] == ENEMY_BEAM) {
+		// handle motion
+		enr[x+6] = enr[x];
+		if (ecs[x+6] > 0) {
+			enc[x+6] += ecs[x+6];
+			if (enc[x+6] >= max-8) {
+				ech[x+6] = 104;
+				ecs[x+6] = -8;
+			}
+		} else {
+			enc[x+6] += ecs[x+6];
+			if (enc[x+6] <= min+8) {
+				ech[x+6] = 228;
+				ecs[x+6] = 8;
+			}
+		}
+	}
+
+	if (enr[x]>191) {
+		noen(x);	// no worries for top row will invisibly wrap around!
+		noen(x+6);
+	}
+	if (ent[x] != ENEMY_NONE) {
+		if (ent[x+6] != ENEMY_BEAM) {
+			// we don't have both sprites available, just draw the one we have
+			sprite(x+ENEMY_SPRITE, ech[x], COLOR_GRAY, enr[x], enc[x]);
+		} else {
+			// we have a 4 frame cycle to flicker the two sprites over 3 positions
+			// the beam alternates every frame, while the generators get 2
+			// solid frames in a row
+			// we'll just use the row
+			switch (enr[x]&3) {
+				case 0:	// left and beam
+					sprite(x+ENEMY_SPRITE, 76, COLOR_GRAY, enr[x], min);
+					sprite(x+6+ENEMY_SPRITE, ech[x+6], COLOR_LTYELLOW, enr[x+6], enc[x+6]);
+					break;
+				case 3:
+				case 1:	// left and right
+					sprite(x+ENEMY_SPRITE, 76, COLOR_GRAY, enr[x], min);
+					sprite(x+6+ENEMY_SPRITE, 80, COLOR_GRAY, enr[x], max);
+					break;
+				case 2:	// right and beam
+					sprite(x+ENEMY_SPRITE, 80, COLOR_GRAY, enr[x], max);
+					sprite(x+6+ENEMY_SPRITE, ech[x+6], COLOR_LTYELLOW, enr[x+6], enc[x+6]);
+					break;
+			}
+		}
+	}
+}
+
+void enemydeadbeam(uint8 x) {
+	// whatever it was, we're set up with the right position and pattern,
+	// so we just keep moving down
+	enr[x]++;	// always slow downward movement
+	if (enr[x]>191) {
+		noen(x);	// no worries for top row will invisibly wrap around!
+	}
+	if (ent[x] != ENEMY_NONE) {
+		sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
+	}
 }
 
 void enemy()

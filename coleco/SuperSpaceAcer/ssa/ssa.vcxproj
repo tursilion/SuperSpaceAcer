@@ -127,6 +127,7 @@
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\sound.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\string.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\vdp.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="trampoline.h" />
   </ItemGroup>

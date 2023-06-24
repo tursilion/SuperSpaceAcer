@@ -6,6 +6,7 @@
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "enemy.h"
 
 // enemy array usage:
 // 0-2	engines

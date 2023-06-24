@@ -1,9 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-// TODO: Have not tested that the inserted indexes in the enemy enum for the beam walls
-// did not break anything. Not implemented yet either except for the graphics swapping.
-
 // TODO: break this up into separate headers
 
 // VRAM map:
@@ -116,9 +113,6 @@ extern const unsigned char colecofont[];
 // player shots
 #define NUM_SHOTS 9
 
-// 6 enemies + 6 enemy shots in one table (12 total)
-#define ENEMY_SPRITE 5
-
 // player has NUM_SHOTS shots
 #define PLAYER_SHOT 22
 
@@ -181,42 +175,6 @@ enum {
 	DIFFICULTY_HARD = 7
 };
 
-// enemy types
-enum {
-	// non-active enemy types
-	ENEMY_NONE,
-	ENEMY_EXPLOSION,
-	
-	// enemy attacks (can't be shot)
-	ENEMY_SHOT,
-	ENEMY_BEAM,
-
-	// enemy engines have special handling
-	ENEMY_ENGINE,
-
-	// active enemies, shootable
-	ENEMY_SAUCER,
-	ENEMY_JET,
-	ENEMY_MINE,
-	ENEMY_HELICOPTER,
-	ENEMY_SWIRLY,
-	ENEMY_BOMB,
-	ENEMY_BEAMGEN1,
-	ENEMY_BEAMGEN2,
-
-	// helicopter state machine, jumped into after helicopter reaches its target
-	ENEMY_HELIPAUSE1,					// Helicopter pauses to shoot (counts up)
-	ENEMY_HELISHOOT1=ENEMY_HELIPAUSE1+9,// first shot (skip to pause 4 on easy)
-	ENEMY_HELIPAUSE2,
-	ENEMY_HELISHOOT2=ENEMY_HELIPAUSE2+5,// second shot (skip to pause 4 on medium)
-	ENEMY_HELIPAUSE3,
-	ENEMY_HELISHOOT3=ENEMY_HELIPAUSE3+5,// third and last shot
-	ENEMY_HELIPAUSE4,
-	ENEMY_HELILEAVE=ENEMY_HELIPAUSE4+3,	// Helicopter is leaving
-
-	ENEMY_MAX
-};
-
 struct _sprite {
 	unsigned char y, x, pat, col;
 };
@@ -248,10 +206,7 @@ void StartMusic(const unsigned char *p, unsigned int musBank, unsigned char idx,
 void shoot();
 void mvshot();
 void cheat();
-void enout();
 char target(unsigned char dest, unsigned char src);
-void enemy();
-void noen(uint8 x);
 void colchk(uint8 half);
 void dyen(unsigned char x);
 void pwr(uint8 x);
@@ -286,11 +241,8 @@ void AddDestroyed(unsigned int vptr);
 void PrepareBoss(unsigned char idx, unsigned char r);
 void addscore(unsigned char val);
 void getDifficulty();
-void shootplayer(unsigned char en, unsigned char shot);
-void helishoot(unsigned char en);
 void initstars();
 void playerinit();
-void enemyinit();
 void waitforstep();
 void delaystars(unsigned char q);
 void DelSprButPlayer(unsigned char x);
@@ -310,12 +262,6 @@ void deShieldSnowball();
 void deShieldLadybug();
 void deShieldGnat();
 void deShieldZenith();
-void enemyexplosion(uint8);
-void enemyengine(uint8);
-void enemyshot(uint8);
-void enemymine(uint8);
-void enemynull(uint8);
-void enemyhelileave(uint8 x);
 void handleTitlePage();
 
 // macros to look like the old c99
@@ -347,6 +293,7 @@ void handleTitlePage();
 
 // shared variables
 extern unsigned int score;
+extern unsigned int oldscore;
 extern unsigned char scoremode;
 extern unsigned char joynum;
 extern uint8 pwrlvl;
