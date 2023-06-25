@@ -32,8 +32,8 @@
 	.area _bank3
 		.ascii "LinkTag:Bank3\0"
 		.area _songpack4
-		.area _zenithc
-		.area _zenithp
+		.area _selenac
+		.area _selenap
 
 	.area _bank4
 		.ascii "LinkTag:Bank4\0"

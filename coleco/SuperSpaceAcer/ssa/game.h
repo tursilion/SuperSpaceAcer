@@ -75,7 +75,7 @@ extern const unsigned char SPRITES[],ALTSHIELDS[],PLAYERFLAMESMALL[];
 extern const unsigned char SNOWBALL[],ALTSNOWBALL[];
 extern const unsigned char LADYBUG[],ALTLADYBUG[];
 extern const unsigned char GNAT[],ALTGNAT[];
-extern const unsigned char ZENITH[],ALTZENITH[];
+extern const unsigned char SELENA[],ALTSELENA[];
 
 // Address of Coleco ROM font
 extern const unsigned char colecofont[];
@@ -88,7 +88,7 @@ extern const unsigned char colecofont[];
 #define SHIP_SNOWBALL 1
 #define SHIP_LADYBUG 2
 #define SHIP_GNAT 3
-#define SHIP_ZENITH 4
+#define SHIP_SELENA 4
 
 // explosion chars 
 // - char is the one that the patterns are copied into
@@ -251,17 +251,17 @@ void initCruiser();
 void initSnowball();
 void initLadybug();
 void initGnat();
-void initZenith();
+void initSelena();
 void shieldCruiser();
 void shieldSnowball();
 void shieldLadybug();
 void shieldGnat();
-void shieldZenith();
+void shieldSelena();
 void deShieldCruiser();
 void deShieldSnowball();
 void deShieldLadybug();
 void deShieldGnat();
-void deShieldZenith();
+void deShieldSelena();
 void handleTitlePage();
 
 // macros to look like the old c99

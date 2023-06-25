@@ -8,8 +8,8 @@
 #include "trampoline.h"
 #include "enemy.h"
 
-extern const unsigned char zenithendC[];
-extern const unsigned char zenithendP[];
+extern const unsigned char selenaendC[];
+extern const unsigned char selenaendP[];
 
 // I don't THINK these need to be recursive, but just in case
 #pragma nooverlay
@@ -148,11 +148,11 @@ void wrapcheckdamage(uint8 sr, uint8 sc, uint8 pwr) {
 	SWITCH_IN_PREV_BANK(old);
 }
 
-void wrapLoadZenithPic() {
+void wrapLoadSelenaPic() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK3;
-	RLEUnpack(0x0000, zenithendP, 6144);
-	RLEUnpack(0x2000, zenithendC, 6144);
+	RLEUnpack(0x0000, selenaendP, 6144);
+	RLEUnpack(0x2000, selenaendC, 6144);
 	SWITCH_IN_PREV_BANK(old);
 }
 
@@ -216,20 +216,29 @@ void wrapLoadEngineSprites() {
 
 void wrapPlayerFlameBig() {
 	// set the player flame sprites to big
+    // we assume that the init function sets to blank for gnat and selena
 	unsigned int old = nBank;
 
-	SWITCH_IN_BANK5;
-	vdpmemcpy(gSPRITE_PATTERNS+100*8, SPRITES+100*8, 4*8);
-	SWITCH_IN_PREV_BANK(old);
+    if (playership == SHIP_GNAT) {
+        vdpchar(100*8+0x0800, 0x01);						// 1 pixel on for high flame
+    } else if (playership != SHIP_SELENA) {
+	    SWITCH_IN_BANK5;
+	    vdpmemcpy(gSPRITE_PATTERNS+100*8, SPRITES+100*8, 4*8);
+	    SWITCH_IN_PREV_BANK(old);
+    }
 } 
 
 void wrapPlayerFlameSmall() {
 	// set the player flame sprites to small
 	unsigned int old = nBank;
 
-	SWITCH_IN_BANK5;
-	vdpmemcpy(gSPRITE_PATTERNS+100*8, PLAYERFLAMESMALL, 4*8);
-	SWITCH_IN_PREV_BANK(old);
+    if (playership == SHIP_GNAT) {
+        vdpchar(100*8+0x0800, 0x01);						// turn the 1 pixel off for low flame
+    } else if (playership != SHIP_SELENA) {
+	    SWITCH_IN_BANK5;
+	    vdpmemcpy(gSPRITE_PATTERNS+100*8, PLAYERFLAMESMALL, 4*8);
+	    SWITCH_IN_PREV_BANK(old);
+    }
 } 
 
 void wrapCopyShip(const unsigned char *p, const unsigned char *c) {

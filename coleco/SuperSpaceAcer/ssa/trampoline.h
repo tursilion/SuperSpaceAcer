@@ -19,7 +19,7 @@ void wrapinitstars();
 void wrapispace();
 void wrapbackground();
 void wrapcheckdamage(uint8 sr, uint8 sc, uint8 pwr);
-void wrapLoadZenithPic();
+void wrapLoadSelenaPic();
 void wrapgetfontbytes(unsigned char *dest, const unsigned char *src, unsigned int cnt);
 void wrapspritescore(unsigned int sprpat, unsigned int sprtab, unsigned char row, unsigned char col, unsigned char ch);
 void wrapLoadEngineSprites();

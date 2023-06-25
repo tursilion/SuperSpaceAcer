@@ -70,6 +70,8 @@
     <Image Include="boss5.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\selena_end_c.c" />
+    <ClCompile Include="..\selena_end_p.c" />
     <ClCompile Include="..\title2\ship1_c.c" />
     <ClCompile Include="..\title2\ship1_p.c" />
     <ClCompile Include="..\title2\ship2_c.c" />
@@ -107,8 +109,6 @@
     <ClCompile Include="wineasy.c" />
     <ClCompile Include="winhard.c" />
     <ClCompile Include="winmed.c" />
-    <ClCompile Include="zenith_end_c.c" />
-    <ClCompile Include="zenith_end_p.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\setup.bat" />

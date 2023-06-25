@@ -8,7 +8,7 @@ AFLAGS = -plosgff
 # crt0 must be first!
 objs = crt0.rel ssd_inc.rel superspaceacer.rel trampolines.rel bg.rel boss.rel enemy.rel music.rel human.rel wineasy.rel winhard.rel winmed.rel \
 		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel songpack1.rel songpack2.rel songpack3.rel songpack4.rel songpack5.rel \
-		songpack6.rel font.rel difficulty.rel zenith_end_c.rel zenith_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
+		songpack6.rel font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
 		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel 
 
 all: buildcol
@@ -134,11 +134,11 @@ font.rel: font.c
 difficulty.rel: difficulty.c
 	$(CC) $(CFLAGS) -o difficulty.rel difficulty.c --codeseg difficulty --constseg difficulty
 
-zenith_end_c.rel: zenith_end_c.c
-	$(CC) $(CFLAGS) -o zenith_end_c.rel zenith_end_c.c --codeseg zenithc --constseg zenithc
+selena_end_c.rel: selena_end_c.c
+	$(CC) $(CFLAGS) -o selena_end_c.rel selena_end_c.c --codeseg selenac --constseg selenac
 
-zenith_end_p.rel: zenith_end_p.c
-	$(CC) $(CFLAGS) -o zenith_end_p.rel zenith_end_p.c --codeseg zenithp --constseg zenithp
+selena_end_p.rel: selena_end_p.c
+	$(CC) $(CFLAGS) -o selena_end_p.rel selena_end_p.c --codeseg selenap --constseg selenap
 
 # libti99 crt0 copied into folder
 crt0.rel: crt0.s

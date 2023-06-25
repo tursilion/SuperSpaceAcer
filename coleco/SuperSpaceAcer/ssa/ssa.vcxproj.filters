@@ -49,12 +49,6 @@
     <ClCompile Include="title_p.c">
       <Filter>Gfx</Filter>
     </ClCompile>
-    <ClCompile Include="zenith_end_c.c">
-      <Filter>Gfx</Filter>
-    </ClCompile>
-    <ClCompile Include="zenith_end_p.c">
-      <Filter>Gfx</Filter>
-    </ClCompile>
     <ClCompile Include="bg.c">
       <Filter>Src</Filter>
     </ClCompile>
@@ -117,6 +111,12 @@
     </ClCompile>
     <ClCompile Include="titlepage.c">
       <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\selena_end_c.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\selena_end_p.c">
+      <Filter>Gfx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

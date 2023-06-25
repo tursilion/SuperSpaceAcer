@@ -4,8 +4,6 @@
 
 // TODO: track enemy destroyed percentage (bonus per stage, overall is reported on game over or game win)
 
-// TODO: gnat is using wrong bullet and should have no flame (redefine flame as single pixel gnat bullet)
-
 /* program SUPER SPACE ACER design version 2.2 */
 /* ported to ColecoVision by M.Brent */
 //#include <stddef.h>
@@ -22,6 +20,7 @@
 // game
 #include "game.h"
 #include "enemy.h"
+#include "trampoline.h"
  
 // startup and init, central code
 #define SIZE_OF_CHARS		160
@@ -465,8 +464,9 @@ void initCruiser() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
 	vdpmemcpy(108*8+0x0800, &SPRITES[108*8], 24*4*8);	// ship sprites
-	vdpmemcpy(100*8+0x0800, &SPRITES[100*8], 2*4*8);	// flame sprites
 	SWITCH_IN_PREV_BANK(old);
+
+    wrapPlayerFlameSmall();
 	
 	shieldsOn = shieldCruiser;
 	shieldsOff = deShieldCruiser;
@@ -481,10 +481,11 @@ void initSnowball() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
 	vdpmemcpy(108*8+0x0800, SNOWBALL, 24*4*8);			// ship sprites
-	vdpmemcpy(100*8+0x0800, &SPRITES[100*8], 2*4*8);	// flame sprites
 	SWITCH_IN_PREV_BANK(old);
 	
-	shieldsOn = shieldSnowball;
+    wrapPlayerFlameSmall();
+
+    shieldsOn = shieldSnowball;
 	shieldsOff = deShieldSnowball;
 	playerColor = COLOR_GRAY;
 	playerOffset = 8;
@@ -497,10 +498,11 @@ void initLadybug() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
 	vdpmemcpy(108*8+0x0800, LADYBUG, 24*4*8);			// ship sprites
-	vdpmemcpy(100*8+0x0800, &SPRITES[100*8], 2*4*8);	// flame sprites
 	SWITCH_IN_PREV_BANK(old);
 	
-	shieldsOn = shieldLadybug;
+    wrapPlayerFlameSmall();
+
+    shieldsOn = shieldLadybug;
 	shieldsOff = deShieldLadybug;
 	playerColor = COLOR_MEDRED;
 	playerOffset = 16;
@@ -514,11 +516,10 @@ void initGnat() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
 	vdpmemcpy(108*8+0x0800, GNAT, 24*4*8);				// ship sprites
-	vdpmemset(100*8+0x0800, 0, 2*4*8);					// zero the flame sprites by default
-	vdpchar(100*8+0x0800, 0x01);						// 1 pixel on for high flame
-
 	SWITCH_IN_PREV_BANK(old);
 	
+	vdpmemset(100*8+0x0800, 0, 4*8);					// zero the flame sprites by default
+
 	shieldsOn = shieldGnat;
 	shieldsOff = deShieldGnat;
 	playerColor = COLOR_MEDGREEN;
@@ -529,15 +530,16 @@ void initGnat() {
 	playerYspeed = 8;
 }
 
-void initZenith() {
+void initSelena() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
-	vdpmemcpy(108*8+0x0800, ZENITH, 24*4*8);			// ship sprites
-	vdpmemset(100*8+0x0800, 0, 2*4*8);					// zero the flame sprites
+	vdpmemcpy(108*8+0x0800, SELENA, 24*4*8);			// ship sprites
 	SWITCH_IN_PREV_BANK(old);
 	
-	shieldsOn = shieldZenith;
-	shieldsOff = deShieldZenith;
+	vdpmemset(100*8+0x0800, 0, 4*8);					// zero the flame sprites
+
+    shieldsOn = shieldSelena;
+	shieldsOff = deShieldSelena;
 	playerColor = COLOR_LTBLUE;
 	playerOffset = 8;
 	shotOffset = -8;
@@ -582,12 +584,12 @@ void shieldGnat() {
 	SWITCH_IN_PREV_BANK(old);
 }
 
-void shieldZenith() {
+void shieldSelena() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
-	vdpmemcpy(124*8+0x0800, ALTZENITH, 4*4*8);			// straight
-	vdpmemcpy(156*8+0x0800, &ALTZENITH[4*4*8], 4*4*8);	// left
-	vdpmemcpy(188*8+0x0800, &ALTZENITH[8*4*8], 4*4*8);	// right
+	vdpmemcpy(124*8+0x0800, ALTSELENA, 4*4*8);			// straight
+	vdpmemcpy(156*8+0x0800, &ALTSELENA[4*4*8], 4*4*8);	// left
+	vdpmemcpy(188*8+0x0800, &ALTSELENA[8*4*8], 4*4*8);	// right
 	SWITCH_IN_PREV_BANK(old);
 }
 
@@ -627,12 +629,12 @@ void deShieldGnat() {
 	SWITCH_IN_PREV_BANK(old);
 }
 
-void deShieldZenith() {
+void deShieldSelena() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
-	vdpmemcpy(124*8+0x0800, &ZENITH[16*8], 4*4*8);	// straight
-	vdpmemcpy(156*8+0x0800, &ZENITH[48*8], 4*4*8);	// left
-	vdpmemcpy(188*8+0x0800, &ZENITH[80*8], 4*4*8);	// right
+	vdpmemcpy(124*8+0x0800, &SELENA[16*8], 4*4*8);	// straight
+	vdpmemcpy(156*8+0x0800, &SELENA[48*8], 4*4*8);	// left
+	vdpmemcpy(188*8+0x0800, &SELENA[80*8], 4*4*8);	// right
 	SWITCH_IN_PREV_BANK(old);
 }
 
@@ -649,7 +651,7 @@ unsigned int mycnt_inc = 0;			//	 4805
 void getcnts(unsigned int *i1, unsigned int *i2, unsigned int *i3, unsigned int *i4);
 #endif
 
-extern void zenithwin();
+extern void selenawin();
 void main() {
 	unsigned char i;
 
@@ -782,8 +784,8 @@ titleagain:
 	case SHIP_GNAT:
 		initGnat();
 		break;
-	case SHIP_ZENITH:
-		initZenith();
+	case SHIP_SELENA:
+		initSelena();
 		break;
 	}
 
@@ -793,7 +795,7 @@ titleagain:
 		level=1;
 		if (playership != SHIP_GNAT) {
 			pwrlvl=PWRPULSE; 
-			if (playership == SHIP_ZENITH) {
+			if (playership == SHIP_SELENA) {
 				pwrlvl+=2;
 				lives = 0;
 			} else if (playership == SHIP_CRUISER) {
@@ -929,7 +931,7 @@ void ispace()
 
 	// show score
 	addscore(0);
-	if ((playership != SHIP_ZENITH) && (playership != SHIP_CRUISER)) {
+	if ((playership != SHIP_SELENA) && (playership != SHIP_CRUISER)) {
 		hchar(23, 2, LIVESCHAR, lives);
 	}
 

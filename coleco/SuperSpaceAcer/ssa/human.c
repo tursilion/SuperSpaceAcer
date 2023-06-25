@@ -48,7 +48,7 @@ uint8 killedby,flst;		// enemy who hit us, flame status
 uint8 pwrlvl;				// pwrlvl: 0-2 = pulse wave level 1,2,3, 4-6=3-way level 1,2,3  (3 is gnat)
 char lives;
 unsigned int score, oldscore;	// oldscore is used as a temporary during demo play
-unsigned char scoremode;		// indicates bonus modes played via score's last digit. 0=normal, 1=gnat, 2=Zenith, 3=invisible enemies
+unsigned char scoremode;		// indicates bonus modes played via score's last digit. 0=normal, 1=gnat, 2=Selena, 3=invisible enemies
 uint8 shr[NUM_SHOTS+1], shc[NUM_SHOTS];	// player shots row and col - shr is plus 1 so the last index can always be 0, faster searches
 int8 shd[NUM_SHOTS];					// player shot x direction (y is constant)
 unsigned int shield;
@@ -68,10 +68,10 @@ const signed char SINEISH[128] = {
 void player()
 { /* move the player based on joystick 'joynum' */
 	// animate flame
-	if (playership != SHIP_ZENITH) {
+	if (playership != SHIP_SELENA) {
 		if (flst == FLAME_SMALL) flst=FLAME_BIG; else flst=FLAME_SMALL;
 	} else {
-		// wing animation for Zenith
+		// wing animation for Selena
 		flst = (++flst)&0x03;
 		switch (flst) {
 		case 0:
@@ -106,17 +106,17 @@ void player()
 		ycnt+=7;
 	}
 	if (KSCAN_JOYX == JOY_LEFT) {
-		if (playership != SHIP_ZENITH) {
+		if (playership != SHIP_SELENA) {
 			playerleft();
 		}
 		if (SHIP_C > playerXspeed) SHIP_C-=playerXspeed;
 	} else if (KSCAN_JOYX == JOY_RIGHT) {
-		if (playership != SHIP_ZENITH) {
+		if (playership != SHIP_SELENA) {
 			playerright();
 		}
 		if (SHIP_C < 224-playerXspeed) SHIP_C+=playerXspeed;
 	} else {
-		if (playership != SHIP_ZENITH) {
+		if (playership != SHIP_SELENA) {
 			playerstraight();
 		}
 	}
@@ -153,12 +153,10 @@ void player()
 			wrapcheckdamage(SHIP_R+playerOffset, SHIP_C+8, 0);	// add damage to boss body
 		}
 	}
-	if ((playership != SHIP_ZENITH)&&(playership != SHIP_GNAT)) {
-		if (flst == FLAME_BIG) {
-			wrapPlayerFlameBig();
-		} else {
-			wrapPlayerFlameSmall();
-		}
+	if (flst == FLAME_BIG) {
+		wrapPlayerFlameBig();
+	} else {
+		wrapPlayerFlameSmall();
 	}
 	playmv();
 
@@ -414,7 +412,7 @@ void plycol() {
 					}
 				} else {
 					pwrlvl=PWRPULSE;
-					if (playership == SHIP_ZENITH) pwrlvl+=2;
+					if (playership == SHIP_SELENA) pwrlvl+=2;
 				}
 			} else if (ptp4 == POWERUP_3WAY) {
 				if ((pwrlvl&0x0f) >= PWR3WAY) {
@@ -423,7 +421,7 @@ void plycol() {
 					}
 				} else {
 					pwrlvl=PWR3WAY;
-					if (playership == SHIP_ZENITH) pwrlvl+=2;
+					if (playership == SHIP_SELENA) pwrlvl+=2;
 				}
 			}
 			// remove powerup
@@ -514,7 +512,7 @@ void pdie()
 	lives--;
 	if (playership != SHIP_GNAT) {
 		pwrlvl=PWRPULSE;
-		if (playership == SHIP_ZENITH) pwrlvl+=2;
+		if (playership == SHIP_SELENA) pwrlvl+=2;
 	} else {
 		pwrlvl=PWRGNAT;
 	}

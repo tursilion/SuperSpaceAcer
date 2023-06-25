@@ -1,7 +1,8 @@
-- implement jets diving left, right or straight when they are just a bit above the player
-- implement beam generators
 - implement new boss graphics
 - implement enemy generators
+- give Luna homing shots
+- make demo end if boss is destroyed
+- run demo on random stage
 == that'll be good for a checkpoint release
 - ending for ladybug (dream sequence to ladybug pic to "I wonder what she's dreaming of?")
 - ending for gnat ("I'm the greatest!" to zoom out, too tiny on stage, celebration banner, but officials look confused about where he is, "Can't anyone hear me?!")
@@ -9,6 +10,7 @@
 - ending for cruiser
 
 New bugs with new compiler:
+- gnat has wrong shot and engine fire after first boss! (demno only? re-call init?)
 - saucers are corrupted on stage 2 onward (fixed?)
 - boss 2 is corrupted and engines are in the wrong place (wrong boss graphics)
 - boss 5 is corrupt and engines are in the wrong place (wrong boss graphics)

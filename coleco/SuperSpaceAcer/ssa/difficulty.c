@@ -39,7 +39,7 @@ char * const gnatText[] = {
 	"HARD TO HIT     "
 };
 
-char * const zenithText[] = {
+char * const selenaText[] = {
 	"NAME:   SELENA  ",
 	"RANK:   PRINCESS",
 	"MAGIC:  LEVEL 99",
@@ -191,7 +191,7 @@ const unsigned char SCHEMATICS[] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 
-	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// zenith top
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// selena top
 	0x00,0x06,0x09,0x30,0x40,0x80,0x80,0x80,
 	0x00,0x01,0x01,0x07,0x09,0x11,0x11,0x16,
 	0x08,0x08,0x88,0x68,0x1E,0x11,0x21,0x20,
@@ -208,7 +208,7 @@ const unsigned char SCHEMATICS[] = {
 	0x6D,0x92,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 
-	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// zenith side
+	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,	// selena side
 	0x83,0x6C,0x50,0x28,0x28,0xC4,0x82,0x79,
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x07,0xC8,0x30,0x20,0x40,0x40,0x20,0xE0,
@@ -377,8 +377,8 @@ redraw2:
 		pGfx = &SCHEMATICS[768];
 		break;
 
-	case SHIP_ZENITH:
-		pTxt = zenithText[txtIdx];
+	case SHIP_SELENA:
+		pTxt = selenaText[txtIdx];
 		pGfx = &SCHEMATICS[1024];
 		break;
 	}
@@ -415,7 +415,7 @@ redraw2:
 					break;
 			}
 			if (playership == SHIP_GNAT) scoremode = 1;
-			if (playership == SHIP_ZENITH) scoremode = 2;
+			if (playership == SHIP_SELENA) scoremode = 2;
 			if ((playership == SHIP_SNOWBALL) && (KSCAN_JOYY == JOY_DOWN)) scoremode = 3;
 			if (ch) scoremode = 9;
 
@@ -440,7 +440,7 @@ redraw2:
 				--playership;
 				kscanfast(joynum);
 				if (KSCAN_KEY == JOY_FIRE) {
-					if (playership > SHIP_ZENITH) playership = SHIP_ZENITH;
+					if (playership > SHIP_SELENA) playership = SHIP_SELENA;
 				} else {
 					if (playership > SHIP_LADYBUG) playership = SHIP_LADYBUG;
 				}
@@ -450,7 +450,7 @@ redraw2:
 				++playership;
 				kscanfast(joynum);
 				if (KSCAN_KEY == JOY_FIRE) {
-					if (playership > SHIP_ZENITH) playership = SHIP_CRUISER;
+					if (playership > SHIP_SELENA) playership = SHIP_CRUISER;
 				} else {
 					if (playership > SHIP_LADYBUG) playership = SHIP_CRUISER;
 				}
@@ -491,8 +491,8 @@ redraw2:
 							pTxt = gnatText[txtIdx];
 							break;
 
-						case SHIP_ZENITH:
-							pTxt = zenithText[txtIdx];
+						case SHIP_SELENA:
+							pTxt = selenaText[txtIdx];
 							break;
 						}
 					}

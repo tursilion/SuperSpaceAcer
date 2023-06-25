@@ -10,7 +10,7 @@
 extern const unsigned char colecofont[];
 unsigned char bottomsprite, bottomrow;
 
-const char zenithTxt[] = 
+const char selenaTxt[] = 
 //	 123456789012
 	"Princess    "
 	"Selena sent "
@@ -56,7 +56,7 @@ void musicsync() {
 	}
 }
 
-void zenithscroll() {
+void selenascroll() {
 	// do a vertical scroll of the rightmost 12 characters
 	// tmpbuf has the next 12 bytes to put at the bottom
 	unsigned char idx;
@@ -310,13 +310,13 @@ void zenithscroll() {
 	}
 }
 
-void zenithwin() {
+void selenawin() {
 	unsigned char i, i2;
 	unsigned int adr;
 	unsigned char *pTxt;
 
 	i2=intpic();
-	wrapLoadZenithPic();
+	wrapLoadSelenaPic();
 
 	// set up 30 sprites to be half the scroll text
 	VDP_SET_ADDRESS_WRITE(0x1b00);	// sprite table
@@ -347,10 +347,10 @@ void zenithwin() {
 	}
 
 	StartMusic(WINANIMMUS, 0);
-	pTxt = zenithTxt;
+	pTxt = selenaTxt;
 
 	// set up the scroll - we put one row of the current
-	// text into tmpbuf and then call zenithscroll, over
+	// text into tmpbuf and then call selenascroll, over
 	// and over until we're finished!
 	while (*pTxt != '@') {
 		// scroll eight times, then we need new text
@@ -359,7 +359,7 @@ void zenithwin() {
 				adr = ((*(pTxt+i2)-32)<<3) + i;
 				wrapgetfontbytes(&tmpbuf[i2], &colecofont[adr], 1);
 			}
-			zenithscroll();
+			selenascroll();
 		}
 		// we can't use waitforstep for sync, because it does sprite copies
 		// and the sprite table is in the middle of the image
@@ -371,7 +371,7 @@ void zenithwin() {
 	// there's no more text, so we just need to scroll it off 
 	memset(tmpbuf, 0, 12);
 	for (i=0; i<180; i++) {
-		zenithscroll();
+		selenascroll();
 	}
 
 	// set graphics mode back before we exit
@@ -390,5 +390,5 @@ void zenithwin() {
 
 void gamewinhard() {
 	// just returns for now
-	if (playership == SHIP_ZENITH) zenithwin();
+	if (playership == SHIP_SELENA) selenawin();
 }
