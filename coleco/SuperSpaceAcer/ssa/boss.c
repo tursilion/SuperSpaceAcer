@@ -35,6 +35,7 @@ unsigned char BNR,BNC;
 char bossminepower;
 void (*bossdraw)();
 unsigned char bosscnt=0;
+unsigned char enginer[3], enginec[3];   // offsets
 
 // boss draw functions
 void draw1();
@@ -81,8 +82,10 @@ void boss()
 	wrapstars();
 
 	for (i=0; i<3; i++) {
-		enr[i]=BOSTAB[p++];
-		enc[i]=BOSTAB[p++];
+		enginer[i]=BOSTAB[p++];
+		enginec[i]=BOSTAB[p++];
+        enr[i]=enginer[i];
+        enc[i]=enginec[i];
 	}
 
 	// work in silence to help mask any slowdown
@@ -153,7 +156,7 @@ void boss()
 		}
 		ech[i]=76; esc[i]=76; eec[i]=80;
 		ent[i]=ENEMY_ENGINE; ers[i]=0; ecs[i]=0;
-		en_func[i]=enemyengine;
+		en_func[i]=enemyengine;     // just animates
 		ep[i]=level*5;		// hit points (engine power)
 		sprite(i+ENEMY_SPRITE,76,8,enr[i],enc[i]);
 	}
@@ -212,7 +215,12 @@ void boss()
 
 	// check if player won the battle
 	if (flag == MAIN_LOOP_ACTIVE) {
-		byboss();
+        if (joynum) {
+	    	byboss();
+        } else {
+            // didn't really, but this will end the demo
+            flag = PLAYER_DIED_DURING_BOSS;
+        }
 	}
 }
 
@@ -239,13 +247,19 @@ void drboss() {
 	if (roff > 127) roff=200;	// chosen because all row values end up off the bottom but never equal 208
 	coff=(bc<<1)+bd;
 	if (ep[0]) {
-		sploct(ENEMY_SPRITE,roff+enr[0],coff+enc[0]);
+        enr[0] = roff+enginer[0];
+        enc[0] = coff+enginec[0];
+		sploct(ENEMY_SPRITE,enr[0],enc[0]);
 	}
 	if (ep[1]) {
-		sploct(1+ENEMY_SPRITE,roff+enr[1],coff+enc[1]);
+        enr[1] = roff+enginer[1];
+        enc[1] = coff+enginec[1];
+		sploct(1+ENEMY_SPRITE,enr[1],enc[1]);
 	}
 	if (ep[2]) {
-		sploct(2+ENEMY_SPRITE,roff+enr[2],coff+enc[2]);
+        enr[2] = roff+enginer[2];
+        enc[2] = coff+enginec[2];
+		sploct(2+ENEMY_SPRITE,enr[2],enc[2]);
 	}
 
 	// move cockpit 'bullet' as close to player as we are allowed to go (so if they overwrite us, we get them)
@@ -505,6 +519,7 @@ void whoded() {
 							addscore(5); 
 							ep[b]=0; 
 							enr[b]=192; 
+                            ent[b]=ENEMY_NONE;
 							spdel(b+ENEMY_SPRITE);
 						}
 						spdel(a+PLAYER_SHOT); 

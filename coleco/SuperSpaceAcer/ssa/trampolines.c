@@ -7,6 +7,7 @@
 #include "game.h"
 #include "trampoline.h"
 #include "enemy.h"
+#include "human.h"
 
 extern const unsigned char selenaendC[];
 extern const unsigned char selenaendP[];
@@ -233,7 +234,7 @@ void wrapPlayerFlameSmall() {
 	unsigned int old = nBank;
 
     if (playership == SHIP_GNAT) {
-        vdpchar(100*8+0x0800, 0x01);						// turn the 1 pixel off for low flame
+        vdpchar(100*8+0x0800, 0x00);						// turn the 1 pixel off for low flame
     } else if (playership != SHIP_SELENA) {
 	    SWITCH_IN_BANK5;
 	    vdpmemcpy(gSPRITE_PATTERNS+100*8, PLAYERFLAMESMALL, 4*8);

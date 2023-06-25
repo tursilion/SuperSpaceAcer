@@ -1,8 +1,5 @@
 - implement new boss graphics
 - implement enemy generators
-- give Luna homing shots
-- make demo end if boss is destroyed
-- run demo on random stage
 == that'll be good for a checkpoint release
 - ending for ladybug (dream sequence to ladybug pic to "I wonder what she's dreaming of?")
 - ending for gnat ("I'm the greatest!" to zoom out, too tiny on stage, celebration banner, but officials look confused about where he is, "Can't anyone hear me?!")
@@ -15,7 +12,6 @@ New bugs with new compiler:
 - boss 2 is corrupted and engines are in the wrong place (wrong boss graphics)
 - boss 5 is corrupt and engines are in the wrong place (wrong boss graphics)
 - part of score is erased during boss explosion (and it crashed once on the blimp with CPU overdrive) (fixed?)
-
 
 VRAM map (except for ending scroll)
 --------

@@ -1,4 +1,5 @@
 // enable this for a test mode - ships will fire constantly
+// enable this for a test mode - ships will fire constantly
 // collisions are checked, but player never dies. You can
 // start a game at high speed with the debugger open and
 // just watch for VDP overruns
@@ -13,6 +14,7 @@
 #include "game.h"
 #include "trampoline.h"
 #include "enemy.h"
+#include "human.h"
 
 // used to get out of demo mode
 static void (* const reboot)()=0x802d;
@@ -51,6 +53,7 @@ unsigned int score, oldscore;	// oldscore is used as a temporary during demo pla
 unsigned char scoremode;		// indicates bonus modes played via score's last digit. 0=normal, 1=gnat, 2=Selena, 3=invisible enemies
 uint8 shr[NUM_SHOTS+1], shc[NUM_SHOTS];	// player shots row and col - shr is plus 1 so the last index can always be 0, faster searches
 int8 shd[NUM_SHOTS];					// player shot x direction (y is constant)
+int8 shrd[NUM_SHOTS];					// player shot y direction (only for selena)
 unsigned int shield;
 unsigned char hittime;				// mostly for cruiser - shakes the ship when hit
 uint8 pcr4,ptp4,pr4,pc4,p4Time;		// powerup settings
@@ -59,10 +62,10 @@ unsigned char playerXspeed, playerYspeed;
 
 // kind of a sine table, generated with blassic to look like joystick outputs
 const signed char SINEISH[128] = {
-	0,0,0,0,4,0,0,4,0,4,4,4,0,4,0,4,0,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-	4,4,4,4,4,4,0,4,0,4,4,4,0,4,0,4,0,4,0,0,4,0,0,0,0,-0,-0,-0,-4,-0,-0,-4,-0,-4,-4,
-	-4,-0,-4,-0,-4,-0,-4,-0,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,
-	-4,-4,-4,-4,-4,-4,-4,-4,-0,-4,-0,-4,-4,-4,-0,-4,-0,-4,-0,-4,-0,-0,-4,-0,-0,-0
+	0,0,0,0,4,4,4,4,4,0,0,0,0,4,4,4,4,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+	4,4,4,4,4,4,0,0,0,4,4,4,4,0,0,0,0,4,4,4,4,0,0,0,0,-0,-0,-0,-4,-4,-4,-4,-0,-0,-0,
+	-4,-4,-4,-4,-4,-0,-0,-0,-0,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,-4,
+	-4,-4,-4,-4,-4,-4,-4,-4,-0,-0,-0,-0,-4,-4,-4,-4,-4,-4,-0,-0,-0,-4,-4,-0,-0,-0
 };
 
 void player()
@@ -174,7 +177,11 @@ void player()
 		}
 	}
 
-	mvshot();
+	if (playership != SHIP_SELENA) {
+        mvshot();
+    } else {
+        homingshot();
+    }
 }
  
 void shoot()
@@ -249,7 +256,7 @@ void shoot()
 			}
 		}
 	} else {
-		// pulse cannon shot
+		// pulse cannon shot (also default for Selena)
 		a=0;
 		while (shr[a]!=0) a++;
 		if (a!=NUM_SHOTS) { 
@@ -258,6 +265,7 @@ void shoot()
 			c+=8;
 			shr[a]=r;
 			shc[a]=c;
+            shrd[a]=-4;
 			shd[a]=0;
 			sprite(PLAYER_SHOT+a,PLAYER_SHOT_PULSE_BASE+(truepwr<<2),13,r,c);
 		}
@@ -309,7 +317,83 @@ void mvshot()
 	}
 #endif
 }
+
+// a version of target (see superspaceacer.c) that works with the negative row of boss engines,
+// for Selena's homing shots
+char rowtarget(unsigned char dest, unsigned char src)
+{ 
+	// similar to sgn(), but designed to work with unsigned values
+	// without wraparound
+    if (dest > 225) dest=0;
+	if (dest > src) return 1;
+	if (dest < src) return -1;
+	return 0;
+}
  
+void homingshot() {
+    /* move the princess shots */
+
+	// WARNING: assumes NUM_SHOTS to be 9
+	// constant offsets are more efficient than array lookups by a lot in SDCC
+#define MOVE_JUST_UP(a)                                 \
+	if (shr[a]) {										\
+        if (shrd[a]>-8) shrd[a]--;                      \
+        if (shd[a]>0) shd[a]--;                         \
+        if (shd[a]<0) shd[a]++;                         \
+		shr[a]+=shrd[a];								\
+        shc[a]+=shd[a];                                 \
+		if ((shr[a]==0)||(shr[a]>191)||(shc[a]>250)||(shc[a]<5)) {	\
+			spdel(PLAYER_SHOT+a);						\
+			shr[a]=0;									\
+		} else {										\
+			sploct(PLAYER_SHOT+a,shr[a],shc[a]);		\
+		}												\
+	}
+
+#define MOVE_ONE_SHOT(a)								\
+	if (shr[a]) {										\
+        shrd[a]+=rowtarget(enr[en],shr[a]);             \
+        shd[a]+=target(enc[en],shc[a]);                 \
+		shr[a]+=shrd[a];								\
+		shc[a]+=shd[a];									\
+		if ((shr[a]==0)||(shr[a]>191)||(shc[a]>250)||(shc[a]<5)) {	\
+			spdel(PLAYER_SHOT+a);						\
+			shr[a]=0;									\
+		} else {										\
+			sploct(PLAYER_SHOT+a,shr[a],shc[a]);		\
+		}												\
+	}
+
+    // find the first available enemy
+    unsigned char en = 0;
+    while ((en<6)&&(ent[en]==ENEMY_NONE)) ++en;
+    if (en >= 6) {
+	    MOVE_JUST_UP(0);
+	    MOVE_JUST_UP(1);
+	    MOVE_JUST_UP(2);
+	    MOVE_JUST_UP(3);
+	    MOVE_JUST_UP(4);
+	    MOVE_JUST_UP(5);
+	    MOVE_JUST_UP(6);
+	    MOVE_JUST_UP(7);
+	    MOVE_JUST_UP(8);
+    } else {
+	    MOVE_ONE_SHOT(0);
+	    MOVE_ONE_SHOT(1);
+	    MOVE_ONE_SHOT(2);
+	    MOVE_ONE_SHOT(3);
+	    MOVE_ONE_SHOT(4);
+	    MOVE_ONE_SHOT(5);
+	    MOVE_ONE_SHOT(6);
+	    MOVE_ONE_SHOT(7);
+	    MOVE_ONE_SHOT(8);
+    }
+
+#undef MOVE_ONE_SHOT
+#undef MOVE_JUST_UP
+
+}
+
 void cheat() { 
 	/* process debugging keys */
 	switch (KSCAN_KEY) {

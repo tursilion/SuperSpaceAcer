@@ -21,6 +21,7 @@
 #include "game.h"
 #include "enemy.h"
 #include "trampoline.h"
+#include "human.h"
  
 // startup and init, central code
 #define SIZE_OF_CHARS		160
@@ -534,6 +535,7 @@ void initSelena() {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
 	vdpmemcpy(108*8+0x0800, SELENA, 24*4*8);			// ship sprites
+    vdpmemcpy(96*8+0x0800, HOMING, 4*8);                // homing shot
 	SWITCH_IN_PREV_BANK(old);
 	
 	vdpmemset(100*8+0x0800, 0, 4*8);					// zero the flame sprites
@@ -807,6 +809,7 @@ titleagain:
 		}
 		if (joynum == 0) {
 			lives = 0;
+            level = rndnum()%5+1;
 		}
 
 		distns=600;
@@ -1103,7 +1106,7 @@ void centr(unsigned char row, const char *out) {
 	/* print&center the text in out[]*/
 	unsigned char c;
 
-	c=16-(strlen(out)>>1);
+	c=15-(strlen(out)>>1);
 	VDP_SET_ADDRESS_WRITE(gIMAGE+(row<<5)+c);
 
 	while (*out) {

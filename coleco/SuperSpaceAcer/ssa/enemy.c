@@ -652,7 +652,7 @@ void enemyinit() {
 void pwr(uint8 x)
 { 
 	/* decides if pwr up to come out*/
-	if (playership != SHIP_GNAT) {		// no powerups for the gnat
+	if ((playership != SHIP_GNAT)&&(playership != SHIP_SELENA)) {		// no powerups for the gnat or Selena
 		if ((flag != MAIN_LOOP_DONE)&&((rndnum()&0x0f)<3)&&(ptp4==POWERUP_NONE)) { 
 			ptp4=(rndnum()&3)+POWERUP_SHIELD;		// gives one of 3
 			if (ptp4 == POWERUP_SHIELD+3) ptp4=POWERUP_SHIELD;

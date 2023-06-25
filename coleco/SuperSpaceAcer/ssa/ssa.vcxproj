@@ -129,6 +129,7 @@
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\vdp.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="human.h" />
     <ClInclude Include="trampoline.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
