@@ -97,12 +97,6 @@
     <ClCompile Include="outfile1.c" />
     <ClCompile Include="outfile2.c" />
     <ClCompile Include="outfile3.c" />
-    <ClCompile Include="songpack1.c" />
-    <ClCompile Include="songpack2.c" />
-    <ClCompile Include="songpack3.c" />
-    <ClCompile Include="songpack4.c" />
-    <ClCompile Include="songpack5.c" />
-    <ClCompile Include="songpack6.c" />
     <ClCompile Include="ssd_inc.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="superspaceacer.c" />

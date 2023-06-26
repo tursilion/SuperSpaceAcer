@@ -19,24 +19,6 @@
     <ClCompile Include="newfont.c">
       <Filter>Gfx</Filter>
     </ClCompile>
-    <ClCompile Include="songpack1.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="songpack2.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="songpack3.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="songpack4.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="songpack5.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="songpack6.c">
-      <Filter>Sound</Filter>
-    </ClCompile>
     <ClCompile Include="ssd_inc.c">
       <Filter>Gfx</Filter>
     </ClCompile>
