@@ -2,10 +2,12 @@
 #include <vdp.h>
 #include <sound.h>
 #include <kscan.h>
-#include <player.h>
+#include <ColecoSNPlay.h>
+#include <ColecoSfxPlay.h>
 
 // game
 #include "game.h"
+#include "music.h"
 
 // although the music lives in various banks, the
 // player code is in the fixed bank, so we can
@@ -29,7 +31,8 @@ void doMusic() {
 	}
 
 	// check whether we're playing
-	if (pDone) {
+//	if (pDone) {
+    if (!(isSNPlaying)) {
 		// loop music if needed
 		if (pLoopMus != NULL) {
 			MUTE_SOUND();	// don't carry over any old tones
@@ -43,7 +46,8 @@ void doMusic() {
 	}
 
 	SWITCH_IN_PREV_BANK(musBank);
-	stplay();
+	//stplay();
+    CALL_PLAYER_SN;
 	SWITCH_IN_PREV_BANK(old);
 }
 
@@ -66,14 +70,17 @@ void StartMusic(const unsigned char *p, unsigned int inBank, unsigned char idx, 
 		pLoopMus = NULL;
 	}
 	SWITCH_IN_PREV_BANK(musBank);
-	stinit((unsigned char*)p, idx);
+	//stinit((unsigned char*)p, idx);
+    StartSong(p, idx);
 	SWITCH_IN_PREV_BANK(old);
 }
 
 void shutup()
 { 
 	/*silence to music generators */
-	allstop();
+	//allstop();
+    StopSong();
+    sfx_StopSong();
 	MUTE_SOUND();
 	pLoopMus=NULL;
 }

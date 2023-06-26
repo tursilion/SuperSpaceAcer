@@ -140,21 +140,6 @@ extern const unsigned char colecofont[];
 #define BOSS_START 121
 extern const unsigned char BOSS1[],BOSS2[],BOSS3[],BOSS4[],BOSS5[];
 
-// musical numbers
-// TODO: many of the songs need to be reworked with an intro and a loop point (?)
-extern const unsigned char songpack1[], songpack2[], songpack3[], songpack4[], songpack5[], songpack6[];
-
-// songs used			address,bank,index
-#define STAGE1MUS		songpack2,0xfffd,1
-#define STAGE2MUS		songpack3,0xfffb,0
-#define STAGE3MUS		songpack6,0xfff9,0
-#define STAGE4MUS		songpack3,0xfffb,1
-#define STAGE5MUS		songpack5,0xfff9,0
-#define BOSSMUS			songpack4,0xfffc,0
-#define GAMEOVERMUS		songpack1,0xfffe,2
-#define WINSCROLLMUS	songpack4,0xfffc,1
-#define WINANIMMUS		songpack2,0xfffd,2
-
 // player ships (damnit, we'll need different endings now...)
 // function pointers are used for the init, set shield and set normal copies
 // also define color 
@@ -182,7 +167,6 @@ extern struct _sprite SpriteTab[32];
 
 // functions
 //void memset(char *p, unsigned char ch, int cnt);
-void doMusic() ;
 void spdall() ;
 void loadcharset();
 void chrdef(unsigned char n, char *sz) ;
@@ -200,8 +184,6 @@ void ispace();
 void sgrint();
 void playmv();
 void stars();
-void shutup();
-void StartMusic(const unsigned char *p, unsigned int musBank, unsigned char idx, unsigned char bLoop);
 char target(unsigned char dest, unsigned char src);
 void pwr(uint8 x);
 void gamovr();

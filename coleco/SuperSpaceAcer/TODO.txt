@@ -275,7 +275,7 @@ For Game Over, I like my old game over music (except fix the run-together notes 
 -Win scroll				what							3626	bank3			64.0 s
 -Game over				my original game over tune		 350	bank4			 6.4 s
 
-Packing Songs:
+Packing Songs (old version):
 	SongPack1:	evilboss2	7952 bytes		bank1
 				select
 				tursi_gameover
@@ -299,10 +299,31 @@ Packing Songs:
 				
 	SongPack6:				7164 bytes		bank6
 				bossIX
-				
 
 Separate:	37,942 (out of date)
 Packed:		32,458 (saved 5484 bytes)
+
+---
+
+VGMComp 2 version:
+
+    OutFile00.sbf:  bossIX          7172 bytes
+                    tursi_gameover
+                    gameover
+                    
+    OutFile01.sbf:  driven          7092 bytes
+                    what
+                    oddity
+                    
+    Outfile02.sbf:  invasion        6176 bytes
+                    storm
+                    
+    Outfile03.sbf:  mystery         6768 bytes
+    
+Packed Total: 27,208 bytes
+
+    
+
 
 
 Rushjet has a patreon now: http://patreon.com/rushjet1

@@ -2,11 +2,12 @@
 #include <vdp.h>
 #include <sound.h>
 #include <kscan.h>
-#include <player.h>
+#include <ColecoSNPlay.h>
 
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "music.h"
 
 extern const char TXTDAT[];
 extern const char WINTIPS[];
@@ -285,7 +286,8 @@ void gamewinmedium() {
 		}
 	}
 
-	while (!(pDone)) {
+//	while (!pDone) {
+    while (isSNPlaying) {
 		musicvdpsync(0,0);
 	}
 }  

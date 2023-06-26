@@ -5,6 +5,7 @@
 
 #include "game.h"
 #include "trampoline.h"
+#include "music.h"
 
 #define BIN2INC_HEADER_ONLY
 #include "title_c.c"

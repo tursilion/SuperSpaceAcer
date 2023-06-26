@@ -15,13 +15,14 @@
 #include <vdp.h>
 #include <sound.h>
 #include <kscan.h>
-#include <player.h>
+#include <ColecoSNPlay.h>
 
 // game
 #include "game.h"
 #include "enemy.h"
 #include "trampoline.h"
 #include "human.h"
+#include "music.h"
  
 // startup and init, central code
 #define SIZE_OF_CHARS		160
@@ -969,7 +970,8 @@ void gamovr()
 	spdall();
 
 	for (;;) {
-		if (pDone) {
+    //	if (pDone) {
+        if (!(isSNPlaying)) {
 			shutup();
 		} else {
 			nCnt=240;

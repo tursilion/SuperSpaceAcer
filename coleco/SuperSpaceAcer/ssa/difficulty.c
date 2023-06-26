@@ -6,6 +6,7 @@
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "music.h"
 
 char * const cruiserText[] = {
 	"NAME:   CRUISER ",

@@ -7,6 +7,7 @@
 #include "game.h"
 #include "trampoline.h"
 #include "enemy.h"
+#include "music.h"
 
 // enemy array usage:
 // 0-2	engines

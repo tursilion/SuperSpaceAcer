@@ -1,5 +1,5 @@
 CC = D:/work/coleco/sdcc-4.2.0/bin/sdcc.exe
-CFLAGS = -mz80 --vc -c "-Id:/work/coleco/libti99coleco" -DENABLEFX --std-sdcc11 --opt-code-speed --less-pedantic --fsigned-char
+CFLAGS = -mz80 --vc -c "-Id:/work/coleco/libti99coleco" "-ID:/work/TI/vgmcomp2/Players/libcolecovgm2" -DENABLEFX --std-sdcc11 --opt-code-speed --less-pedantic --fsigned-char
 AS = D:/work/coleco/sdcc-4.2.0/bin/sdasz80
 AFLAGS = -plosgff
 
@@ -7,8 +7,8 @@ AFLAGS = -plosgff
 
 # crt0 must be first!
 objs = crt0.rel ssd_inc.rel superspaceacer.rel trampolines.rel bg.rel boss.rel enemy.rel music.rel human.rel wineasy.rel winhard.rel winmed.rel \
-		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel songpack1.rel songpack2.rel songpack3.rel songpack4.rel songpack5.rel \
-		songpack6.rel font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
+		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel outfile0.rel outfile1.rel outfile2.rel outfile3.rel \
+		font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
 		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel 
 
 all: buildcol
@@ -18,7 +18,7 @@ all: buildcol
 # if makemegacart complains about data in RAM, see if a segment is missing there
 
 buildcol: $(objs)
-	$(CC) -mz80 --vc --no-std-crt0 $(BANKS) --code-loc 0x8100 --data-loc 0x7000 -l"d:/work/coleco/libti99coleco/libti99.a" $(objs)
+	$(CC) -mz80 --vc --no-std-crt0 $(BANKS) --code-loc 0x8100 --data-loc 0x7000 -l"d:/work/coleco/libti99coleco/libti99.a" -l"D:\work\TI\vgmcomp2\Players\libcolecovgm2\libcolecovgm2.a" $(objs)
 	"../parseMap.exe" crt0.map
 
 # banks - all defined the same way, we just need to declare them
@@ -90,23 +90,32 @@ boss5.rel: boss5.bmp
 	D:/work/SuperSpaceAcer/coleco/SuperSpaceAcer/packboss/Debug/packboss.exe boss5.bmp boss5.c BOSS5
 	$(CC) $(CFLAGS) -oboss5.rel boss5.c --codeseg boss5 --constseg boss5
 
-songpack1.rel: songpack1.c
-	$(CC) $(CFLAGS) -o songpack1.rel songpack1.c --codeseg songpack1 --constseg songpack1
+#songpack1.rel: songpack1.c
+#	$(CC) $(CFLAGS) -o songpack1.rel songpack1.c --codeseg songpack1 --constseg songpack1
+#
+#songpack2.rel: songpack2.c
+#	$(CC) $(CFLAGS) -o songpack2.rel songpack2.c --codeseg songpack2 --constseg songpack2
+#
+#songpack3.rel: songpack3.c
+#	$(CC) $(CFLAGS) -o songpack3.rel songpack3.c --codeseg songpack3 --constseg songpack3
+#
+#songpack4.rel: songpack4.c
+#	$(CC) $(CFLAGS) -o songpack4.rel songpack4.c --codeseg songpack4 --constseg songpack4
+#
+#songpack5.rel: songpack5.c
+#	$(CC) $(CFLAGS) -o songpack5.rel songpack5.c --codeseg songpack5 --constseg songpack5
+#
+#songpack6.rel: songpack6.c
+#	$(CC) $(CFLAGS) -o songpack6.rel songpack6.c --codeseg songpack6 --constseg songpack6
 
-songpack2.rel: songpack2.c
-	$(CC) $(CFLAGS) -o songpack2.rel songpack2.c --codeseg songpack2 --constseg songpack2
-
-songpack3.rel: songpack3.c
-	$(CC) $(CFLAGS) -o songpack3.rel songpack3.c --codeseg songpack3 --constseg songpack3
-
-songpack4.rel: songpack4.c
-	$(CC) $(CFLAGS) -o songpack4.rel songpack4.c --codeseg songpack4 --constseg songpack4
-
-songpack5.rel: songpack5.c
-	$(CC) $(CFLAGS) -o songpack5.rel songpack5.c --codeseg songpack5 --constseg songpack5
-
-songpack6.rel: songpack6.c
-	$(CC) $(CFLAGS) -o songpack6.rel songpack6.c --codeseg songpack6 --constseg songpack6
+outfile0.rel: outfile0.c
+	$(CC) $(CFLAGS) -o outfile0.rel outfile0.c --codeseg outfile0 --constseg outfile0
+outfile1.rel: outfile1.c
+	$(CC) $(CFLAGS) -o outfile1.rel outfile1.c --codeseg outfile1 --constseg outfile1
+outfile2.rel: outfile2.c
+	$(CC) $(CFLAGS) -o outfile2.rel outfile2.c --codeseg outfile2 --constseg outfile2
+outfile3.rel: outfile3.c
+	$(CC) $(CFLAGS) -o outfile3.rel outfile3.c --codeseg outfile3 --constseg outfile3
 
 ship1_c.rel: ../title2/ship1_c.c
 	$(CC) $(CFLAGS) -o ship1_c.rel ../title2/ship1_c.c --codeseg ship1c --constseg ship1c

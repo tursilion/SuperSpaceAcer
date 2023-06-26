@@ -93,6 +93,10 @@
     <ClCompile Include="human.c" />
     <ClCompile Include="music.c" />
     <ClCompile Include="newfont.c" />
+    <ClCompile Include="outfile0.c" />
+    <ClCompile Include="outfile1.c" />
+    <ClCompile Include="outfile2.c" />
+    <ClCompile Include="outfile3.c" />
     <ClCompile Include="songpack1.c" />
     <ClCompile Include="songpack2.c" />
     <ClCompile Include="songpack3.c" />
@@ -123,13 +127,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\halt.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\kscan.h" />
-    <ClInclude Include="..\..\..\..\coleco\libti99coleco\player.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\sound.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\string.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\vdp.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="human.h" />
+    <ClInclude Include="music.h" />
     <ClInclude Include="trampoline.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

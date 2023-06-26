@@ -6,6 +6,7 @@
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "music.h"
 
 extern const unsigned char colecofont[];
 unsigned char bottomsprite, bottomrow;
@@ -317,6 +318,7 @@ void selenawin() {
 
 	i2=intpic();
 	wrapLoadSelenaPic();
+    VDP_SET_REGISTER(7,COLOR_BLACK);    // make sure the screen is black
 
 	// set up 30 sprites to be half the scroll text
 	VDP_SET_ADDRESS_WRITE(0x1b00);	// sprite table

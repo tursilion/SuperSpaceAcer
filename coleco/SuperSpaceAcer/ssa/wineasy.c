@@ -2,11 +2,12 @@
 #include <vdp.h>
 #include <sound.h>
 #include <kscan.h>
-#include <player.h>
+#include <ColecoSNPlay.h>
 
 // game
 #include "game.h"
 #include "trampoline.h"
+#include "music.h"
 
 // how to get back to the title page the lazy way
 static void (* const reboot)()=0x802d;
@@ -164,7 +165,8 @@ void gamewineasy() {
 	centr(17, "GAME OVER");
 	StartMusic(GAMEOVERMUS, 0);
 
-	while (!pDone) {
+//	while (!pDone) {
+    while (isSNPlaying) {
 		waitforstep();
 	}
 	shutup();

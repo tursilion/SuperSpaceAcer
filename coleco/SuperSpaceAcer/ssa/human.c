@@ -15,6 +15,7 @@
 #include "trampoline.h"
 #include "enemy.h"
 #include "human.h"
+#include "music.h"
 
 // used to get out of demo mode
 static void (* const reboot)()=0x802d;

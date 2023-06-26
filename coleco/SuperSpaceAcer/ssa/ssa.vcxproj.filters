@@ -118,6 +118,18 @@
     <ClCompile Include="..\selena_end_p.c">
       <Filter>Gfx</Filter>
     </ClCompile>
+    <ClCompile Include="outfile0.c">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="outfile1.c">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="outfile2.c">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="outfile3.c">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -127,9 +139,6 @@
       <Filter>libti99</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\kscan.h">
-      <Filter>libti99</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\coleco\libti99coleco\player.h">
       <Filter>libti99</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\sound.h">
@@ -148,6 +157,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="human.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="music.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

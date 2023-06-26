@@ -22,23 +22,21 @@
 	.area _bank1
 		.ascii "LinkTag:Bank1\0"
 		.area _enemy
-		.area _songpack1
 
 	.area _bank2
 		.ascii "LinkTag:Bank2\0"
 		.area _human
-		.area _songpack2
 
 	.area _bank3
 		.ascii "LinkTag:Bank3\0"
-		.area _songpack4
+		.area _outfile1
 		.area _selenac
 		.area _selenap
 
 	.area _bank4
 		.ascii "LinkTag:Bank4\0"
-		.area _songpack3
 		.area _difficulty
+		.area _outfile0
 
 	.area _bank5
 		.ascii "LinkTag:Bank5\0"
@@ -52,8 +50,8 @@
 	.area _bank6
 		.ascii "LinkTag:Bank6\0"
 		.area _bg
-		.area _songpack5
-		.area _songpack6
+		.area _outfile2
+		.area _outfile3
 
 	.area _bank7
 		.ascii "LinkTag:Bank7\0"
