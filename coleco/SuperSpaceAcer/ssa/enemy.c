@@ -415,7 +415,7 @@ void enemyengine(uint8 x) {
  
 void enemynull(uint8 x) {
 	(void)x;
-	// boss cockpit and others with no task to do
+	// boss cockpit and others with no task to do - note, not even drawn!
 	//sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
 }
 
@@ -455,7 +455,7 @@ void enemybeamgen(uint8 x) {
 		ent[x+6] = ENEMY_BEAM;
 		ers[x+6] = 0;
 		ecs[x+6] = 8;	// start moving right
-		en_func[x+6] = enemynull;	// we'll handle it in here
+		en_func[x+6] = enemynull;	// just a dummy function
 		eec[x+6] = 228;
 		esc[x+6] = 228;
 		ech[x+6] = 228;

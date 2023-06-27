@@ -491,11 +491,11 @@ uint8 checkdamage(uint8 sr, uint8 sc, uint8 pwr) {
 }
  
 void whoded() { 
-	uint8 a,b;
 	unsigned char rd,cd;
+    unsigned char r,c;
 
 	/*check boss specific collisions*/
-	for (a=0; a<NUM_SHOTS; a++) {
+	for (uint8 a=0; a<NUM_SHOTS; a++) {
 		// check for valid shot
 		if (!shr[a]) continue;
 
@@ -503,30 +503,30 @@ void whoded() {
 		if (checkdamage(shr[a], shc[a], pwrlvl&0x0f)) {
 			spdel(a+PLAYER_SHOT);
 			shr[a]=0;
+            continue;
 		}
 
-		// check if hit an engine (if high enough)
-		rd=shr[a]>>3;
-		if (rd <= br+6) {	// lowest engine is 20 pixels down, plus 20 for the collision is 40 pixels - wide check to save many smaller checks
-			for (b=0; b<3; b++) { 
-				rd=abs(((br<<3)+enr[b]+8)-shr[a]); 
-				if (rd <= 20) {
-					cd=abs(((bc<<1)+enc[b])-shc[a]);
-					if ((cd<=15)&&(shr[a]>0)) {  
-						VDP_SET_ADDRESS(0x830f);		// CT at >03C0 (makes boss flash white, everything else already is)
-						bosscnt=3;						// how many cycles to stay white (should be 3 frames per cycle)
-						ep[b]-=damage[pwrlvl&0x07];
-						if (ep[b]<=0) { 
-							addscore(5); 
-							ep[b]=0; 
-							enr[b]=192; 
-                            ent[b]=ENEMY_NONE;
-							spdel(b+ENEMY_SPRITE);
-						}
-						spdel(a+PLAYER_SHOT); 
-						shr[a]=0; 
-						break;
+		// check if hit an engine
+        for (uint8 b=0; b<3; ++b) {
+            if (ent[b] != ENEMY_ENGINE) continue;
+            spposn(b+ENEMY_SPRITE, r, c);
+            rd = abs(r-shr[a]);
+            if (rd <= 20) {
+                cd = abs(c-shc[a]);
+                if (cd <= 15) {
+					VDP_SET_ADDRESS(0x830f);		// CT at >03C0 (makes boss flash white, everything else already is)
+					bosscnt=3;						// how many cycles to stay white (should be 3 frames per cycle)
+					ep[b]-=damage[pwrlvl&0x07];
+					if (ep[b]<=0) { 
+						addscore(5); 
+						ep[b]=0; 
+						enr[b]=192; 
+                        ent[b]=ENEMY_NONE;
+						spdel(b+ENEMY_SPRITE);
 					}
+					spdel(a+PLAYER_SHOT); 
+					shr[a]=0; 
+					break;
 				}
 			}
 		}
@@ -1318,26 +1318,12 @@ void draw5() {
 		p-=2;	// for leading edge
 	}
 
-#if 0
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR2;
-	EDGEBLANKB;
-    ch+=10;
-    BOSS_SET_ADDRESS_WRITE(p+13);
-	EDGEBLANKA;
-    LINECHAR2;
-	EDGEBLANKB;
-	//ch+=1+0-1;
-	p+=32;
-#else
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR14;
 	EDGEBLANKB;
 	//ch+=1+0-1;
 	p+=32;
-#endif
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
