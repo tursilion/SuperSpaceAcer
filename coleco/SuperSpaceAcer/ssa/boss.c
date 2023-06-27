@@ -1,3 +1,5 @@
+// TODO: boss cockpit sprite needs to better conform to the boss shape
+
 // libti99 
 #include <vdp.h>
 #include <sound.h>

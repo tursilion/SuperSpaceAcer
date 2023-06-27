@@ -83,7 +83,7 @@ void enout() {
                 gentime[idx]=genmax[idx];               // countdown timer
                 gencount[idx]=(rndnum()&0x07);          // how many
 				gentype[idx] = oddstable[level][a];     // rebase into an enemy type
-                genspeed[idx]=rndnum()&0xbf;            // max of 64 positive or negative, I think
+                genspeed[idx]=rndnum()&0x87;            // max of 7 positive or negative, I think
 
                 if (gentype[idx] == ENEMY_MINE) gencount[idx]=(rndnum()&0x03);
                 if (gentype[idx] == ENEMY_BEAMGEN) gencount[idx]=(rndnum()&0x03);
@@ -123,7 +123,7 @@ void enout() {
                 for (unsigned char b=0; b<maxgen; ++b) {
                     if (b==idx) continue;
                     if (gencount[b]==0) continue;
-                    if (abs(genx[idx]-genx[b]) < 32) {
+                    if (abs(genx[idx]-genx[b]) < 16) {
                         // just a safety check to prevent lockstep
                         if (genspeed[idx]==genspeed[b]) ++genspeed[idx];
                         ok=0;
@@ -156,7 +156,7 @@ void enout() {
                 switch (gentype[idx]) {
 				    // minimum player damage is 2 for spread, 3 for pulse
                     default:    //for (;;) { } // not sure why we need a default, but we seem to. So make it a saucer.
-					case ENEMY_SAUCER:		eec[k]=0; esc[k]=0; ep[k]=2; c=COLOR_MEDGREEN; en_func[k]=enemysaucer; if (enc[k]<32) enc[k]+=32; if (enc[k]>216) enc[k]-=32; break;
+					case ENEMY_SAUCER:		eec[k]=0; esc[k]=0; ep[k]=2; c=COLOR_MEDGREEN; en_func[k]=enemysaucer; if (enc[k]<32) enc[k]+=32; if (enc[k]>216) enc[k]-=48; break;
 					case ENEMY_JET:			eec[k]=4; esc[k]=4; ep[k]=3; ecs[k]=0; c=COLOR_LTBLUE; en_func[k]=enemyjet; break;
 					case ENEMY_MINE:		eec[k]=8; esc[k]=8; ep[k]=10; c=COLOR_CYAN; en_func[k]=enemymine; break;
 					case ENEMY_HELICOPTER:	eec[k]=24; esc[k]=12; ep[k]=5; c=COLOR_MAGENTA; ers[k]=(rndnum()&0x7f)+1; ecs[k]=(rndnum()&0x07); if (enc[k]>127) ecs[k]=-ecs[k]; en_func[k]=enemyhelicopter; break;

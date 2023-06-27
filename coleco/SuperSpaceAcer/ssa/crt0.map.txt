@@ -22,12 +22,12 @@ Value     Size      Global                        Module
 0000EA8F  00000880  _SHIP4P                       ship4_p                     
 0000E20F  00000880  _SHIP4C                       ship4_c                     
 0000C00F  00000880  _SHIP2C                       ship2_c                     
-0000D0AE  0000084F  _enemybeamgen                 enemy                       
+0000D0DD  0000084F  _enemybeamgen                 enemy                       
 0000CAA2  00000800  _SPRITES                      ssd_inc                     
 0000C82E  000007FA  _getDifficulty                difficulty                  
 0000E742  000007C3  _TXTDAT                       ssd_inc                     
 0000C150  000006DE  _SCHEMATICS                   difficulty                  
-0000C07E  00000634  _enout                        enemy                       
+0000C07E  00000663  _enout                        enemy                       
 0000C5B5  000005DD  _mboss                        boss                        
 0000E0C1  0000058B  _draw4                        boss                        
 0000E64C  00000517  _draw5                        boss                        
@@ -50,8 +50,8 @@ Value     Size      Global                        Module
 000082F8  000002AD  _SongLoop                     ColecoPlayerSN              
 0000C5D4  0000029F  _BOSS4                        boss4                       
 0000A0BE  00000289  _main                         superspaceacer              
-0000C74C  0000027A  _enemyjet                     enemy                       
-0000DA3E  00000265  _shootplayer                  enemy                       
+0000C77B  0000027A  _enemyjet                     enemy                       
+0000DA6D  00000265  _shootplayer                  enemy                       
 0000C00E  0000025C  _player                       human                       
 0000C6B5  00000236  _mvshot                       human                       
 0000C1AB  00000231  _gamewineasy                  wineasy                     
@@ -61,7 +61,7 @@ Value     Size      Global                        Module
 0000C1F7  000001CF  _BOSS2                        boss2                       
 0000AB5B  000001BA  _wrapspritescore              trampolines                 
 0000CC5C  000001B3  _whoded                       boss                        
-0000CBA1  00000183  _enemyhelipause               enemy                       
+0000CBD0  00000183  _enemyhelipause               enemy                       
 0000E522  00000180  _ALTSELENA                    ssd_inc                     
 0000D7A2  00000180  _ALTSNOWBALL                  ssd_inc                     
 0000D322  00000180  _ALTSHIELDS                   ssd_inc                     
@@ -81,7 +81,7 @@ Value     Size      Global                        Module
 0000982A  0000012C  _sprStart28                   superspaceacer              
 000095F5  0000012C  _sprStart20                   superspaceacer              
 0000EF05  00000129  _WINTIPS                      ssd_inc                     
-0000CA7C  00000125  _enemyhelicopter              enemy                       
+0000CAAB  00000125  _enemyhelicopter              enemy                       
 0000D2E3  00000123  _colchk                       human                       
 0000D1D7  00000113  _AddDamage                    boss                        
 0000C00E  0000010A  _soundtest                    difficulty                  
@@ -92,29 +92,29 @@ Value     Size      Global                        Module
 0000DAE5  00000106  _playerinit                   human                       
 0000A491  000000F7  _ispace                       superspaceacer              
 0000A8D9  000000F6  _wrapunpackboss               trampolines                 
-0000CE04  000000EC  _enemyswirly                  enemy                       
+0000CE33  000000EC  _enemyswirly                  enemy                       
 0000A614  000000E9  _playmv                       superspaceacer              
-0000D941  000000E4  _enemy                        enemy                       
-0000CD24  000000E0  _enemyhelileave               enemy                       
+0000D970  000000E4  _enemy                        enemy                       
+0000CD53  000000E0  _enemyhelileave               enemy                       
 0000C070  000000E0  _smallcapsfont                wineasy                     
 0000D028  000000CD  _sSkillText                   difficulty                  
 0000CB92  000000CA  _checkdamage                  boss                        
 0000C0B6  000000B8  _handleTitlePage              titlepage                   
-0000C9C6  000000B6  _enemymine                    enemy                       
-0000CF74  000000B5  _enemyshot                    enemy                       
+0000C9F5  000000B6  _enemymine                    enemy                       
+0000CFA3  000000B5  _enemyshot                    enemy                       
 0000ADC0  000000A9  _wrapCopyShip                 trampolines                 
 00008730  000000A1  _getCompressedByte            ColCPlayerCommon            
 0000E6A2  000000A0  _CHARS                        ssd_inc                     
 0000D2EA  0000009E  _AddDestroyed                 boss                        
-0000C6B2  0000009A  _enemysaucer                  enemy                       
+0000C6E1  0000009A  _enemysaucer                  enemy                       
 0000C453  00000099  _reparse                      winmed                      
-0000DCEC  00000098  _pwr                          enemy                       
+0000DD1B  00000098  _pwr                          enemy                       
 0000A6FD  00000097  _addscore                     superspaceacer              
 0000C026  00000090  _animate                      titlepage                   
 0000A588  0000008C  _gamovr                       superspaceacer              
 00009B44  0000008C  _RLEUnpack                    superspaceacer              
 00009956  00000088  _waitforstep                  superspaceacer              
-0000CEF0  00000084  _enemybomb                    enemy                       
+0000CF1F  00000084  _enemybomb                    enemy                       
 000085D2  00000083  _set_graphics_raw             vdp_setgraphics             
 0000AEDA  00000081  _StartMusic                   music                       
 0000C26A  00000080  _SINEISH                      human                       
@@ -132,7 +132,7 @@ Value     Size      Global                        Module
 000099E6  0000005B  _loadcharset                  superspaceacer              
 000088C4  0000005A  _startBackref                 ColCPlayerCommon            
 0000C4EC  0000005A  _movesprites                  winmed                      
-0000D05E  00000050  _enemyexplosion               enemy                       
+0000D08D  00000050  _enemyexplosion               enemy                       
 0000C18E  0000004D  _initstars                    bg                          
 00008E33  0000004C  _kscanfast                    kscanfast                   
 0000865F  0000004B  _joystfast                    joystfast                   
@@ -148,7 +148,7 @@ Value     Size      Global                        Module
 0000A036  00000044  _deShieldGnat                 superspaceacer              
 00009FAE  00000044  _deShieldSnowball             superspaceacer              
 0000A07A  00000044  _deShieldSelena               superspaceacer              
-0000D8FD  00000044  _enemydeadbeam                enemy                       
+0000D92C  00000044  _enemydeadbeam                enemy                       
 0000C168  00000043  _slowcenter                   wineasy                     
 0000AD3F  00000041  _wrapPlayerFlameBig           trampolines                 
 0000C412  00000041  _fontstr                      winmed                      
@@ -161,7 +161,7 @@ Value     Size      Global                        Module
 0000A9CF  0000003A  _winwrapgetscroll             trampolines                 
 0000C3DC  00000036  _musicvdpsync                 winmed                      
 0000891E  00000035  _getCompressedByteRaw         ColCPlayerCommon            
-0000D029  00000034  _enemyengine                  enemy                       
+0000D058  00000034  _enemyengine                  enemy                       
 00008890  00000034  _startRLE24                   ColCPlayerCommon            
 0000AAED  00000034  _wrapLoadSelenaPic            trampolines                 
 000087D1  00000034  _startInline                  ColCPlayerCommon            
@@ -172,7 +172,7 @@ Value     Size      Global                        Module
 0000C04E  00000030  _oddstable                    enemy                       
 00008131  0000002F  __divuint                                                 
 0000A794  0000002F  _centr                        superspaceacer              
-0000DCA3  0000002E  _helishoot                    enemy                       
+0000DCD2  0000002E  _helishoot                    enemy                       
 000085A5  0000002D  _vdpmemread                   vdp_memread                 
 0000AAC0  0000002D  _wrapcheckdamage              trampolines                 
 0000C03B  0000002D  _BOSTAB                       boss                        
@@ -212,8 +212,8 @@ Value     Size      Global                        Module
 00008AFF  0000001F  _sfx_StopSong                 ColecoPlayerSFX             
 00009BE1  0000001E  _grf1                         superspaceacer              
 0000AF5B  0000001D  _shutup                       music                       
-0000DCD1  0000001B  _enemyinit                    enemy                       
-0000DA25  00000019  _noen                         enemy                       
+0000DD00  0000001B  _enemyinit                    enemy                       
+0000DA54  00000019  _noen                         enemy                       
 0000C00E  00000019  _initGenerators               enemy                       
 0000C00E  00000018  _ldpic                        titlepage                   
 0000C150  00000018  _easypats                     wineasy                     
@@ -257,7 +257,7 @@ Value     Size      Global                        Module
 0000812E  00000003  __divu8                                                   
 0000904B  00000002  __divschar                                                
 0000812C  00000002  __divuchar                                                
-0000D05D  00000001  _enemynull                    enemy                       
+0000D08C  00000001  _enemynull                    enemy                       
 00008F63  00000001  ___sdcc_call_hl                                           
 00008131  00000000  __divu16                                                  
 00009055  00000000  __div16                                                   
