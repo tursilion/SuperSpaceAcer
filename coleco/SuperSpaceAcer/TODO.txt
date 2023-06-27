@@ -1,17 +1,9 @@
-- implement new boss graphics
 - implement enemy generators
 == that'll be good for a checkpoint release
 - ending for ladybug (dream sequence to ladybug pic to "I wonder what she's dreaming of?")
 - ending for gnat ("I'm the greatest!" to zoom out, too tiny on stage, celebration banner, but officials look confused about where he is, "Can't anyone hear me?!")
 - ending for Snowball
 - ending for cruiser
-
-New bugs with new compiler:
-- gnat has wrong shot and engine fire after first boss! (demno only? re-call init?)
-- saucers are corrupted on stage 2 onward (fixed?)
-- boss 2 is corrupted and engines are in the wrong place (wrong boss graphics)
-- boss 5 is corrupt and engines are in the wrong place (wrong boss graphics)
-- part of score is erased during boss explosion (and it crashed once on the blimp with CPU overdrive) (fixed?)
 
 VRAM map (except for ending scroll)
 --------
@@ -103,7 +95,7 @@ Secret Game Modes
 
 Hold fire when moving left and right to access the ships GNAT and PRINCESS
 	-GNAT is tiny and has only a single gun with no powerups (game mode '1' on score last digit)
-	-PRINCESS is fully powered but has only one life (game mode '2' on score last digit)
+	-PRINCESS has fully powered homing shots but has only one life (game mode '2' on score last digit)
 
 Hold DOWN when selecting SNOWBALL for cloaked enemy mode (game mode '3' on score last digit)
 
@@ -151,9 +143,9 @@ saucers: 	4 pixels		5 rows
 jets:		8				2 rows
 mines:		2 pixels		8 rows
 heli:		4				5 rows
+beamgen:	2				8 rows
 swirly:		5				4 rows
 bomb:		3				6 rows
-beamgen:	2				8 rows
 
 
 Generators can produce the enemies psuedo randomly. In fact, with a separate seed I can use the same random
@@ -191,10 +183,8 @@ Updating a generator:
 At each checkpoint (staggered generators):
 -if enemies is zero, re-create generator
 
-
 ==============================================================================
 -Give Luna a horizontal screen wrap like that Touhou game (either double-tap, or just always ;) )
-
 
 Want to redo stages to be a little more impressive.
 
@@ -204,26 +194,13 @@ Stage 3 - Air   - Dive into a gas giant - multicolored clouds with parallax bene
 Stage 4 - Fire  - Over the boiling surface of a star - lots of reds and yellows
 Stage 5 - Water - Over an ocean, breakers and occasional islands to break up the scenery
 
-Enemies need to come out on pre-determined paths, as well.
-
-Need sound effects.
-
-Change enemy bullets to be rotating ovals instead of dots - that makes it more clear.
-
 Some minor F18A enhancements would be nice too. I was thinking extra particles from explosions and using the
 bitmap layer for colored (and far more easily positioned) bosses. Will require a separate boss program for
 F18A and maybe a pre-frame stub program for the special effects.
 
-Data all lives in dedicated banks as well - goal is to keep each bank under 8k so it fits on both systems. Doesn't matter 
-to me if we waste memory on the Coleco version - otherwise we would need to use different addresses for which half of a 
-bank things are in.
-
 Note the TI bank switching has no fixed bank like the Coleco. To that end, we might try to put the GCC runtime in a 
 fixed location in /every/ TI bank to ge the same effect of runtime being available. That will make the banking even 
 trickier, but I think it's fact of life. I'll have to figure it out. (Alternative, use 32k and put it there.)
-
-Music player will need to get bytes with a bank-read-bank method (which is still faster than VDP). All songs 
-must be less than 8k.
 
 Music that I have from RushJet:
 
@@ -257,8 +234,6 @@ teckni			very 'beepy'.. has parts that are okay, but not sure it fits
 
 what			ending music
 
-For Game Over, I like my old game over music (except fix the run-together notes at the end ;) ).
-
 (recapping)												Size (bytes as SPF)		Duration
 -title page 			(no music)						   0
 -attract mode anim		evilboss2						6220	bank4			76.8 s
@@ -274,36 +249,6 @@ For Game Over, I like my old game over music (except fix the run-together notes 
 -win animation			gameover						 982	bank5			32.0 s
 -Win scroll				what							3626	bank3			64.0 s
 -Game over				my original game over tune		 350	bank4			 6.4 s
-
-Packing Songs (old version):
-	SongPack1:	evilboss2	7952 bytes		bank1
-				select
-				tursi_gameover
-				informant
-			
-	SongPack2:				6784 bytes		bank2
-				freekd
-				driven
-				gameover
-				
-	SongPack3:				5384 bytes		bank4
-				invasion
-				oddity
-						
-	SongPack4:				6214 bytes		bank5
-				storm
-				what
-			
-	SongPack5:				6124 bytes		bank6
-				mystery
-				
-	SongPack6:				7164 bytes		bank6
-				bossIX
-
-Separate:	37,942 (out of date)
-Packed:		32,458 (saved 5484 bytes)
-
----
 
 VGMComp 2 version:
 
@@ -322,69 +267,18 @@ VGMComp 2 version:
     
 Packed Total: 27,208 bytes
 
-    
-
-
-
 Rushjet has a patreon now: http://patreon.com/rushjet1
 
-
 TODO:
--- check all the below is still true
 -- add intersital animations flying to a planet - every other stage on a planet level:
        space, jungle, space, water, space, [secret warp stage?]
 
-- add a dragon-spirit inspired player character? Powerups add heads?
-    - powerup is either head or fire instead of S and P (or just add head for S, add power for P)
-    - hit reduces both - if on last head, you dead (one life or multiple? Maybe one)
-
--streaking vertical stars during warp (just make them taller? might take 2 chars each... but we can afford it then...)
 -If I need another music for ending music - the stage 1 music sounds /awesome/ at 50% speed ;)
--music toggle (when off, sfx only)
--“use the force” like in Star Wars arcade. At the start of every level, force is set to TRUE. If you fire, force is set to FALSE. During the boss, you CAN fire, but if any shot leaves the top of the screen or hits a mine then force is set to FALSE. If you destroy the boss and force is still TRUE, then you get “10,000 FOR USING THE FORCE” (10,000 * boss level)
 -Sound effects for events in game (hit nuke, nuke goes off, hit boss armor, hit boss engine, fire wide, fire beam level 1, 2, 3)
+-sfx via AY sound chip if available?
+-music toggle (when off, sfx only, through SN)
+-“use the force” like in Star Wars arcade. At the start of every level, force is set to TRUE. If you fire, force is set to FALSE. During the boss, you CAN fire, 
+ but if any shot leaves the top of the screen or hits a mine then force is set to FALSE. If you destroy the boss and force is still TRUE, then you get 
+ “10,000 FOR USING THE FORCE” (10,000 * boss level)
 -Ground on levels after the first (air (clouds), earth, water, fire? see what works with bosses)
 -F18A alternate version (better sprite graphics at least)
--Two player alternating version (for arcade port and home). (Luckily we already read joystick on variable).
--MAKE A VERTICAL VERSION (can put both on cart) - this will be how it's meant to play. '*' selects.
--Vertical version can have a menu, or, joystick two can be used as a switch (for arcade use).
--Choose inputs that can be directly wired to the port, so we can just make a 9-pin dongle for switches.
--Need an input for vertical,horizontal, and coin. If possible, 2 inputs for difficulty select (dipswitch).
--Cocktail mode? (One more dipswitch). (Figure out which way should be player 1 - can check any MAME game).
--Check coin on the NMI so we don't miss it, be careful when decrementing it (though coin and start racing is 
- fairly unlikely). Keypad 1 and 2 can become start 1 and 2. 
--Vertical mode would /increase/ the flicker a lot, so maybe this is the F18A version, so that it can run
- without any flicker. It can be in the home cart as an option - maybe '#' works but is undocumented.
--Could we build a Z80 computer compatible with the ColecoVision and sell that as an arcade JAMMA board with
- the above? There are lots of examples online...? Then could sell it! That would be fun... are Z80s cheap?
- Or FPGA it? (Is there a Z80 arcade board that's close enough on FPGA arcade?)
--Since the vertical version would be a lot of little tweaks, it would be wise to do that last, after the horizontal is done.
- Otherwise every little fix needs to be cross ported.
--Arcade needs coin/time accounting? 
-
-Timing Notes:
--TMS9918 timing:
-  1-3 - vertical sync   (  3 lines )
-  4-16  - top blanking  ( 13 lines )
-  17-43 - top border    ( 27 lines )
-  44-234- active        ( 192 lines)
-  235-258-bottom border ( 24 lines )
-  259-261-bottom blank  ( 3 lines  )
-  
-  262 lines total. Oddly BlueMSX reports overruns starting at line 17? (So border area is not free write?)
-  Datasheet says interrupt fires at the end of active.
-  BlueMSX fires at 0xD8 (216). So probably, it puts vertical sync at the top (reordered the list on this note).
-  That suggests that it doesn't honor these border sizes...
-  The safe time is supposed to be 4300uS, and a scanline is roughly 63.6uS, so that's 67 scanlines. The table  
-  above is 70 scanlines outside the active area, so that suggests up to 3 scanlines lost to who knows what!
-  But it also suggests that BlueMSX is giving too little time for safe write time.
-
--(According to BlueMSX) My sprite table copy starts at scanline 0xDB (219). The worst case copy (backwards copy) is finished by scanline 0xE7 (231) 
- (which is still faster than my assembly loop version code). That's 12 scanlines. 
--BlueMSX triggers on scanline 216, so we get it just 3 scanlines later. That leaves 64 scanlines of safe time, according to the data sheet. We use 12, so that leaves 52.
--A single straight unrolled copy of 128 bytes takes until 0xE5 (10 scanlines).
--From that I can estimate 768 bytes (full screen) would take 60 scanlines. It could be done if it was all we did! But no biggie.
-
-One thing of note, the F18A can take it even during active display, so we can push harder there.
-
-F18A - query - can the GPU reprocess the screen to similate the forced perspective of the DOS arcade port? It was pretty fun that way...
