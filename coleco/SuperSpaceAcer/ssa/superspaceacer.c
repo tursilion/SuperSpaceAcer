@@ -795,7 +795,7 @@ titleagain:
 	while (1) {		/*forever*/
 		score=0;
 		lives=3;
-		level=1;
+		level=5;    // TODO 1
 		if (playership != SHIP_GNAT) {
 			pwrlvl=PWRPULSE; 
 			if (playership == SHIP_SELENA) {

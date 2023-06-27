@@ -23,11 +23,11 @@
 // 3 sets of Engine Row, Engine Column
 // Color
 const char BOSTAB[] = {
-	8,11,	-8,21,	-8,43,	0,0,	2,
-	11,11,	20,8,	-4,32,	20,56,	6,
-	7,11,	-3,3,	-6,32,	-3,61,	5,
-	12,11,	18,4,	-6,32,	18,59,	10,
-	9,15,	9,12,	-4,48,	9,84,	13
+	8,11,	-8,17,	-8,49,	0,0,	2,
+	11,11,	-5,14,	-7,34,	-5,52,	6,
+	7,11,	-8,2,	-8,34,	-8,64,	5,
+	12,11,	-8,-1,	-2,32,	-8,66,	10,
+	9,15,	5,15,	6,50,	5,84,	13
 };
 
 char br,bd;			// these ones need to be signed
@@ -811,6 +811,16 @@ __endasm;
 	VDPWD=ch++;			\
 	BOSS_SAFE_DELAY();
 
+#define LINECHAR3		\
+	VDPWD=ch++;			\
+	BOSS_SAFE_DELAY();	\
+	VDPWD=ch++;			\
+	BOSS_SAFE_DELAY();	\
+	VDPWD=ch++;			\
+	BOSS_SAFE_DELAY();	\
+	VDPWD=ch++;			\
+	BOSS_SAFE_DELAY();
+
 #define LINECHAR4		\
 	VDPWD=ch++;			\
 	BOSS_SAFE_DELAY();	\
@@ -1000,7 +1010,7 @@ __endasm;
 inline void BOSS_SET_ADDRESS_WRITE(unsigned int x)	{	VDPWA=((x)&0xff); VDPWA=((((x)>>8)&0x3f)|0x40); }
 
 void draw1() {
-	unsigned char ch=BOSS_START+2;	// skipping the first 2
+	unsigned char ch=BOSS_START+1;	// skipping the first 1
 	unsigned int p;
 
 	// gIMAGE /must/ stay at >0000 for this code to work
@@ -1010,103 +1020,32 @@ void draw1() {
 		p-=2;	// for leading edge
 	}
 
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+1-1;
-	p+=32;
-
 	BOSS_SET_ADDRESS_WRITE(p+1);
 	EDGEBLANKA;
 	LINECHAR8;
 	EDGEBLANKB;
-	ch+=2-1;
+	ch+=2+0-1;      // add characters spare at end of this line, plus leading characters spare next line, -1
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	//ch++;
+	//ch+=1+0-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	//ch++;
+	//ch+=1+0-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	//ch++;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+1-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+1);
-	EDGEBLANKA;
-	LINECHAR8;
-	EDGEBLANKB;
-	ch+=2+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR7;
-	EDGEBLANKB;
-}
-
-void draw2() {
-	unsigned char ch=BOSS_START+2;	// skipping the first 2
-	unsigned int p;
-
-	p=(((unsigned)(bc))>>2)+(((unsigned)(br))<<5)+gIMAGE;
-	if (bd>0) {
-		p-=2;	// for leading edge
-	}
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+3-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+3);
-	EDGEBLANKA;
-	LINECHAR5;
-	EDGEBLANKB;
-	ch+=3+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
+	//ch+=1+0-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
@@ -1132,21 +1071,92 @@ void draw2() {
 
 	BOSS_SET_ADDRESS_WRITE(p+4);
 	EDGEBLANKA;
-	LINECHAR2;
+	LINECHAR3;
 	EDGEBLANKB;
-	ch+=5+4-1;
+}
+
+void draw2() {
+	unsigned char ch=BOSS_START;
+	unsigned int p;
+
+	p=(((unsigned)(bc))>>2)+(((unsigned)(br))<<5)+gIMAGE;
+	if (bd>0) {
+		p-=2;	// for leading edge
+	}
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch++;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	ch+=1+1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+1);
+	EDGEBLANKA;
+	LINECHAR8;
+	EDGEBLANKB;
+	ch+=2+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
+	EDGEBLANKA;
+	LINECHAR4;
+	EDGEBLANKB;
+	ch+=4+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
+	EDGEBLANKA;
+	LINECHAR4;
+	EDGEBLANKB;
+	ch+=4+4-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p+4);
 	EDGEBLANKA;
-	LINECHAR2;
+	LINECHAR3;
 	EDGEBLANKB;
-	ch+=5+4-1;
+	ch+=4+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
+	EDGEBLANKA;
+	LINECHAR4;
+	EDGEBLANKB;
+	ch+=4+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR6;
+	EDGEBLANKB;
+	ch+=3+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
+	EDGEBLANKA;
+	LINECHAR4;
+	EDGEBLANKB;
+	ch+=4+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
+	EDGEBLANKA;
+	LINECHAR4;
+	EDGEBLANKB;
+	ch+=4+4-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p+4);
 	EDGEBLANKA;
-	LINECHAR2;
+	LINECHAR3;
 	EDGEBLANKB;
 }
 
@@ -1163,21 +1173,28 @@ void draw3() {
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	ch+=1+0-1;
+	//ch+=1-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	ch+=1+0-1;
+	//ch+=1-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
 	EDGEBLANKA;
 	LINECHAR10;
 	EDGEBLANKB;
-	ch+=1+0-1;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p);
@@ -1191,91 +1208,6 @@ void draw3() {
 	EDGEBLANKA;
 	LINECHAR9;
 	EDGEBLANKB;
-	ch+=1+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+3-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+3);
-	EDGEBLANKA;
-	LINECHAR4;
-	EDGEBLANKB;
-}
-
-void draw4() {
-	unsigned char ch=BOSS_START+2;	// skipping the first 2
-	unsigned int p;
-
-	p=(((unsigned)(bc))>>2)+(((unsigned)(br))<<5)+gIMAGE;
-	if (bd>0) {
-		p-=2;	// for leading edge
-	}
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR10;
-	EDGEBLANKB;
 	ch+=1+1-1;
 	p+=32;
 
@@ -1283,24 +1215,10 @@ void draw4() {
 	EDGEBLANKA;
 	LINECHAR8;
 	EDGEBLANKB;
-	ch+=2+2-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+2);
-	EDGEBLANKA;
-	LINECHAR6;
-	EDGEBLANKB;
-	ch+=3+3-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p+3);
-	EDGEBLANKA;
-	LINECHAR4;
-	EDGEBLANKB;
 }
 
-void draw5() {
-	unsigned char ch=BOSS_START+5;	// skipping the first 5
+void draw4() {
+	unsigned char ch=BOSS_START;
 	unsigned int p;
 
 	p=(((unsigned)(bc))>>2)+(((unsigned)(br))<<5)+gIMAGE;
@@ -1308,88 +1226,170 @@ void draw5() {
 		p-=2;	// for leading edge
 	}
 
-	BOSS_SET_ADDRESS_WRITE(p+5);
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	//ch+=1-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR10;
+	EDGEBLANKB;
+	ch+=1+3-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+3);
 	EDGEBLANKA;
 	LINECHAR4;
 	EDGEBLANKB;
-	ch+=6+1-1;
+	ch+=4+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR5;
+	EDGEBLANKB;
+	ch+=4+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR6;
+	EDGEBLANKB;
+	ch+=3+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR6;
+	EDGEBLANKB;
+	ch+=3+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR6;
+	EDGEBLANKB;
+	ch+=3+2-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p+2);
+	EDGEBLANKA;
+	LINECHAR5;
+	EDGEBLANKB;
+}
+
+void draw5() {
+	unsigned char ch=BOSS_START;
+	unsigned int p;
+
+	p=(((unsigned)(bc))>>2)+(((unsigned)(br))<<5)+gIMAGE;
+	if (bd>0) {
+		p-=2;	// for leading edge
+	}
+
+#if 0
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR2;
+	EDGEBLANKB;
+    ch+=10;
+    BOSS_SET_ADDRESS_WRITE(p+13);
+	EDGEBLANKA;
+    LINECHAR2;
+	EDGEBLANKB;
+	//ch+=1+0-1;
+	p+=32;
+#else
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR14;
+	EDGEBLANKB;
+	//ch+=1+0-1;
+	p+=32;
+#endif
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR14;
+	EDGEBLANKB;
+	//ch+=1+0-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR14;
+	EDGEBLANKB;
+	//ch+=1+0-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR14;
+	EDGEBLANKB;
+	//ch+=1+0-1;
+	p+=32;
+
+	BOSS_SET_ADDRESS_WRITE(p);
+	EDGEBLANKA;
+	LINECHAR14;
+	EDGEBLANKB;
+	ch+=1+1-1;
 	p+=32;
 
 	BOSS_SET_ADDRESS_WRITE(p+1);
 	EDGEBLANKA;
 	LINECHAR12;
 	EDGEBLANKB;
-	ch+=2+0-1;
+	ch+=2+3-1;
 	p+=32;
 
-	BOSS_SET_ADDRESS_WRITE(p);
+	BOSS_SET_ADDRESS_WRITE(p+3);
 	EDGEBLANKA;
-	LINECHAR14;
+	LINECHAR8;
 	EDGEBLANKB;
-	ch+=1+0-1;
+	ch+=4+4-1;
 	p+=32;
 
-	BOSS_SET_ADDRESS_WRITE(p);
+	BOSS_SET_ADDRESS_WRITE(p+4);
 	EDGEBLANKA;
-	LINECHAR14;
+	LINECHAR6;
 	EDGEBLANKB;
-	ch+=1+0-1;
+	ch+=5+5-1;
 	p+=32;
 
-	BOSS_SET_ADDRESS_WRITE(p);
+	BOSS_SET_ADDRESS_WRITE(p+5);
 	EDGEBLANKA;
-	LINECHAR14;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR14;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-	LINECHAR14;
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-
-//	LINECHAR14;
-	LINECHAR5;
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	ch+=4;
 	LINECHAR4;
-
-	EDGEBLANKB;
-	ch+=1+0-1;
-	p+=32;
-
-	BOSS_SET_ADDRESS_WRITE(p);
-	EDGEBLANKA;
-
-//	LINECHAR14;
-	LINECHAR5;
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	VDP_SAFE_DELAY();
-	VDPWD=32;
-	ch+=4;
-	LINECHAR4;
-
 	EDGEBLANKB;
 }
