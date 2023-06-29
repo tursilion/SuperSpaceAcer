@@ -62,6 +62,7 @@ unsigned char level;
 int distns;
 unsigned char nDifficulty;
 unsigned char seed=1;
+unsigned char attractShip = 0;
 
 extern const unsigned char CHARS[];
 extern const unsigned char ELECTRICWALL[];
@@ -723,8 +724,9 @@ void main() {
 		// it matches!
 		playership = 0;
 		scoremode = *SAVEDMODE;
-		seed = *SAVEDATTRACT;	// note: LSB may be different than pre-reboot
-		*SAVEDATTRACT = seed&1;
+		attractShip = *SAVEDATTRACT;
+		*SAVEDATTRACT = attractShip & 1;
+		attractShip >>= 4;
 	} else {
 		// it was junk
 		score = 0;
@@ -776,7 +778,8 @@ titleagain:
 	} else {
 		// demo mode
 		nDifficulty = DIFFICULTY_EASY;
-		playership = rndnum()%5;
+		playership = attractShip++;
+		if (attractShip > 4) attractShip=0;
 		oldscore = score;
 	}
 	cls();
@@ -1161,7 +1164,7 @@ void reboot() {
 	*SAVEDMODE = scoremode;
 	// and save the seed, excluding the least significant bit, in the attract mode byte
 	x = *SAVEDATTRACT;
-	x = (seed&0xFE)|(x&1);
+	x = (attractShip<<4)|(x&1);
 	*SAVEDATTRACT = x;
 
 	hwreboot();	// never returns
