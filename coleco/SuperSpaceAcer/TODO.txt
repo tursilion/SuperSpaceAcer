@@ -143,10 +143,9 @@ saucers: 	4 pixels		5 rows
 jets:		8				2 rows
 mines:		2 pixels		8 rows
 heli:		4				5 rows
-beamgen:	2				8 rows
+beamgen:	2				24 rows (extra spacing)
 swirly:		5				4 rows
-bomb:		3				6 rows
-
+bomb:		3				12 rows (extra spacing)
 
 Generators can produce the enemies psuedo randomly. In fact, with a separate seed I can use the same random
 number code, but lock it down to the stage. If I seed each stage the same way each time, I will get the same
@@ -252,20 +251,27 @@ what			ending music
 
 VGMComp 2 version:
 
-    OutFile00.sbf:  bossIX          7172 bytes
-                    tursi_gameover
-                    gameover
+    OutFile00.sbf:  bossIX			70.383s		7172 bytes
+                    tursi_gameover	 6.383s
+                    gameover		31.983s
                     
-    OutFile01.sbf:  driven          7092 bytes
-                    what
-                    oddity
+    OutFile01.sbf:  driven			60.783s		7092 bytes
+                    what			63.983s
+                    oddity			45.316s
                     
-    Outfile02.sbf:  invasion        6176 bytes
-                    storm
+    Outfile02.sbf:  invasion		37.316s		6176 bytes
+                    storm			73.583s
                     
-    Outfile03.sbf:  mystery         6768 bytes
+    Outfile03.sbf:  mystery			97.583s		6768 bytes
     
 Packed Total: 27,208 bytes
+
+Stage 1 is 35 seconds long, roughly, with a length of 600. So a second is about 17.143 distns.
+Stage 1, driven, 60.783s, should be 1042
+Stage 2, invasion, 37.316, should be 640
+Stage 3, boxxIX, 70.383, should be 1207
+Stage 4, oddity, 45.316, should be 777
+Stage 5, mystery, 97.585, should be 1673
 
 Rushjet has a patreon now: http://patreon.com/rushjet1
 

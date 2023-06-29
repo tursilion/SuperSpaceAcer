@@ -86,6 +86,9 @@
 
 	.area _bank12
 		.ascii "LinkTag:Bank12\0"
+		.area _qwertianc
+		.area _qwertianp
+		.area _attract
 
 	.area _bank13
 		.ascii "LinkTag:Bank13\0"
@@ -148,14 +151,22 @@ _startprog:
 	ld hl,#_vdpLimi
 	ld (hl),#0
 
-	; clear RAM before starting
+	; clear RAM before starting (except last 6 bytes)
 	ld hl,#0x7000			; set copy source
 	ld de,#0x7001			; set copy dest
-	ld bc,#0x03ff			; set bytes to copy (1 less than size)
+	ld bc,#0x03f9			; set bytes to copy (1 less than size)
 	ld (hl),#0				; set initial value (this gets copied through)
 	ldir					; do it
-	
-	ld  sp, #0x7400			; Set stack pointer directly above top of memory.
+
+	; reserved stack space:
+	; 73FA - saved score lsb
+	; 73FB - saved score MSB
+	; 73FC - inverted score lsb
+	; 73FD - inverted score msb
+	; 73FE - saved score mode
+	; 73FF - attract mode flag
+
+	ld  sp, #0x73FA			; Set stack pointer directly above top of memory, reserving 6 bytes.
 	ld	bc,#0xFFFE			; switch in code bank
    	ld	a,(bc)				; note that this does NOT set the local pBank variable, user code still must do that!
 	call gsinit				; Initialize global variables. (always at end of code bank, so need above bank switch)

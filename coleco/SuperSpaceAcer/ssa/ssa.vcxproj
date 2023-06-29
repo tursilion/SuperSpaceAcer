@@ -70,6 +70,10 @@
     <Image Include="boss5.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\demoship1c.c" />
+    <ClCompile Include="..\demoship1p.c" />
+    <ClCompile Include="..\demoship2c.c" />
+    <ClCompile Include="..\demoship2p.c" />
     <ClCompile Include="..\selena_end_c.c" />
     <ClCompile Include="..\selena_end_p.c" />
     <ClCompile Include="..\title2\ship1_c.c" />
@@ -80,6 +84,7 @@
     <ClCompile Include="..\title2\ship3_p.c" />
     <ClCompile Include="..\title2\ship4_c.c" />
     <ClCompile Include="..\title2\ship4_p.c" />
+    <ClCompile Include="attract.c" />
     <ClCompile Include="bg.c" />
     <ClCompile Include="boss.c" />
     <ClCompile Include="boss1.c" />
@@ -124,6 +129,7 @@
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\sound.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\string.h" />
     <ClInclude Include="..\..\..\..\coleco\libti99coleco\vdp.h" />
+    <ClInclude Include="attract.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="human.h" />

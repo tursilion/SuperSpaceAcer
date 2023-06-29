@@ -9,8 +9,9 @@
 #include "enemy.h"
 #include "human.h"
 
-extern const unsigned char selenaendC[];
-extern const unsigned char selenaendP[];
+#define BIN2INC_HEADER_ONLY
+#include "selena_end_c.c"
+#include "selena_end_p.c"
 
 // I don't THINK these need to be recursive, but just in case
 #pragma nooverlay
@@ -259,4 +260,16 @@ void wrapCopyShip(const unsigned char *p, const unsigned char *c) {
 void wrapGamWin() {
 	SWITCH_IN_BANK8;
 	gamwin();	// never returns
+}
+
+void wrapLoadStoryFont() {
+	// this loads the ColecoVision ROM font like loadcharset, but instead of
+	// into the pattern table, it goes into the third bitmap table for story text
+	unsigned int old = nBank;
+
+	SET_COLECO_FONT_BANK;
+	// we assume pattern table is at 0
+	vdpmemcpy((32*8)+4096, colecofont, 768);
+
+	SWITCH_IN_PREV_BANK(old);
 }

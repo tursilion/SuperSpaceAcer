@@ -17,9 +17,6 @@
 #include "human.h"
 #include "music.h"
 
-// used to get out of demo mode
-static void (* const reboot)()=0x802d;
-
 // color of player's ship (was white)
 unsigned char playerColor;
 char shotOffset;

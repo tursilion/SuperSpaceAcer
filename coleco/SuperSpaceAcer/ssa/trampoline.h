@@ -29,5 +29,6 @@ void wrapGameWinHard();
 void wrapGameWinMed();
 void wrapCopyShip(const unsigned char *p, const unsigned char *c);
 void wrapGamWin();
+void wrapLoadStoryFont();
 
 #endif

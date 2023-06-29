@@ -165,6 +165,11 @@ struct _sprite {
 };
 extern struct _sprite SpriteTab[32];
 
+// some pointers above the stack to store data across reboots
+#define SAVEDSCORE ((unsigned char*)0x73fa)
+#define SAVEDMODE ((unsigned char*)0x73fe)
+#define SAVEDATTRACT ((unsigned char*)0x73ff)
+
 // functions
 //void memset(char *p, unsigned char ch, int cnt);
 void spdall() ;
@@ -232,6 +237,7 @@ void deShieldLadybug();
 void deShieldGnat();
 void deShieldSelena();
 void handleTitlePage();
+void reboot();
 
 // macros to look like the old c99
 #define screen(x) VDP_SET_REGISTER(VDP_REG_COL, x)

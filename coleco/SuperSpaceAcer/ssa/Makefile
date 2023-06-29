@@ -9,7 +9,7 @@ AFLAGS = -plosgff
 objs = crt0.rel ssd_inc.rel superspaceacer.rel trampolines.rel bg.rel boss.rel enemy.rel music.rel human.rel wineasy.rel winhard.rel winmed.rel \
 		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel outfile0.rel outfile1.rel outfile2.rel outfile3.rel \
 		font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
-		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel 
+		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel qwertianc.rel qwertianp.rel attract.rel
 
 all: buildcol
 	d:/work/coleco/tursi/makemegacart/release/makemegacart.exe -map crt0.s crt0.ihx ssa.rom
@@ -46,7 +46,7 @@ music.rel: music.c game.h
 human.rel: human.c game.h
 	$(CC) $(CFLAGS) -o human.rel human.c --codeseg human --constseg human
 
-superspaceacer.rel: superspaceacer.c game.h
+superspaceacer.rel: superspaceacer.c game.h enemy.h trampoline.h human.h music.h attract.h
 	$(CC) $(CFLAGS) -o superspaceacer.rel superspaceacer.c --codeseg ssa --constseg ssa
 
 titlepage.rel: titlepage.c game.h
@@ -148,6 +148,15 @@ selena_end_c.rel: selena_end_c.c
 
 selena_end_p.rel: selena_end_p.c
 	$(CC) $(CFLAGS) -o selena_end_p.rel selena_end_p.c --codeseg selenap --constseg selenap
+
+qwertianp.rel: qwertianp.c
+	$(CC) $(CFLAGS) -o qwertianp.rel qwertianp.c --codeseg qwertianp --constseg qwertianp
+
+qwertianc.rel: qwertianc.c
+	$(CC) $(CFLAGS) -o qwertianc.rel qwertianc.c --codeseg qwertianc --constseg qwertianc
+
+attract.rel: attract.c attract.h
+	$(CC) $(CFLAGS) -o attract.rel attract.c --codeseg attract --constseg attract
 
 # libti99 crt0 copied into folder
 crt0.rel: crt0.s

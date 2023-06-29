@@ -112,6 +112,21 @@
     <ClCompile Include="outfile3.c">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="..\demoship1c.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\demoship1p.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\demoship2c.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\demoship2p.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="attract.c">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -142,6 +157,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="music.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="attract.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

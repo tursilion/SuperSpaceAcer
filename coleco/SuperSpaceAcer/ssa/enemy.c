@@ -21,12 +21,21 @@ const signed char sinemove[32] = {	0,1,2,2,3,3,4,4,
 									-4,-4,-4,-3,-3,-2,-2,-1 
 								 };
 
-const unsigned char mincnt[7] = {
+// generator speeds, with some emphasis on 0 and only
+// a few fast moves.
+const signed char speedtab[16] = {
+	0, 0, 0, 0,
+	1, -1, 2, -2,
+	0, 0, 0, 0,
+	8, 64, -8, -64
+};
+
+const unsigned char mincnt[8] = {
     5,  // saucer
     2,  // jet
     8,  // mine
     5,  // helicopter
-    24, // beamgen
+    32, // beamgen
     4,  // swirly
     12  // bomb
 };
@@ -34,12 +43,12 @@ const unsigned char mincnt[7] = {
 // per level (first level is 1, so 0 is a dummy
 // then 8 random numbers (0-7)
 const unsigned char oddstable[6][8] = {
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_SAUCER, ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_SAUCER, ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_JET,     ENEMY_SAUCER,     ENEMY_HELICOPTER, ENEMY_SAUCER,     ENEMY_HELICOPTER },
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_BEAMGEN, ENEMY_HELICOPTER, ENEMY_JET,        ENEMY_SAUCER,     ENEMY_HELICOPTER },
-    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_BEAMGEN, ENEMY_HELICOPTER, ENEMY_SWIRLY,     ENEMY_BOMB,       ENEMY_SAUCER }
+/*0*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_SAUCER, ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
+/*1*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_SAUCER, ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
+/*2*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_JET,     ENEMY_SAUCER,     ENEMY_JET,        ENEMY_SAUCER,     ENEMY_JET },
+/*3*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_JET,     ENEMY_SAUCER,     ENEMY_HELICOPTER, ENEMY_SAUCER,     ENEMY_HELICOPTER },
+/*4*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_HELICOPTER, ENEMY_BEAMGEN, ENEMY_JET,        ENEMY_HELICOPTER, ENEMY_BEAMGEN },
+/*5*/    {   ENEMY_SAUCER, ENEMY_JET, ENEMY_MINE,   ENEMY_BEAMGEN, ENEMY_HELICOPTER, ENEMY_SWIRLY,     ENEMY_BOMB,       ENEMY_SAUCER }
 };
 
 uint8 enr[12], enc[12];					// enemy row and col
@@ -76,17 +85,34 @@ void enout() {
         for (unsigned char idx=0; idx<maxgen; ++idx) {
             if (gencount[idx] == 0) {
                 // generators are always active
-			    unsigned char a=(rndnum()&7);
+			    unsigned char a=rndnum()&7;
                 // this counts!
                 genx[idx]=rndnum();                     // x pos
-                genmax[idx]=(rndnum()&0x7)+mincnt[a];   // time between enemies
+				if (genx[idx] < 64) genx[idx]+=64;		// stay off the edges in case speed is 0
+				else if (genx[idx] > 192) genx[idx] -= 64;
+				gentype[idx] = oddstable[level][a];     // rebase into an enemy type
+				if (gentype[idx] == ENEMY_BEAMGEN) {
+					// only one beamgen generator at a time please
+					unsigned char ok=1;
+					for (unsigned char b=0; b<maxgen; ++b) {
+						if (b==idx) continue;
+						if ((gencount[b])&&(gentype[b]==ENEMY_BEAMGEN)) {
+							ok=0;
+							break;
+						}
+					}
+					if (!ok) {
+						gentype[idx] = ENEMY_SAUCER;
+					}
+				}
+                genmax[idx]=(rndnum()&0x7)+mincnt[gentype[idx]-ENEMY_SAUCER];   // time between enemies
+
                 gentime[idx]=genmax[idx];               // countdown timer
                 gencount[idx]=(rndnum()&0x07);          // how many
-				gentype[idx] = oddstable[level][a];     // rebase into an enemy type
-                genspeed[idx]=rndnum()&0x87;            // max of 7 positive or negative, I think
+                genspeed[idx]=speedtab[rndnum()&0xf];	// 16 possible speeds
 
-                if (gentype[idx] == ENEMY_MINE) gencount[idx]=(rndnum()&0x03);
-                if (gentype[idx] == ENEMY_BEAMGEN) gencount[idx]=(rndnum()&0x03);
+                if (gentype[idx] == ENEMY_MINE) gencount[idx]=(rndnum()&0x01)+1;
+                if (gentype[idx] == ENEMY_BEAMGEN) gencount[idx]=(rndnum()&0x03)+1;
                 if (gentype[idx] == ENEMY_BOMB) gencount[idx]=1;
                 if (gentype[idx] == ENEMY_JET) genspeed[idx]>>=2;
 
@@ -99,21 +125,20 @@ void enout() {
     // update any active generators
     for (unsigned char idx=0; idx<maxgen; ++idx) {
         if (gencount[idx]) {
-            // TODO - debug info, clear old generator
-            vdpchar(genx[idx]>>3, ' ');
+            // debug info, clear old generator
+            //vdpchar(genx[idx]>>3, ' ');
 
             genx[idx]+=genspeed[idx];
 
-            // TODO - debug info, show the generator onscreen
-            vdpchar(genx[idx]>>3, '1'+idx);
-
+            // debug info, show the generator onscreen
+            //vdpchar(genx[idx]>>3, '1'+idx);
 
             if (0 == --gentime[idx]) {
                 // time to launch an enemy - maybe - make sure we aren't too close to edges or another active generator
                 unsigned char k,c;
                 unsigned char ok=1;
 
-                // if we can't launch, we still count it
+				// count it as launched, even if we can't
                 gentime[idx] = genmax[idx];
                 --gencount[idx];
 
@@ -123,7 +148,7 @@ void enout() {
                 for (unsigned char b=0; b<maxgen; ++b) {
                     if (b==idx) continue;
                     if (gencount[b]==0) continue;
-                    if (abs(genx[idx]-genx[b]) < 16) {
+                    if (abs(genx[idx]-genx[b]) < 20) {
                         // just a safety check to prevent lockstep
                         if (genspeed[idx]==genspeed[b]) ++genspeed[idx];
                         ok=0;
@@ -135,7 +160,7 @@ void enout() {
                 }
 
                 k=255;
-                for (unsigned char b=0; b<nDifficulty; ++b) {
+                for (unsigned char b=0; b<=nDifficulty; ++b) {
                     if (b>5) break;
                     if (ent[b] == ENEMY_NONE) {
                         k=b;
@@ -147,8 +172,8 @@ void enout() {
                     continue;
                 }
 
-                // all right, load it up
-                ent[k]=gentype[idx];
+				// fill it in
+				ent[k]=gentype[idx];
 				enr[k]=1;
 				enc[k]=genx[idx];
                 c=COLOR_WHITE;  // why is this getting through?

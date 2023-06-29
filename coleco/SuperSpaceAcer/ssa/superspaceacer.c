@@ -6,10 +6,6 @@
 
 /* program SUPER SPACE ACER design version 2.2 */
 /* ported to ColecoVision by M.Brent */
-//#include <stddef.h>
-//#include <stdint.h>
-//#include <stdlib.h>
-//#include <sdcc_string.h>
 
 // libti99
 #include <vdp.h>
@@ -23,7 +19,11 @@
 #include "trampoline.h"
 #include "human.h"
 #include "music.h"
- 
+#include "attract.h"
+
+// full software reboot vector
+static void (* const hwreboot)()=0x802d;
+
 // startup and init, central code
 #define SIZE_OF_CHARS		160
 #define SIZE_OF_SPRITES		2048
@@ -34,6 +34,9 @@ struct _sprite SpriteTab[32];
 
 // player data for weapons, but used in multiple places
 const unsigned char damage[8] = { 3,4,5,1, 2,2,3,1 };
+
+// distns table per stage (level-1)
+const int stage_distns[5] = { 1000, 1100, 1200, 1400, 1650 };
 
 // multi-purpose
 int a,b,x,y;
@@ -713,13 +716,15 @@ void main() {
 	// init this just once (why doesn't auto-init work? TODO: Probably because my CRT0 isn't loading it...)
 	playership = 255;
 
-	// check for a score saved off in VDP. If it's there, we can load it and also zero playership
-	vdpmemread(768, tmpbuf, 4);
+	// check for a score saved off above stack. If it's there, we can load it and also zero playership
+	memcpy(tmpbuf, SAVEDSCORE, 4);
 	score = *((unsigned short*)tmpbuf);
 	if (~score == *((unsigned short*)(&tmpbuf[2]))) {
 		// it matches!
 		playership = 0;
-		scoremode = vdpreadchar(772);
+		scoremode = *SAVEDMODE;
+		seed = *SAVEDATTRACT;	// note: LSB may be different than pre-reboot
+		*SAVEDATTRACT = seed&1;
 	} else {
 		// it was junk
 		score = 0;
@@ -730,6 +735,20 @@ void main() {
 titleagain:
 	SWITCH_IN_BANK9;
 	handleTitlePage();
+
+	if (joynum == 0) {
+		// this is an attract timeout
+		// we'll use a flag in VDP above the score to note
+		// gameplay attract or story attract
+		if (!(*SAVEDATTRACT)) {
+			*SAVEDATTRACT = 1;
+			SWITCH_IN_BANK12;
+			doAttract();	// never returns
+		} else {
+			// we'll do the demo play
+			*SAVEDATTRACT = 0;
+		}
+	}
 
 	// set regular graphics mode
 	i = grf1();
@@ -813,7 +832,7 @@ titleagain:
             level = rndnum()%5+1;
 		}
 
-		distns=600;
+		distns=stage_distns[0];
 
 		while (level<6)
 		{
@@ -838,8 +857,8 @@ titleagain:
 			// the distns was already rolled back, so we can do nothing and just loop
 			if ((flag != PLAYER_DIED) && (flag != PLAYER_DIED_DURING_BOSS)) {
 				// Boss was defeated!
+				distns=stage_distns[level];		// do this BEFORE we increment, cause it's -1
 				level++; 
-				distns=level*100+500; 
 			}
 		}
 		if ((level==6)&&(joynum)) {
@@ -954,7 +973,7 @@ void ispace()
 	SWITCH_IN_BANK1;
 	enemyinit();
 
-	distns=distns+100;
+	distns=distns+100*level;
 }
  
 void gamovr()
@@ -1129,3 +1148,21 @@ void sgrint()
 	color(1,9,0);
 }
 
+// reboot wrapper that saves off some handy variables
+void reboot() {
+	unsigned char x;
+
+	// to preserve the score while keeping the lazy reboot, we save it off above the stack
+	// we save it twice, once inverted as a checksum, so the boot will always know it's right
+	*((unsigned short*)tmpbuf) = score;
+	*((unsigned short*)(&tmpbuf[2])) = ~score;
+	memcpy(SAVEDSCORE, tmpbuf, 4);
+	// also save off the scoremode
+	*SAVEDMODE = scoremode;
+	// and save the seed, excluding the least significant bit, in the attract mode byte
+	x = *SAVEDATTRACT;
+	x = (seed&0xFE)|(x&1);
+	*SAVEDATTRACT = x;
+
+	hwreboot();	// never returns
+}

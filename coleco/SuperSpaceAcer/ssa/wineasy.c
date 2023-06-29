@@ -9,9 +9,6 @@
 #include "trampoline.h"
 #include "music.h"
 
-// how to get back to the title page the lazy way
-static void (* const reboot)()=0x802d;
-
 // lower case letters in the TI format of small uppercase (96-123)
 const unsigned char smallcapsfont[] = {
 	0x3C,0x66,0xDB,0xB1,0xB1,0xDB,0x66,0x3C,0x00,0x00,0x78,0xCC,0xFC,0xCC,0xCC,0x00,	// 00000200 `0........x..... //
@@ -60,14 +57,6 @@ void gamwin() {
 	}
 
 	// on end, reboot
-	// to preserve the score while keeping the lazy reboot, we save it off in VDP right after the screen table
-	// we save it twice, once inverted as a checksum, so the boot will always know it's right
-	*((unsigned short*)tmpbuf) = score;
-	*((unsigned short*)(&tmpbuf[2])) = ~score;
-	vdpmemcpy(768, tmpbuf, 4);
-	VDP_SAFE_DELAY();
-	// also save off the scoremode
-	vdpchar(772, scoremode);
 	reboot();
 }
 
