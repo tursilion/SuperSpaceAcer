@@ -46,6 +46,7 @@ char shotOffset;
 unsigned char joynum;
 uint8 killedby,flst;		// enemy who hit us, flame status
 uint8 pwrlvl;				// pwrlvl: 0-2 = pulse wave level 1,2,3, 4-6=3-way level 1,2,3  (3 is gnat)
+uint8 oldpwrlvl;
 char lives;
 unsigned int score, oldscore;	// oldscore is used as a temporary during demo play
 unsigned char scoremode;		// indicates bonus modes played via score's last digit. 0=normal, 1=gnat, 2=Selena, 3=invisible enemies
@@ -103,7 +104,7 @@ void player()
 		KSCAN_KEY = JOY_FIRE;
 		KSCAN_JOYX = SINEISH[xcnt>>1];
 		KSCAN_JOYY = SINEISH[ycnt>>1];
-		xcnt+=3;
+		xcnt+=3;    // must be odd
 		ycnt+=7;
 	}
 	if (KSCAN_JOYX == JOY_LEFT) {
@@ -146,10 +147,12 @@ void player()
 	}
 
 	if ((shield) && (playership != SHIP_CRUISER)) {
+        if (shield == 42) playsfx_shieldwarn();
 		--shield;
 		// ladybug counts down faster, but has an offensive shield that can ram enemies
 		// can't ram the boss engines, but can ram the boss itself ;)
 		if ((shield) && (playership == SHIP_LADYBUG)) {
+            if (shield == 42) playsfx_shieldwarn();
 			--shield;
 			wrapcheckdamage(SHIP_R+playerOffset, SHIP_C+8, 0);	// add damage to boss body
 		}
@@ -171,6 +174,7 @@ void player()
 #endif
 		
 		if (KSCAN_KEY == JOY_FIRE) {
+            if (force == 1) force = 0;
 			shoot();
 		}
 	}
@@ -281,6 +285,7 @@ void mvshot()
 		shr[a]-=8;										\
 		shc[a]+=shd[a];									\
 		if ((shr[a]>191)||(shc[a]>250)||(shc[a]<5)) {	\
+            if (force == 2) force = 0;                  \
 			spdel(PLAYER_SHOT+a);						\
 			shr[a]=0;									\
 		} else {										\
@@ -341,6 +346,7 @@ void homingshot() {
 		shr[a]+=shrd[a];								\
         shc[a]+=shd[a];                                 \
 		if ((shr[a]==0)||(shr[a]>191)||(shc[a]>250)||(shc[a]<5)) {	\
+            if (force == 2) force = 0;                  \
 			spdel(PLAYER_SHOT+a);						\
 			shr[a]=0;									\
 		} else {										\
@@ -355,6 +361,7 @@ void homingshot() {
 		shr[a]+=shrd[a];								\
 		shc[a]+=shd[a];									\
 		if ((shr[a]==0)||(shr[a]>191)||(shc[a]>250)||(shc[a]<5)) {	\
+            if (force == 2) force = 0;                  \
 			spdel(PLAYER_SHOT+a);						\
 			shr[a]=0;									\
 		} else {										\
@@ -396,6 +403,7 @@ void cheat() {
 	/* process debugging keys */
 	switch (KSCAN_KEY) {
 		case CHEAT_SHIELDS:
+            playsfx_shieldup();
 			if (playership == SHIP_CRUISER) {
 				shield+=25;
 			} else {
@@ -420,6 +428,11 @@ void cheat() {
 			if (pwrlvl>=7) {
 				pwrlvl=0; 
 			}
+            if (pwrlvl >= PWR3WAY) {
+                playsfx_pwrwide();
+            } else {
+                playsfx_pwrpulse();
+            }
 			break;
 
 		case CHEAT_KILLBOSS:
@@ -480,6 +493,7 @@ void plycol() {
 			// Player collides with powerup
 			if (ptp4==POWERUP_SHIELD) { 
 				// Shield power increase
+                playsfx_shieldup();
 				if (playership == SHIP_CRUISER) {
 					if (shield < 75) shield += 25;	// maximum shields set on Cruiser
 				} else {
@@ -488,22 +502,28 @@ void plycol() {
 					shield+=100;
 				}
 			} else if (ptp4 == POWERUP_WAVE) {
+                playsfx_pwrpulse();
 				if ((pwrlvl&0x0f) < PWR3WAY) {
 					if ((pwrlvl&0x03) < 2) {
 						pwrlvl++;
 					}
 				} else {
-					pwrlvl=PWRPULSE;
-					if (playership == SHIP_SELENA) pwrlvl+=2;
+                    // swapping
+                    uint8 tmp = pwrlvl;
+					pwrlvl=oldpwrlvl;
+                    oldpwrlvl = tmp;
 				}
 			} else if (ptp4 == POWERUP_3WAY) {
+                playsfx_pwrwide();
 				if ((pwrlvl&0x0f) >= PWR3WAY) {
 					if ((pwrlvl&0x03) < 2) {
 						pwrlvl++;
 					}
 				} else {
-					pwrlvl=PWR3WAY;
-					if (playership == SHIP_SELENA) pwrlvl+=2;
+                    // swapping
+                    uint8 tmp = pwrlvl;
+					pwrlvl=oldpwrlvl;
+                    oldpwrlvl = tmp;
 				}
 			}
 			// remove powerup
@@ -525,8 +545,10 @@ void plycol() {
 						a=99;
 #endif
 					} else if (playership == SHIP_CRUISER) {
+                        playsfx_shielddown();
 						shield -= 25;
 						if (shield > 75) shield = 0;
+                        if (shield == 0) playsfx_shieldwarn();
 						hittime = 10;
 						// kill off the enemy
 						if (ent[a] < ENEMY_SAUCER) {
@@ -535,9 +557,10 @@ void plycol() {
 							ep[a]=0;
 							dyen(a);
 						}
-						// TODO: trigger sfx
+						playsfx_shipdead();
 					} else if (playership == SHIP_LADYBUG) {
 						if (ent[a] >= ENEMY_SAUCER) {
+                            playsfx_shieldup();
 							ep[a]=0;
 							dyen(a);
 							shield+=100;	// ladybug recharges shield by hitting enemies
@@ -594,9 +617,11 @@ void pdie()
 	lives--;
 	if (playership != SHIP_GNAT) {
 		pwrlvl=PWRPULSE;
+        oldpwrlvl=PWR3WAY;
 		if (playership == SHIP_SELENA) pwrlvl+=2;
 	} else {
 		pwrlvl=PWRGNAT;
+        oldpwrlvl=PWRGNAT;
 	}
 	if (lives<0) {
 		flag=PLAYER_DIED;
@@ -744,15 +769,14 @@ void dyen(unsigned char x)
 
 	if (ep[x] > 0) {
 		// count down armor
-		// todo: sfx here
 		ep[x] -= damage[pwrlvl&0x07];
 	}
 	if (ep[x] <= 0) {
 		// no armor left
 		addscore(ent[x]);
+		playsfx_shipdead();
 		if (ent[x] == ENEMY_BEAMGEN) {
 			// figure out which one we destroyed
-			// TODO: sfx here
 			// based on which character it is, we know if it's left or right
 
 			// make bullet into explosion
@@ -782,7 +806,6 @@ void dyen(unsigned char x)
 			sppat(x+ENEMY_SPRITE, ech[x]);
 			sploct(x+ENEMY_SPRITE, enr[x], enc[x]);
 		} else if (ent[x] != ENEMY_BOMB) {
-			// TODO: sfx here
 			ent[x]=ENEMY_EXPLOSION;
 			ech[x]=52;
 			eec[x]=72;
@@ -790,12 +813,9 @@ void dyen(unsigned char x)
 			en_func[x] = enemyexplosion;
 			spcolr(x+ENEMY_SPRITE,9);
 		} else {
-			// TODO: special sfx here for ENEMY_BOMB
+			playsfx_nukebomb(); // overrides previous
 			spposn(x+ENEMY_SPRITE,r,c);
 			screen(15);
-
-			SOUND=0xe6;		// TODO: delete these three SOUNDS (two here, one at end) when SFX is in
-			SOUND=0xf0;
 
 			for (k=0; k<12; k++) {
 				wrapnoen(k);
@@ -836,6 +856,8 @@ void dyen(unsigned char x)
 
 			SOUND=0xff;
 		}
-	}
+	} else {
+        playsfx_armor();
+    }
 }
  

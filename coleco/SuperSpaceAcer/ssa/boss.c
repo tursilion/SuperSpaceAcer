@@ -10,6 +10,7 @@
 #include "trampoline.h"
 #include "enemy.h"
 #include "music.h"
+#include "human.h"
 
 // enemy array usage:
 // 0-2	engines
@@ -17,8 +18,7 @@
 // 6	cockpit (invisible collision sprite)
 // 7-11	shots
 
-// TODO: Sometimes runs too slowly with music active, need to free up some cycles! (getting there!)
-// Jitters seen in BlueMSX seem mostly okay on hardware
+// TODO: slows down when full pulse weapon is damaging body - can we optimize more?
 
 //*BOSSES
 // Number Rows, Number Columns
@@ -503,6 +503,7 @@ void whoded() {
 
 		// check if hit a piece of boss
 		if (checkdamage(shr[a], shc[a], pwrlvl&0x0f)) {
+            playsfx_hitboss();
 			spdel(a+PLAYER_SHOT);
 			shr[a]=0;
             continue;
@@ -520,12 +521,15 @@ void whoded() {
 					bosscnt=3;						// how many cycles to stay white (should be 3 frames per cycle)
 					ep[b]-=damage[pwrlvl&0x07];
 					if (ep[b]<=0) { 
+                        playsfx_explosion();
 						addscore(5); 
 						ep[b]=0; 
 						enr[b]=192; 
                         ent[b]=ENEMY_NONE;
 						spdel(b+ENEMY_SPRITE);
-					}
+					} else {
+                        playsfx_armor();
+                    }
 					spdel(a+PLAYER_SHOT); 
 					shr[a]=0; 
 					break;
@@ -627,7 +631,13 @@ void byboss() {
 
 	delaystars(10);
 
-	// fly off screen
+    if (force) {
+        centr(13, "10000 FOR USING THE FORCE");
+        addscore(100);
+       	delaystars(20);
+    }
+
+    // fly off screen
 	for (qw=0; qw<81; qw++){ 
 		x=11186/(qw+200);
 		a=x&0xf;	// low nibble of freq

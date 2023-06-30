@@ -102,6 +102,7 @@
     <ClCompile Include="outfile1.c" />
     <ClCompile Include="outfile2.c" />
     <ClCompile Include="outfile3.c" />
+    <ClCompile Include="sfxs.c" />
     <ClCompile Include="ssd_inc.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="superspaceacer.c" />

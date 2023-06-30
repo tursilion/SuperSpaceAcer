@@ -65,8 +65,6 @@ void selenascroll() {
 	unsigned int adr;
 	unsigned char *pDat;
 
-	// TODO: this is a little flickery on BlueMSX and goes out of sync at the top. 
-	// What does hardware look like?
 	// Flicker is probably as good as it will get with the unrolled loops. The out
 	// of sync is harder to solve, it's caused by the screen refresh happening between
 	// the pattern scroll and the sprite scroll. Moving the sprites along with the screen
@@ -79,7 +77,7 @@ void selenascroll() {
 
 #if 0
 	// No sprites, pure bitmap scrolling here
-	// TODO: port this version of the code to F18A for a perfect scroll
+	// port this version of the code to F18A for a perfect scroll
 	// using SpriteTab as a big char buffer to do a row at a time
 	// using tmpbuf, one char at a time
 	// do the topmost row (no previous cell)

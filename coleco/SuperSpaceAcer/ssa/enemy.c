@@ -1,6 +1,3 @@
-// TODO: need to tune generators for consistent flow
-// TODO: why do I get more than 3 mines at at time?
-// TODO: can we make the first stage with the beamgen start with just beamgens?
 // TODO: saucers can start too close to the right edge?
 // TODO: Helicopters that just appear near the bottom?
 
@@ -209,45 +206,6 @@ void enout() {
 	    }
     }
 }
-
-#if 0
-void enout()
-{ /* rndly bring out a new enemy */
-	uint8 k, a;
-	unsigned char c=0;
-
-	k=rndnum()&nDifficulty;
-	if (k<6) { 
-		if (ent[k]==ENEMY_NONE) { 
-			a=(rndnum()&7); if (a>6) a-=6;
-			if (a<=level) {
-				a+=ENEMY_SAUCER;	// rebase into an enemy type
-
-				ent[k]=a;
-				enr[k]=1;
-				enc[k]=rndnum()&0xff; if (enc[k] > 249) enc[k]-=250;
-
-				// minimum player damage is 2 for spread, 3 for pulse
-				switch (a) { 
-					case ENEMY_SAUCER:		eec[k]=0; esc[k]=0; ep[k]=2; c=COLOR_MEDGREEN; en_func[k]=enemysaucer; break;
-					case ENEMY_JET:			eec[k]=4; esc[k]=4; ep[k]=3; ecs[k]=0; c=COLOR_LTBLUE; en_func[k]=enemyjet; break;
-					case ENEMY_MINE:		eec[k]=8; esc[k]=8; ep[k]=10; c=COLOR_CYAN; en_func[k]=enemymine; break;
-					case ENEMY_HELICOPTER:	eec[k]=24; esc[k]=12; ep[k]=5; c=COLOR_MAGENTA; ers[k]=(rndnum()&0x7f)+1; ecs[k]=(rndnum()&0x07); if (enc[k]>127) ecs[k]=-ecs[k]; en_func[k]=enemyhelicopter; break;
-					case ENEMY_SWIRLY:		eec[k]=40; esc[k]=28; ep[k]=8; c=COLOR_MEDRED; en_func[k]=enemyswirly; break;
-					case ENEMY_BOMB:		eec[k]=44; esc[k]=44; ep[k]=20; c=COLOR_DKYELLOW; en_func[k]=enemybomb; break;
-					case ENEMY_BEAMGEN:		
-						eec[k]=80; esc[k]=76; ep[k]=14; c=COLOR_GRAY; en_func[k]=enemybeamgen; 
-						if (enc[k] > 144) enc[k]-=128;
-						break;
-				} 
-				if (scoremode == 3) c=COLOR_BLACK;	// invisible enemies (TODO: if the background color changes, it may not be black)
-				ech[k]=esc[k];
-				sprite(k+ENEMY_SPRITE,ech[k],c,enr[k],enc[k]);
-			}
-		}
-	}
-}
-#endif
 
 void enemysaucer(uint8 x) {
 	enr[x]+=4;

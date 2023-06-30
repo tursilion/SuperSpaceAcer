@@ -39,6 +39,17 @@ extern const unsigned char outpack0[], outpack1[], outpack2[], outpack3[];
 void doMusic() ;
 void StartMusic(const unsigned char *p, unsigned int musBank, unsigned char idx, unsigned char bLoop);
 void shutup();
+void initSound();
 
+void playsfx_armor();
+void playsfx_explosion();
+void playsfx_hitboss();
+void playsfx_nukebomb();
+void playsfx_shipdead();
+void playsfx_shielddown();
+void playsfx_shieldwarn();
+void playsfx_shieldup();
+void playsfx_pwrpulse();
+void playsfx_pwrwide();
 
 #endif

@@ -10,6 +10,7 @@
 		.area _ssa					;   to work around a bug that drops the first AREA: tag in the ihx
 		.area _tramp
 		.area _music
+        .area _sfxs
 
 	.area _INITIALIZER
 	.area _GSINIT
@@ -169,8 +170,8 @@ _startprog:
 	ld  sp, #0x73FA			; Set stack pointer directly above top of memory, reserving 6 bytes.
 	ld	bc,#0xFFFE			; switch in code bank
    	ld	a,(bc)				; note that this does NOT set the local pBank variable, user code still must do that!
-	call gsinit				; Initialize global variables. (always at end of code bank, so need above bank switch)
-	call _vdpinit			; Initialize something or other ;)
+	;call gsinit			; Initialize global variables (linker is not setting this up?)
+	call _vdpinit			; Initialize video system (also mutes SN)
 	call _main
 	rst 0x0					; Restart when main() returns.
 

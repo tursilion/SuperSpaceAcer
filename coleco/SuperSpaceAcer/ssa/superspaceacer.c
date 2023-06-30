@@ -1,8 +1,6 @@
 // TODO: all game modes - need to add bonus points on game win for remaining lives - maybe 10k? (which is really only 100) (or shields for the cruiser)
 // The end of game bonus tally could maybe look like the easy win screen, but without the simulation complete bit? :)
-// Selena, with no shield or lives, can just have a fixed 10000 "Best Princess Bonus"
-
-// TODO: track enemy destroyed percentage (bonus per stage, overall is reported on game over or game win)
+// TODO: Selena, with no shield or lives, can just have a fixed 10000 "Best Princess Bonus"
 
 /* program SUPER SPACE ACER design version 2.2 */
 /* ported to ColecoVision by M.Brent */
@@ -36,7 +34,7 @@ struct _sprite SpriteTab[32];
 const unsigned char damage[8] = { 3,4,5,1, 2,2,3,1 };
 
 // distns table per stage (level-1)
-const int stage_distns[5] = { 1000, 1100, 1200, 1400, 1650 };
+const int stage_distns[5] = { 1100, 1150, 1200, 1400, 1650 };
 
 // multi-purpose
 int a,b,x,y;
@@ -51,6 +49,8 @@ uint8 playership = 255;
 uint8 playerOffset;
 // old shield color - used to detect changes so we don't upload the graphics every frame
 uint8 oldshield = 0;
+// force bonus - if you never shoot except during the boss, and never miss, you get it
+uint8 force = 0;
 
 // function pointers for shield graphics swap functions
 // these functions MUST exist in the fixed bank
@@ -663,29 +663,6 @@ void main() {
 	unsigned char i;
 
 #if 0
-// when enabling - remember to enable the counter in crt0.s NMI
-// TODO: music player performance testing
-// 5000 iterations, stage 3.
-// original					:	1434 (29%)
-// optimized with local vars:	1590 (32%) - slower!!
-// Fixed					:	1255 (25%)
-// More tuning				:	1243 (25%)
-// optimized			    :   1176 (24%)
-	unsigned int bigi;
-	StartMusic(STAGE3MUS, 1);
-	score = 0;
-	VDP_SET_REGISTER(VDP_REG_MODE1,VDP_MODE1_INT|VDP_MODE1_16K);
-	for (bigi=0; bigi<5000; bigi++) {
-//		VDP_WAIT_VBLANK_CRU;
-//		vdpLimi = 0;
-		doMusic();
-		i=VDPST;
-	}
-
-	//getcnts(&mycnt_newcmd, &mycnt_run, &mycnt_fixed, &mycnt_inc);
-
-#endif
-#if 0
 	// test performance of boss damage code
 	unsigned int bigi;
 	score=0;
@@ -695,26 +672,8 @@ void main() {
 		i=VDPST;
 	}
 #endif
-#if 0
-	// test performance of boss draw code
-	unsigned int bigi;
-	score=0;
-	BNR=8;
-	BNC=11;
-	br=1;
-	bc=1;
-	VDP_SET_REGISTER(VDP_REG_MODE1,VDP_MODE1_INT|VDP_MODE1_16K);
-	SWITCH_IN_BANK7;
-	for (bigi=0; bigi<1000; bigi++) {
-		draw1();
-		i=VDPST;
-	}
-#endif
 
-
-// disable this block for timing tests
-#if 1
-	// init this just once (why doesn't auto-init work? TODO: Probably because my CRT0 isn't loading it...)
+	// init this just once (why doesn't auto-init work? Probably because my CRT0 isn't loading it... and this still does not work.)
 	playership = 255;
 
 	// check for a score saved off above stack. If it's there, we can load it and also zero playership
@@ -732,7 +691,8 @@ void main() {
 		score = 0;
 		scoremode = 0;
 	}
-#endif
+
+    initSound();
 
 titleagain:
 	SWITCH_IN_BANK9;
@@ -774,6 +734,7 @@ titleagain:
 	SWITCH_IN_BANK4;
 	scoremode = 0;
 	if (joynum != 0) {
+        playership = 0;     // always reset to cruiser on entry
 		getDifficulty();	// sets scoremode
 	} else {
 		// demo mode
@@ -820,6 +781,7 @@ titleagain:
 		level=1;
 		if (playership != SHIP_GNAT) {
 			pwrlvl=PWRPULSE; 
+            oldpwrlvl = PWR3WAY;
 			if (playership == SHIP_SELENA) {
 				pwrlvl+=2;
 				lives = 0;
@@ -839,10 +801,12 @@ titleagain:
 
 		while (level<6)
 		{
+            force = 1;  // force is okay
 			space();
 			if (flag != PLAYER_DIED) {
 				// means game over
 				SWITCH_IN_BANK7;
+                if (force) force = 2;
 				boss();
 			}
 			// have to check again in case you died facing a boss
@@ -933,7 +897,6 @@ void space()
 					}
 				}
 				centr(11, "WARNING!! BOSS APPROACHING!");
-				// TODO: fade out music
 			}
 		}
 	}
@@ -1044,7 +1007,7 @@ void playmv()
 
 		if (shield > 70) {
 			x=COLOR_WHITE;
-		} else if (shield > 40) {
+		} else if (shield > 40) {   // also find the code that plays sfx_shieldwarn
 			x=COLOR_DKYELLOW;
 		} else if (shield > 0) {
 			x=COLOR_DKRED;

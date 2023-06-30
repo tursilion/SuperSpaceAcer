@@ -1,9 +1,14 @@
-- implement enemy generators
-== that'll be good for a checkpoint release
 - ending for ladybug (dream sequence to ladybug pic to "I wonder what she's dreaming of?")
 - ending for gnat ("I'm the greatest!" to zoom out, too tiny on stage, celebration banner, but officials look confused about where he is, "Can't anyone hear me?!")
 - ending for Snowball
 - ending for cruiser
+-- add intersital animations flying to a planet - every other stage on a planet level:
+       space, jungle, space, water, space, [secret warp stage?]
+
+-If I need another music for ending music - the stage 1 music sounds /awesome/ at 50% speed (once it gets into it) ;)
+-music toggle (when off, sfx only, through SN)
+-Ground on levels after the first (air (clouds), earth, water, fire? see what works with bosses)
+-F18A alternate version (better sprite graphics at least)
 
 VRAM map (except for ending scroll)
 --------
@@ -116,6 +121,10 @@ can essentially give it infinite shields (till the mines stop). That really help
 
 Conversely, the gnat is too weak to do much against boss mines, so really needs to rely on dodging
 
+Do not shoot during the stage, then destroy the boss without missing, and earn 10,000 points "for using the force".
+
+If you have an AY sound chip (Phoenix, SGM), then sound effects will be played on it.
+
 Game Modes:
 0	-	cruiser
 1	-	snowball
@@ -129,13 +138,6 @@ Game Modes:
 9	-	cheat mode
 
 ==============================================================================
-
-distns: counts DOWN. Adds 100 when you die, so could technically be higher!
-	1200
-	1400
-	1600
-	1800
-	2000
 	
 Vertical speeds:			Closest spacing (if on same column)
 	
@@ -183,7 +185,6 @@ At each checkpoint (staggered generators):
 -if enemies is zero, re-create generator
 
 ==============================================================================
--Give Luna a horizontal screen wrap like that Touhou game (either double-tap, or just always ;) )
 
 Want to redo stages to be a little more impressive.
 
@@ -274,17 +275,3 @@ Stage 4, oddity, 45.316, should be 777
 Stage 5, mystery, 97.585, should be 1673
 
 Rushjet has a patreon now: http://patreon.com/rushjet1
-
-TODO:
--- add intersital animations flying to a planet - every other stage on a planet level:
-       space, jungle, space, water, space, [secret warp stage?]
-
--If I need another music for ending music - the stage 1 music sounds /awesome/ at 50% speed ;)
--Sound effects for events in game (hit nuke, nuke goes off, hit boss armor, hit boss engine, fire wide, fire beam level 1, 2, 3)
--sfx via AY sound chip if available?
--music toggle (when off, sfx only, through SN)
--“use the force” like in Star Wars arcade. At the start of every level, force is set to TRUE. If you fire, force is set to FALSE. During the boss, you CAN fire, 
- but if any shot leaves the top of the screen or hits a mine then force is set to FALSE. If you destroy the boss and force is still TRUE, then you get 
- “10,000 FOR USING THE FORCE” (10,000 * boss level)
--Ground on levels after the first (air (clouds), earth, water, fire? see what works with bosses)
--F18A alternate version (better sprite graphics at least)

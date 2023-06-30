@@ -127,6 +127,9 @@
     <ClCompile Include="attract.c">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="sfxs.c">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">

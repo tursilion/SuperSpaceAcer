@@ -1,8 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-// TODO: break this up into separate headers
-
 // VRAM map:
 // >0000	Screen Image Table
 // >0300	Sprite Descriptor Table
@@ -271,7 +269,6 @@ extern unsigned int score;
 extern unsigned int oldscore;
 extern unsigned char scoremode;
 extern unsigned char joynum;
-extern uint8 pwrlvl;
 extern char lives;
 extern unsigned char level;
 extern unsigned char ent[12];
@@ -301,5 +298,7 @@ extern uint8 playership;
 extern unsigned char playerXspeed, playerYspeed;
 extern uint8 oldshield;
 extern unsigned char seed;
+extern unsigned char force;
+
 
 #endif

@@ -16,4 +16,6 @@ void playerright();
 void playerinit();
 void dyen(unsigned char x);
 
+extern uint8 pwrlvl;
+extern uint8 oldpwrlvl;
 #endif

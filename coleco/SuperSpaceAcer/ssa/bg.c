@@ -12,8 +12,7 @@
 #define SMALL_STAR_LAST		7
 #define NUM_SMALL_STARS		6
 
-//uint8 str[NUM_SMALL_STARS], stc[NUM_SMALL_STARS], sto[NUM_SMALL_STARS];		// star row, col, offset
-uint8 stdata[NUM_SMALL_STARS*3];    // strided array so we can use faster(?) pointer math
+uint8 stdata[NUM_SMALL_STARS*3];    // strided array so we can use faster(?) pointer math: row, col, offset
 extern unsigned char tmpbuf[32];
 
 // do the background effect
@@ -27,7 +26,7 @@ void background() {
 	cnt++;
 
 #if 0
-	// TODO: just a dumb test to remove - makes a scrolling background
+	just a dumb test to remove - makes a scrolling background
 	x=cnt&7;
 	tmpbuf[(x+0)&7]=0;
 	tmpbuf[(x+1)&7]=0;
