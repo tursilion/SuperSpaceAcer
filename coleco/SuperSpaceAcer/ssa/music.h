@@ -36,7 +36,9 @@ extern const unsigned char outpack0[], outpack1[], outpack2[], outpack3[];
 #define WINANIMMUS		outpack0,0xfffb,2   /* gameover */
 #endif
 
-void doMusic() ;
+extern void (*doMusic)(void);
+void doAllMusic();
+void doSfxInstead();
 void StartMusic(const unsigned char *p, unsigned int musBank, unsigned char idx, unsigned char bLoop);
 void shutup();
 void initSound();

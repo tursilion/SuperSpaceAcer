@@ -967,8 +967,6 @@ const char TXTDAT[] =
  "      The Galaxy is safe!       "
  "      You are a TRUE hero!      "
  " ============================== "
- "             STAFF              "
- " ============================== "
  "              IDEA              "
  "              ====              "
  "       Mike Brent (Tursi)       "

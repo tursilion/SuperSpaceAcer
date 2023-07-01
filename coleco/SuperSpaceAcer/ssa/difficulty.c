@@ -52,6 +52,7 @@ char * const selenaText[] = {
 char * const musText[] = {
 	"MUSIC TEST",
 	"PRESS BUTTON ON KEYPAD",
+	"HOLD UP FOR SFX",
 	"PRESS FIRE TO EXIT"
 };
 
@@ -231,7 +232,7 @@ void soundtest() {
 	unsigned char r;
 
 	cls();
-	for (r=1; r<7; r+=2) {
+	for (r=1; r<9; r+=2) {
 		centr(r, musText[r>>1]);
 	}
 	wrapinitstars();
@@ -240,9 +241,10 @@ void soundtest() {
 		waitforstep();
 		screen(COLOR_MEDRED);
 
+		joystfast(joynum);
 		kscanfast(joynum);	// all keys except '*' are okay (cause we are called with '*' down)
 
-		if (KSCAN_KEY != 0xff) {
+		if ((KSCAN_KEY != 0xff)&&(KSCAN_JOYY != JOY_UP)) {
 			shutup();
 		}
 
@@ -252,41 +254,85 @@ void soundtest() {
 			return;
 
 		case '1':
-			StartMusic(STAGE1MUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_armor();
+			} else {
+				StartMusic(STAGE1MUS, 1);
+			}
 			break;
 
 		case '2':
-			StartMusic(STAGE2MUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_explosion();
+			} else {
+				StartMusic(STAGE2MUS, 1);
+			}
 			break;
 
 		case '3':
-			StartMusic(STAGE3MUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_hitboss();
+			} else {
+				StartMusic(STAGE3MUS, 1);
+			}
 			break;
 
 		case '4':
-			StartMusic(STAGE4MUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_nukebomb();
+			} else {
+				StartMusic(STAGE4MUS, 1);
+			}
 			break;
 
 		case '5':
-			StartMusic(STAGE5MUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_shipdead();
+			} else {
+				StartMusic(STAGE5MUS, 1);
+			}
 			break;
 
 		case '6':
-			StartMusic(BOSSMUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_shielddown();
+			} else {
+				StartMusic(BOSSMUS, 1);
+			}
 			break;
 
 		case '7':
-			StartMusic(GAMEOVERMUS, 0);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_shieldwarn();
+			} else {
+				StartMusic(GAMEOVERMUS, 0);
+			}
 			break;
 
 		case '8':
-			StartMusic(WINSCROLLMUS, 1);
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_shieldup();
+			} else {
+				StartMusic(WINSCROLLMUS, 1);
+			}
+			break;
+
+		case '9':
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_pwrpulse();
+			} else {
+				// nothing
+			}
 			break;
 
 		// TODO: this is probably too obvious to keep it?
 		case '0':
-			nDifficulty = DIFFICULTY_HARD;
-			wrapGamWin();
+			if (KSCAN_JOYY == JOY_UP) {
+				playsfx_pwrwide();
+			} else {
+				nDifficulty = DIFFICULTY_HARD;
+				wrapGamWin();
+			}
 		}
 
 		// just for fun, and don't incude in timing
@@ -431,6 +477,19 @@ redraw2:
 
 			soundtest();
 			goto redraw;
+		}
+		if (KSCAN_KEY == '#') {
+			if (doMusic == doAllMusic) {
+				doMusic = doSfxInstead;
+				centr(12, "Music Off");
+			} else {
+				doMusic = doAllMusic;
+				centr(12, "Music On ");
+			}
+			shutup();
+			do {
+				kscanfast(joynum);
+			} while (KSCAN_KEY == '#');
 		}
 
 		// handle the ship select at the bottom

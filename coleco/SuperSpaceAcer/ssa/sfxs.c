@@ -32,7 +32,7 @@ const unsigned char sfx_explosion[] = {
     2, 6, 0x3d, 10, 0x1,
     1, 6, 0x38,
     1, 6, 0x33,
-    1, 6, 0x00,
+    1, 10, 0x0,
     0
 };
 
@@ -106,51 +106,6 @@ const unsigned char sfx_shielddown[] = {
 };
 
 // other shield warning (tone)
-#if 0
-const unsigned char sfx_shieldwarn[] = {
-    3, 1, 0x00, 0, 0x9b, 8, 0xf,
-    1, 0, 0x94, 
-    2, 0, 0x8d, 8, 0xc,
-    1, 0, 0x86,
-    1, 0, 0x80,
-    2, 0, 0x7a, 8, 0x9,
-    1, 0, 0x74,
-    1, 0, 0x6e,
-    2, 0, 0x69, 8, 0x7,
-    1, 0, 0x64,
-    1, 0, 0x5f,
-    2, 0, 0xa1, 8, 0x6,
-    1, 0, 0x99,
-    1, 0, 0x92,
-    2, 0, 0x8b, 8, 0x5,
-    1, 0, 0x84,
-    1, 0, 0x7e,
-    2, 0, 0x78, 8, 0x4,
-    1, 0, 0x73,
-    1, 0, 0x6d, 
-    1, 0, 0x68,
-    2, 0, 0x63, 8, 0x3,
-    1, 0, 0x5e,
-    1, 0, 0x9f,
-    2, 0, 0x98, 8, 0x2,
-    1, 0, 0x90,
-    1, 0, 0x8a,
-    1, 0, 0x83,
-    1, 0, 0x7d,
-    1, 0, 0x77,
-    2, 0, 0x71, 8, 0x01,
-    1, 0, 0x6c,
-    1, 0, 0x67,
-    1, 0, 0x62,
-    1, 0, 0x5d,
-    1, 0, 0x9d,
-    1, 0, 0x96,
-    1, 0, 0x8f,
-    1, 0, 0x88,
-    1, 8, 0x00,
-    0
-};
-#else
 const unsigned char sfx_shieldwarn[] = {
     3, 1, 0x00, 0, 0x9b, 8, 0xf,
     1, 0, 0x94, 
@@ -190,7 +145,7 @@ const unsigned char sfx_shieldwarn[] = {
     1, 8, 0x00,
     0
 };
-#endif
+
 const unsigned char sfx_pwrwide[] = {
     3, 1, 0x02, 0, 0x26, 8, 0xf,
     2, 0, 0x23, 8, 0xc,

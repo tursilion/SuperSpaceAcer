@@ -93,6 +93,50 @@ void player()
 	if (joynum) {
 		kscanfast(joynum);
 		joystfast(joynum);
+
+		if (KSCAN_KEY == '#') {
+			unsigned const unsigned char *oldLoop = pLoopMus;
+			if (doMusic == doAllMusic) {
+				doMusic = doSfxInstead;
+				centr(11, "MUSIC OFF");
+			} else {
+				doMusic = doAllMusic;
+				centr(11, "MUSIC ON ");
+			}
+			shutup();
+
+			// wait for release
+			do {
+				kscanfast(joynum);
+			} while (KSCAN_KEY == '#');
+
+			centr(11, "         ");
+			pLoopMus = oldLoop;
+		} else if (KSCAN_KEY == '*') {
+			unsigned const unsigned char *oldLoop = pLoopMus;
+
+			shutup();
+			centr(11, "PAUSE");
+
+			// wait for release
+			do {
+				kscanfast(joynum);
+			} while (KSCAN_KEY == '*');
+
+			// wait for new press
+			do {
+				kscanfast(joynum);
+			} while (KSCAN_KEY != '*');
+
+			centr(11, "     ");
+
+			// wait for release
+			do {
+				kscanfast(joynum);
+			} while (KSCAN_KEY == '*');
+
+			pLoopMus = oldLoop;
+		}
 	} else {
 		static unsigned char xcnt=0, ycnt=0;
 		kscanfast((xcnt&1)+1);

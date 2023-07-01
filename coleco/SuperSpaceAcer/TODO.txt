@@ -4,9 +4,8 @@
 - ending for cruiser
 -- add intersital animations flying to a planet - every other stage on a planet level:
        space, jungle, space, water, space, [secret warp stage?]
-
+       
 -If I need another music for ending music - the stage 1 music sounds /awesome/ at 50% speed (once it gets into it) ;)
--music toggle (when off, sfx only, through SN)
 -Ground on levels after the first (air (clouds), earth, water, fire? see what works with bosses)
 -F18A alternate version (better sprite graphics at least)
 
