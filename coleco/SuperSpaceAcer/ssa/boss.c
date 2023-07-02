@@ -18,6 +18,9 @@
 // 6	cockpit (invisible collision sprite)
 // 7-11	shots
 
+// a scaled difficulty level for the boss motion
+uint8 scaledLevel;
+
 // TODO: slows down when full pulse weapon is damaging body - can we optimize more?
 
 //*BOSSES
@@ -103,14 +106,14 @@ void boss()
 	for (i=3; i<12; i++) {
 		ent[i]=ENEMY_NONE;
 	}
-	// clear shot table
+	// clear shot table (todo: why do we clear shots?)
 	for (i=0; i<=NUM_SHOTS; i++) {
 		shr[i]=0;	// note: ONLY shr is legal in this loop because it includes NUM_SHOTS
 	}
 	// no powerup either (should already be gone though)
 	ptp4=POWERUP_NONE;
 	
-	// center the player ship and build the boss tables
+	// build the boss tables
 	for (x_idx=0; x_idx<3; x_idx++) {
 		for (x_r=0; x_r<BNR; x_r++) {
 			wrapplayer();
@@ -120,6 +123,12 @@ void boss()
 			wrapstars();	// calls waitforstep()
 		}
 	}
+
+	// set up the scaled movement speed
+	scaledLevel = level;
+	if (scaledLevel > 4) scaledLevel = 4;	// max out boss movement speed
+	if ((nDifficulty == DIFFICULTY_EASY)&&(scaledLevel > 2)) scaledLevel=2;
+	if ((nDifficulty == DIFFICULTY_MEDIUM)&&(scaledLevel > 3)) scaledLevel=3;
 
 	// start the music now
 	StartMusic(BOSSMUS, 1);
@@ -302,7 +311,6 @@ void erboss() {
 void mboss() { 
 	/*boss control*/
 	uint8 x,a;
-	uint8 scaledLevel;
 
 	// get the update out of the way first
 	bc=bc+bd;
@@ -327,9 +335,6 @@ void mboss() {
 	drboss();
 
 	// now fix the direction for next time
-	scaledLevel = level;
-	if ((nDifficulty == DIFFICULTY_EASY)&&(scaledLevel > 2)) scaledLevel=2;
-	if ((nDifficulty == DIFFICULTY_MEDIUM)&&(scaledLevel > 3)) scaledLevel=3;
 	x=scaledLevel;
 	if (bc>=(31-BNC)<<2) bd=-x;
 	if (bc<=1) bd=x;

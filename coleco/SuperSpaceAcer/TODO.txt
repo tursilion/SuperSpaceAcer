@@ -1,7 +1,7 @@
-- ending for ladybug (dream sequence to ladybug pic to "I wonder what she's dreaming of?")
 - ending for gnat ("I'm the greatest!" to zoom out, too tiny on stage, celebration banner, but officials look confused about where he is, "Can't anyone hear me?!")
 - ending for Snowball
 - ending for cruiser
+- can we make the final boss a little more fair? Slower movement
 -- add intersital animations flying to a planet - every other stage on a planet level:
        space, jungle, space, water, space, [secret warp stage?]
        
