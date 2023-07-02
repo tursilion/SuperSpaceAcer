@@ -30,5 +30,8 @@ void wrapGameWinMed();
 void wrapCopyShip(const unsigned char *p, const unsigned char *c);
 void wrapGamWin();
 void wrapLoadStoryFont();
+void wrapLoadLadyScreen();
+void wrapLadyBugByte(int off);
+void wrapDrawLastRowText(char txt, unsigned int off);
 
 #endif

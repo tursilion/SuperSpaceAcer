@@ -84,6 +84,10 @@
 
 	.area _bank11
 		.ascii "LinkTag:Bank11\0"
+		.area _ladybugc
+		.area _ladybugp
+		.area _ladybugscreenc
+		.area _ladybugscreenp
 
 	.area _bank12
 		.ascii "LinkTag:Bank12\0"

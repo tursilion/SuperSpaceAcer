@@ -71,7 +71,7 @@ void handleTitlePage() {
 	
 	// display score in sprites, if not zero
 	// assumes sprite patterns at 0x3800
-	if (playership != 255) {
+	if ((playership != 255)&&(score != 0)) {
 		wrapspritescore(0x3800, 0x1b00, 0xff, 103, 0);
 	}
 

@@ -12,6 +12,10 @@
 #define BIN2INC_HEADER_ONLY
 #include "selena_end_c.c"
 #include "selena_end_p.c"
+#include "ladybugc.c"
+#include "ladybugp.c"
+#include "ladybugscreenc.c"
+#include "ladybugscreenp.c"
 
 // I don't THINK these need to be recursive, but just in case
 #pragma nooverlay
@@ -272,4 +276,36 @@ void wrapLoadStoryFont() {
 	vdpmemcpy((32*8)+4096, colecofont, 768);
 
 	SWITCH_IN_PREV_BANK(old);
+}
+
+void wrapLoadLadyScreen() {
+	unsigned int old = nBank;
+	SWITCH_IN_BANK11;
+	RLEUnpack(0x0000, LADYSCREENP, 6144);
+	RLEUnpack(0x2000, LADYSCREENC, 6144);
+	SWITCH_IN_PREV_BANK(old);
+}
+
+// copies one byte over
+void wrapLadyBugByte(int off) {
+	if (off < 6144) {
+		unsigned int old = nBank;
+		SWITCH_IN_BANK11;
+		vdpchar(off, LADYBUGP[off]);
+		vdpchar(0x2000+off, LADYBUGC[off]);
+		SWITCH_IN_PREV_BANK(old);
+	}
+}
+
+// draw one character on a bitmap screen at off (pattern table only)
+void wrapDrawLastRowText(char txt, unsigned int off) {
+	unsigned int old = nBank;
+
+	if (txt <= 32) return;
+
+	SET_COLECO_FONT_BANK;
+	txt-=32;
+	vdpmemcpy(off, &colecofont[txt<<3], 8);
+	SWITCH_IN_PREV_BANK(old);
+
 }

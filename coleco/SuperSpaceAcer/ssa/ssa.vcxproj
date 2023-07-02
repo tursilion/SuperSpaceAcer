@@ -96,6 +96,10 @@
     <ClCompile Include="enemy.c" />
     <ClCompile Include="font.c" />
     <ClCompile Include="human.c" />
+    <ClCompile Include="ladybugc.c" />
+    <ClCompile Include="ladybugp.c" />
+    <ClCompile Include="ladybugscreenC.c" />
+    <ClCompile Include="ladybugscreenP.c" />
     <ClCompile Include="music.c" />
     <ClCompile Include="newfont.c" />
     <ClCompile Include="outfile0.c" />

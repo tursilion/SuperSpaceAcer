@@ -130,6 +130,18 @@
     <ClCompile Include="sfxs.c">
       <Filter>Sound</Filter>
     </ClCompile>
+    <ClCompile Include="ladybugc.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="ladybugp.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="ladybugscreenC.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
+    <ClCompile Include="ladybugscreenP.c">
+      <Filter>Gfx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">

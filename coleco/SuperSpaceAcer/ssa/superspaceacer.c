@@ -365,8 +365,47 @@ void spdall() {
 	}
 }
 
+// warning: this seed is reset by the level code, so this game is
+// intentionally not very random.
 unsigned char rndnum()
 {
+	// these are all the masks
+#if 0
+/* 00 */       0x00,  //             0
+/* 01 */       0x01,  //             1
+/* 02 */       0x03,  //             3
+/* 03 */       0x06,  //             7
+/* 04 */       0x0C,  //            15
+/* 05 */       0x14,  //            31
+/* 06 */       0x30,  //            63
+/* 07 */       0x60,  //           127
+/* 08 */       0xB8,  //           255
+/* 09 */     0x0110,  //           511
+/* 10 */     0x0240,  //         1,023
+/* 11 */     0x0500,  //         2,047
+/* 12 */     0x0CA0,  //         4,095
+/* 13 */     0x1B00,  //         8,191
+/* 14 */     0x3500,  //        16,383
+/* 15 */     0x6000,  //        32,767
+/* 16 */     0xB400,  //        65,535
+/* 17 */ 0x00012000,  //       131,071
+/* 18 */ 0x00020400,  //       262,143
+/* 19 */ 0x00072000,  //       524,287
+/* 20 */ 0x00090000,  //     1,048,575
+/* 21 */ 0x00140000,  //     2,097,151
+/* 22 */ 0x00300000,  //     4,194,303
+/* 23 */ 0x00400000,  //     8,388,607
+/* 24 */ 0x00D80000,  //    16,777,215
+/* 25 */ 0x01200000,  //    33,554,431
+/* 26 */ 0x03880000,  //    67,108,863
+/* 27 */ 0x07200000,  //   134,217,727
+/* 28 */ 0x09000000,  //   268,435,575
+/* 29 */ 0x14000000,  //   536,870,911
+/* 30 */ 0x32800000,  // 1,073,741,823
+/* 31 */ 0x48000000,  // 2,147,483,647
+/* 32 */ 0xA3000000   // 4,294,967,295
+#endif
+
 	// trying the dreamcast one again, but 8-bit this time
 	if (seed&1) {
 		seed >>= 1;
@@ -683,6 +722,8 @@ void main() {
 		// it matches!
 		playership = 0;
 		scoremode = *SAVEDMODE;
+		seed = (scoremode>>4)&0x0f;
+		scoremode &= 0x0f;
 		attractShip = *SAVEDATTRACT;
 		*SAVEDATTRACT = attractShip & 1;
 		attractShip >>= 4;
@@ -691,6 +732,7 @@ void main() {
 		score = 0;
 		scoremode = 0;
 	}
+	if (seed == 0) ++seed;
 
     initSound();
 
@@ -798,6 +840,11 @@ titleagain:
 		}
 
 		distns=stage_distns[0];
+		if (joynum == 0) {
+			// start at an offset to make attract mode a little more random
+			distns -= rndnum();
+			distns -= rndnum();
+		}
 
 		while (level<6)
 		{
@@ -1114,7 +1161,7 @@ void sgrint()
 	color(1,9,0);
 }
 
-// reboot wrapper that saves off some handy variables
+// reboot wrapper that saves off some handy variables and restarts the game
 void reboot() {
 	unsigned char x;
 
@@ -1123,9 +1170,10 @@ void reboot() {
 	*((unsigned short*)tmpbuf) = score;
 	*((unsigned short*)(&tmpbuf[2])) = ~score;
 	memcpy(SAVEDSCORE, tmpbuf, 4);
-	// also save off the scoremode
-	*SAVEDMODE = scoremode;
-	// and save the seed, excluding the least significant bit, in the attract mode byte
+
+	// also save off the scoremode (only 0-9, so we can store a count here too to init the seed with)
+	*SAVEDMODE = ((*SAVEDMODE+0x10)&0xf0) | scoremode;
+	// save off the last attract ship too
 	x = *SAVEDATTRACT;
 	x = (attractShip<<4)|(x&1);
 	*SAVEDATTRACT = x;

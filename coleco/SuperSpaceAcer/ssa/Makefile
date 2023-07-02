@@ -9,7 +9,8 @@ AFLAGS = -plosgff
 objs = crt0.rel ssd_inc.rel superspaceacer.rel trampolines.rel bg.rel boss.rel enemy.rel music.rel human.rel wineasy.rel winhard.rel winmed.rel \
 		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel outfile0.rel outfile1.rel outfile2.rel outfile3.rel \
 		font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
-		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel qwertianc.rel qwertianp.rel attract.rel sfxs.rel
+		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel qwertianc.rel qwertianp.rel attract.rel sfxs.rel ladybugc.rel ladybugp.rel \
+		ladybugscreenc.rel ladybugscreenp.rel
 
 all: buildcol
 	d:/work/coleco/tursi/makemegacart/release/makemegacart.exe -map crt0.s crt0.ihx ssa.rom
@@ -161,6 +162,17 @@ attract.rel: attract.c attract.h
 sfxs.rel: sfxs.c
 	$(CC) $(CFLAGS) -o sfxs.rel sfxs.c --codeseg sfxs --constseg sfxs
 
+ladybugc.rel : ladybugc.c
+	$(CC) $(CFLAGS) -o ladybugc.rel ladybugC.c --codeseg ladybugc --constseg ladybugc
+
+ladybugp.rel : ladybugp.c
+	$(CC) $(CFLAGS) -o ladybugp.rel ladybugP.c --codeseg ladybugp --constseg ladybugp
+
+ladybugscreenc.rel : ladybugscreenc.c
+	$(CC) $(CFLAGS) -o ladybugscreenc.rel ladybugscreenc.c --codeseg ladybugscreenc --constseg ladybugscreenc
+
+ladybugscreenp.rel : ladybugscreenp.c
+	$(CC) $(CFLAGS) -o ladybugscreenp.rel ladybugscreenp.c --codeseg ladybugscreenp --constseg ladybugscreenp
 
 # libti99 crt0 copied into folder
 crt0.rel: crt0.s
