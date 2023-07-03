@@ -239,7 +239,7 @@ void soundtest() {
 
 	for (;;) {
 		waitforstep();
-		screen(COLOR_MEDRED);
+		//screen(COLOR_MEDRED);
 
 		joystfast(joynum);
 		kscanfast(joynum);	// all keys except '*' are okay (cause we are called with '*' down)

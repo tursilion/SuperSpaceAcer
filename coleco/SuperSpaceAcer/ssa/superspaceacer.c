@@ -252,6 +252,14 @@ void sprStart28() __naked {
 	__endasm;
 }
 
+void musicsync() {
+	// safely check if it's time to play music
+	if (vdpLimi&0x80) {
+		VDP_INT_POLL;
+		doMusic();
+	}
+}
+
 // end of frame handler - handles sprite copy unless we were late
 void waitforstep() {
 	static unsigned char nSpriteOffset=0;
@@ -442,11 +450,11 @@ unsigned char intpic() {
 }
 
 void RLEUnpack(unsigned int p, unsigned char *buf, unsigned int nMax) {
-	int cnt;
 	unsigned char z;
+	int cnt;	// looks like the boss pack code has some bugs and packs too many bytes, we need this
 
+	cnt = nMax;
 	VDP_SET_ADDRESS_WRITE(p);
-	cnt=nMax;
 	while (cnt > 0) {
 		z=*buf;
 		if (z&0x80) {
@@ -462,6 +470,76 @@ void RLEUnpack(unsigned int p, unsigned char *buf, unsigned int nMax) {
 			buf+=z;
 		}
 		cnt-=z;
+	}
+}
+
+// does an interleaved unpack of picture and color, with music interrupts allowed
+// this won't be perfect, but it'll be close
+// Unlike the main unpack function, this one allows you to request fewer bytes
+// than the original file was packed for... this slows it a bit.
+void RLEUnpackInt(unsigned char *bufp, unsigned char *bufc, unsigned int nMax) {
+	unsigned char z;
+	unsigned int pAdr = 0;
+	unsigned int cAdr = 0x2000;
+	int pCnt, cCnt;		// keep these signed in case of pack bugs
+
+	pCnt = nMax;
+	cCnt = nMax;
+
+	// we'll try to keep the two tables relatively close
+	while ((pCnt>0)||(cCnt>0)) {
+		// color
+		while ((cCnt > 0)&&(cAdr <= pAdr+0x2000)) {
+			VDP_SET_ADDRESS_WRITE(cAdr);
+			z=*bufc;
+			if (z&0x80) {
+				// run of bytes
+				bufc++;
+				z&=0x7f;
+				if (z>cCnt) z=cCnt;
+				raw_vdpmemset(*bufc, z);
+				bufc++;
+				cAdr+=z;
+			} else {
+				// sequence of data
+				bufc++;
+				if (z>cCnt) z=cCnt;
+				raw_vdpmemcpy(bufc, z);
+				bufc+=z;
+				cAdr+=z;
+			}
+			cCnt-=z;
+
+			// check for music
+			musicsync();
+		}
+
+		// pattern
+		while ((pCnt > 0)&&(cAdr-0x2000 >= pAdr)) {
+			VDP_SET_ADDRESS_WRITE(pAdr);
+			z=*bufp;
+			if (z&0x80) {
+				// run of bytes
+				bufp++;
+				z&=0x7f;
+				if (z > pCnt) z=pCnt;
+				raw_vdpmemset(*bufp, z);
+				bufp++;
+				pAdr+=z;
+			} else {
+				// sequence of data
+				bufp++;
+				if (z > pCnt) z=pCnt;
+				raw_vdpmemcpy(bufp, z);
+				bufp+=z;
+				pAdr+=z;
+			}
+			pCnt-=z;
+
+			// check for music
+			musicsync();
+		}
+
 	}
 }
 

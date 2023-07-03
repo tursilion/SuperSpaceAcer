@@ -170,6 +170,7 @@ extern struct _sprite SpriteTab[32];
 
 // functions
 //void memset(char *p, unsigned char ch, int cnt);
+void musicsync();
 void spdall() ;
 void loadcharset();
 void chrdef(unsigned char n, char *sz) ;
@@ -178,6 +179,7 @@ void patsprcpy(uint8 from, uint8 to) ;
 unsigned char rndnum();
 unsigned char intpic() ;
 void RLEUnpack(unsigned int p, unsigned char *buf, unsigned int nMax);
+void RLEUnpackInt(unsigned char *bufp, unsigned char *bufc, unsigned int nMax);
 void ldpic() ;
 unsigned char grf1() ;
 void main() ;

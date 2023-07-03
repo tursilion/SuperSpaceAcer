@@ -10,7 +10,8 @@ objs = crt0.rel ssd_inc.rel superspaceacer.rel trampolines.rel bg.rel boss.rel e
 		title_c.rel title_p.rel boss1.rel boss2.rel boss3.rel boss4.rel boss5.rel outfile0.rel outfile1.rel outfile2.rel outfile3.rel \
 		font.rel difficulty.rel selena_end_c.rel selena_end_p.rel titlepage.rel ship1_c.rel ship1_p.rel ship2_c.rel ship2_p.rel \
 		ship3_c.rel ship3_p.rel ship4_c.rel ship4_p.rel qwertianc.rel qwertianp.rel attract.rel sfxs.rel ladybugc.rel ladybugp.rel \
-		ladybugscreenc.rel ladybugscreenp.rel
+		ladybugscreenc.rel ladybugscreenp.rel gnat1rlec.rel gnat1rlep.rel gnat2rlec.rel gnat2rlep.rel gnat3rlec.rel gnat3rlep.rel \
+		gnat4rlec.rel gnat4rlep.rel gnat5rlec.rel gnat5rlep.rel 
 
 all: buildcol
 	d:/work/coleco/tursi/makemegacart/release/makemegacart.exe -map crt0.s crt0.ihx ssa.rom
@@ -173,6 +174,27 @@ ladybugscreenc.rel : ladybugscreenc.c
 
 ladybugscreenp.rel : ladybugscreenp.c
 	$(CC) $(CFLAGS) -o ladybugscreenp.rel ladybugscreenp.c --codeseg ladybugscreenp --constseg ladybugscreenp
+
+gnat1rlec.rel : gnat1rlec.c
+	$(CC) $(CFLAGS) -o gnat1rlec.rel gnat1rlec.c --codeseg gnat1rlec --constseg gnat1rlec
+gnat1rlep.rel : gnat1rlep.c
+	$(CC) $(CFLAGS) -o gnat1rlep.rel gnat1rlep.c --codeseg gnat1rlep --constseg gnat1rlep
+gnat2rlec.rel : gnat2rlec.c
+	$(CC) $(CFLAGS) -o gnat2rlec.rel gnat2rlec.c --codeseg gnat2rlec --constseg gnat2rlec
+gnat2rlep.rel : gnat2rlep.c
+	$(CC) $(CFLAGS) -o gnat2rlep.rel gnat2rlep.c --codeseg gnat2rlep --constseg gnat2rlep
+gnat3rlec.rel : gnat3rlec.c
+	$(CC) $(CFLAGS) -o gnat3rlec.rel gnat3rlec.c --codeseg gnat3rlec --constseg gnat3rlec
+gnat3rlep.rel : gnat3rlep.c
+	$(CC) $(CFLAGS) -o gnat3rlep.rel gnat3rlep.c --codeseg gnat3rlep --constseg gnat3rlep
+gnat4rlec.rel : gnat4rlec.c
+	$(CC) $(CFLAGS) -o gnat4rlec.rel gnat4rlec.c --codeseg gnat4rlec --constseg gnat4rlec
+gnat4rlep.rel : gnat4rlep.c
+	$(CC) $(CFLAGS) -o gnat4rlep.rel gnat4rlep.c --codeseg gnat4rlep --constseg gnat4rlep
+gnat5rlec.rel : gnat5rlec.c
+	$(CC) $(CFLAGS) -o gnat5rlec.rel gnat5rlec.c --codeseg gnat5rlec --constseg gnat5rlec
+gnat5rlep.rel : gnat5rlep.c
+	$(CC) $(CFLAGS) -o gnat5rlep.rel gnat5rlep.c --codeseg gnat5rlep --constseg gnat5rlep
 
 # libti99 crt0 copied into folder
 crt0.rel: crt0.s

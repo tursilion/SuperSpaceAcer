@@ -33,5 +33,10 @@ void wrapLoadStoryFont();
 void wrapLoadLadyScreen();
 void wrapLadyBugByte(int off);
 void wrapDrawLastRowText(char txt, unsigned int off);
+void wraploadgnat1();
+void wraploadgnat2();
+void wraploadgnat3();
+void wraploadgnat4();
+void wraploadgnat5();
 
 #endif

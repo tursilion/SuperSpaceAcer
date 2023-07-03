@@ -16,6 +16,16 @@
 #include "ladybugp.c"
 #include "ladybugscreenc.c"
 #include "ladybugscreenp.c"
+#include "gnat1rlec.c"
+#include "gnat1rlep.c"
+#include "gnat2rlec.c"
+#include "gnat2rlep.c"
+#include "gnat3rlec.c"
+#include "gnat3rlep.c"
+#include "gnat4rlec.c"
+#include "gnat4rlep.c"
+#include "gnat5rlec.c"
+#include "gnat5rlep.c"
 
 // I don't THINK these need to be recursive, but just in case
 #pragma nooverlay
@@ -308,4 +318,44 @@ void wrapDrawLastRowText(char txt, unsigned int off) {
 	vdpmemcpy(off, &colecofont[txt<<3], 8);
 	SWITCH_IN_PREV_BANK(old);
 
+}
+
+void wraploadgnat1() {
+	// needs the full screen - also needs to check music interrupts
+	unsigned int old = nBank;
+	SWITCH_IN_BANK12;
+	RLEUnpackInt(gnat1rlep, gnat1rlec, 6144);
+	SWITCH_IN_PREV_BANK(old);
+}
+
+void wraploadgnat2() {
+	// only need the top 2/3rd
+	unsigned int old = nBank;
+	SWITCH_IN_BANK12;
+	RLEUnpackInt(gnat2rlep, gnat2rlec, 4096);
+	SWITCH_IN_PREV_BANK(old);
+}
+
+void wraploadgnat3() {
+	// only need the top 2/3rd
+	unsigned int old = nBank;
+	SWITCH_IN_BANK13;
+	RLEUnpackInt(gnat3rlep, gnat3rlec, 4096);
+	SWITCH_IN_PREV_BANK(old);
+}
+
+void wraploadgnat4() {
+	// only need the top 2/3rd
+	unsigned int old = nBank;
+	SWITCH_IN_BANK13;
+	RLEUnpackInt(gnat4rlep, gnat4rlec, 4096);
+	SWITCH_IN_PREV_BANK(old);
+}
+
+void wraploadgnat5() {
+	// only need the top 2/3rd
+	unsigned int old = nBank;
+	SWITCH_IN_BANK13;
+	RLEUnpackInt(gnat5rlep, gnat5rlec, 4096);
+	SWITCH_IN_PREV_BANK(old);
 }

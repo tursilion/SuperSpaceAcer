@@ -12,36 +12,8 @@
 #include "qwertianc.c"
 #include "qwertianp.c"
 
-
 // story screens have 8 lines of 32 characters to say their peace
 const char story[] = 
-#if 0
-//	012345678901234567890123456789012
-	"It has been less than a century "
-	"since humans finally broke free "
-	"    of the Earth and entered    "
-	"      interstellar space.       "
-	"*"
-	" The Qwertians were one of the  "
-	"first alien species mankind made"
-	"         contact with.          "
-	"*"
-	"Initially thought to be peaceful"
-	" these doe-like creatures soon  "
-	"demonstrated a deadly drive for "
-	"      expansion and power.      "
-	"*"
-	"Thirty years ago Bob Shumway and"
-	" his CD15 'Snowball' proved the "
-	" ability of a single fighter to "
-	"   infiltrate their defenses.   "
-	"*"
-	"  Now Bob and his friends must  "
-	"undertake their greatest mission"
-	"to infiltrate the Qwertian Fleet"
-	" and destroy their battleships. "
-	"*"
-#else
 //	012345678901234567890123456789012
 	"Species Designation: QWERTIAN   "
 	"First Contact: Epoch+1.9.87 yrs "
@@ -51,9 +23,7 @@ const char story[] =
 	"is to fight through the Qwertian"
 	" fleet and destroy their battle "
 	"cruisers. Success at all costs! "
-	"*"
-#endif
-;
+	"*";
 
 unsigned char delayText(unsigned char frames) {
 	unsigned char cnt;

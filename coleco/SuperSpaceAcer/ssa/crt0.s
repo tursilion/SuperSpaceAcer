@@ -94,9 +94,19 @@
 		.area _qwertianc
 		.area _qwertianp
 		.area _attract
+		.area _gnat1rlec
+		.area _gnat1rlep
+		.area _gnat2rlec
+		.area _gnat2rlep
 
 	.area _bank13
 		.ascii "LinkTag:Bank13\0"
+		.area _gnat3rlec
+		.area _gnat3rlep
+		.area _gnat4rlec
+		.area _gnat4rlep
+		.area _gnat5rlec
+		.area _gnat5rlep
 
 	.area _bank14
 		.ascii "LinkTag:Bank14\0"

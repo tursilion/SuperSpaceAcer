@@ -11,6 +11,7 @@
 
 extern const unsigned char colecofont[];
 unsigned char bottomsprite, bottomrow;
+unsigned char gnaty;
 
 const char selenaTxt[] = 
 //	 123456789012
@@ -52,6 +53,94 @@ const char selenaTxt[] =
 // text for the ladybug single line
 //                       12345678901234567890123456789012
 const char LadyText[] = "What do you think bugs dream of?";
+
+const char gnatstory1[] = 
+//	012345678901234567890123456789012
+    "                                "
+	"REPORTER: We are here at the    "
+	"victory celebration for our new "
+	"champion, the amazing pilot GNAT"
+	"who has destroyed the Qwertian  "
+	"threat! We expect them to arrive"
+	"at any moment...                "
+	"*";
+
+const char gnatstory2[] = 
+//	012345678901234567890123456789012
+    "                                "
+    "                                "
+	"GNAT: I'm here! Yes! I'm here!  "
+	"      I'm the GREATEST!!        "
+    "                                "
+	"*";
+
+const char gnatstory3[] = 
+//	012345678901234567890123456789012
+    "                                "
+    "                                "
+	"GNAT: Hey, can't anyone hear me?"
+	"      Hello?!?!                 "
+    "                                "
+    "                                "
+    "*";
+
+// 32x6 bytes
+const unsigned char gnatSprites[] = {
+//	Ship main
+//Black:	0
+	0x00, 0x00, 0x00, 0x00, 0x3C, 0x47, 0x78, 0x80,
+	0x78, 0x27, 0x70, 0x20, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0xF0, 0x10, 0x10, 0x0C,
+	0x04, 0xFC, 0x38, 0x10, 0x00, 0x00, 0x00, 0x00,
+//White:	4
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x7F,
+	0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0xE0, 0xE0, 0xF8,
+	0xF8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//Blue5:	8
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+//ltyellow: 12
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+	0x03, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+
+//Cockpit open
+//Black		16
+	0x00, 0x00, 0x20, 0x50, 0x2C, 0x17, 0x78, 0x80,
+	0x78, 0x27, 0x70, 0x20, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0xF0, 0x10, 0x10, 0x0C,
+	0x04, 0xFC, 0x38, 0x10, 0x00, 0x00, 0x00, 0x00,
+//Blue5		20
+	0x00, 0x00, 0x00, 0x20, 0x10, 0x08, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+
+//Man
+//Cyan7		24
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x50, 0x20,
+	0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+const signed char gnathop[] = {
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+
+	0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+
+	-3, -5, -6, -4, -2, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+
+	-3, -5, -6, -4, -2, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+};
 
 unsigned int rndnum13()
 {
@@ -104,14 +193,6 @@ unsigned int rndnum13()
 	}
 
 	return seed;
-}
-
-void musicsync() {
-	// safely check if it's time to play music
-	if (vdpLimi&0x80) {
-		VDP_INT_POLL;
-		doMusic();
-	}
 }
 
 void selenascroll() {
@@ -552,10 +633,179 @@ void ladybugwin() {
 	FIX_KSCAN(i2);
 }
 
+static void delayText(unsigned char frames) {
+	static unsigned char hop = 0;
+	unsigned char cnt;
+
+	// get the correct y offset
+	if (gnaty == 0) gnaty=vdpreadchar(0x1b0c);
+
+	while (frames--) {
+		cnt = VDP_INT_COUNTER;
+		for (;;) {
+			musicsync();	// clears it
+			if (cnt != VDP_INT_COUNTER) break;
+		}
+
+		if (gnaty != 0xd0) {
+			vdpchar(0x1B0C, gnaty+gnathop[(hop>>1)&0x3f]);
+			++hop;
+		}
+	}
+}
+
+static void runText(const char *pTxt) {
+	// assume SIT is at 0x1800
+	int scrn = 0x1800+512;
+
+	// first clear the bottom third of the screen
+	vdpmemset(scrn, ' ', 32*8);
+
+	// now loop, displaying characters and checking fire until
+	// we get an asterisk.
+	while (*pTxt != '*') {
+		delayText(2);
+		vdpchar(scrn++, *(pTxt++));
+	}
+}
+
+// replacement sprite for the bitmap address of SAL
+static void bmpsprite(unsigned char n, unsigned char ch, unsigned char col, unsigned char r, unsigned char c) {
+	VDP_SET_ADDRESS_WRITE(n*4+0x1B00);
+	VDP_SAFE_DELAY();
+	VDPWD = r;
+	VDP_SAFE_DELAY();
+	VDPWD = c;
+	VDP_SAFE_DELAY();
+	VDPWD = ch;
+	VDP_SAFE_DELAY();
+	VDPWD = col;
+}
+
+void gnatwin() {
+	unsigned char i2;
+	unsigned int y;
+	const unsigned char DELAYT = 180;
+
+	i2=intpic();
+	wraploadgnat1();
+    VDP_SET_REGISTER(7,COLOR_BLACK);    // make sure the screen is black
+
+	// load the character set down into the third half of the screen
+	// yes, three halves. Blame TI. ;)
+	wrapLoadStoryFont();
+
+	// and fix the colors to green on transparent
+	vdpmemset(gColor+4096, 0x30, 2048);
+
+	// load the sprite patterns, too
+	vdpmemcpy(0x3800, gnatSprites, 32*7);
+										
+	// enable the screen
+	VDP_SET_REGISTER(VDP_REG_MODE1, i2);
+	FIX_KSCAN(i2);
+
+	// start the music
+	StartMusic(WINANIMMUS, 0);
+
+	// run the story inline - if start is pressed, exit
+	runText(gnatstory1);
+	delayText(DELAYT);
+
+	// wait, then clear the text
+	VDP_WAIT_VBLANK_CRU;
+	musicsync();	// clears it
+	vdpmemset(0x1800+512, ' ', 32*8);
+
+	// load the rest of the gnat frames
+	wraploadgnat2();
+	wraploadgnat3();
+	wraploadgnat4();
+	wraploadgnat5();
+
+	// and fix the colors to white on transparent
+	VDP_WAIT_VBLANK_CRU;
+	musicsync();	// clears it
+	vdpmemset(gColor+4096, 0xf0, 2048);
+
+	// fly the gnat ship onscreen and pop him out!
+	i2=0;
+	y=32;
+	bmpsprite(4, 20, COLOR_DKBLUE, 0xd0, 0);		// true end of list
+	for (unsigned char i=255; i>110; i--) {
+		VDP_WAIT_VBLANK_CRU;
+		musicsync();	// clears it
+
+		y+=(i2>>3);
+		++i2;
+		bmpsprite(3, 12, COLOR_LTYELLOW, y>>4, i);		// flame
+		bmpsprite(2, 0, COLOR_BLACK, y>>4, i);
+		bmpsprite(1, 4, COLOR_WHITE, y>>4, i);
+		bmpsprite(0, 8, COLOR_LTBLUE, y>>4, i);
+	}
+
+	// open the cockpit
+	VDP_WAIT_VBLANK_CRU;
+	musicsync();	// clears it
+	vdpchar(0x1b02, 20);	// window
+	VDP_SAFE_DELAY();		// probably don't need this, but just in case
+	vdpchar(0x1b0a, 16);	// outline
+
+	// player down from ship and move over a bit
+	y>>=4;	// lose the fraction
+	for (unsigned char i=0; i<4; ++i) {
+		for (unsigned char i2=0; i2<4; ++i2) {
+			VDP_WAIT_VBLANK_CRU;
+			musicsync();	// clears it
+		}
+		++y;
+		bmpsprite(3, 24, COLOR_DKBLUE, y, 112);
+	}
+
+	// player to the right behind the ship
+	for (unsigned char i=112; i<126; ++i) {
+		for (unsigned char i2=0; i2<4; ++i2) {
+			VDP_WAIT_VBLANK_CRU;
+			musicsync();	// clears it
+		}
+		bmpsprite(3, 24, COLOR_DKBLUE, y, i);
+	}
+	gnaty = 0;
+
+	runText(gnatstory2);
+	delayText(DELAYT);
+
+	runText(gnatstory3);
+	delayText(DELAYT);
+
+	// wait, then clear the text
+	VDP_WAIT_VBLANK_CRU;
+	musicsync();	// clears it
+	vdpmemset(0x1800+512, ' ', 32*8);
+
+	// wait for music to end
+	while (isSNPlaying) {
+		VDP_WAIT_VBLANK_CRU;
+		musicsync();	// clears it
+	}
+
+	// set graphics mode back before we exit
+	i2 = grf1();
+	
+	/*load VDP data */
+	loadcharset();
+	
+	spdall();	// clears sprite table
+	vdpmemset(gSPRITES, 0xd0, 128);	// clears VDP copy of sprite table (fixes initial gfx glitch)
+	sgrint();	// fix color table
+	VDP_SET_REGISTER(VDP_REG_MODE1, i2);	// Switch screen on
+	FIX_KSCAN(i2);
+}
 
 void gamewinhard() {
 	// just returns for now
 	if (playership == SHIP_SELENA) selenawin();
 	else if (playership == SHIP_LADYBUG) ladybugwin();
+	else if (playership == SHIP_GNAT) gnatwin();
 
 }
