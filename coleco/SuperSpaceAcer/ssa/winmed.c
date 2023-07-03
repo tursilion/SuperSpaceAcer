@@ -1,6 +1,3 @@
-// TODO: crashed after running the gnat win function from the sound test
-// sounded like it didn't end when it was expected to, played though game over then crashed.
-
 // libti99
 #include <vdp.h>
 #include <sound.h>
@@ -289,7 +286,10 @@ void gamewinmedium() {
 		}
 	}
 
-//	while (!pDone) {
+	// turn off the music loop
+	pLoopMus = NULL;
+
+	// wait for it to end
     while (isSNPlaying) {
 		musicvdpsync(0,0);
 	}

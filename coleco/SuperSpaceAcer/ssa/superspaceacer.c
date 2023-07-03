@@ -19,8 +19,8 @@
 #include "music.h"
 #include "attract.h"
 
-// full software reboot vector
-static void (* const hwreboot)()=0x802d;
+// full software reboot vector (warning: hard coded but defined by the crt0)
+static void (* const hwreboot)()=0x802c;
 
 // startup and init, central code
 #define SIZE_OF_CHARS		160
@@ -815,6 +815,8 @@ void main() {
     initSound();
 
 titleagain:
+	screen(COLOR_BLACK);
+
 	SWITCH_IN_BANK9;
 	handleTitlePage();
 

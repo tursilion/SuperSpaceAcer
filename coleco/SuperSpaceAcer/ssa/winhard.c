@@ -61,7 +61,7 @@ const char gnatstory1[] =
 	"victory celebration for our new "
 	"champion, the amazing pilot GNAT"
 	"who has destroyed the Qwertian  "
-	"threat! We expect them to arrive"
+	"threat! We expect GNAT to arrive"
 	"at any moment...                "
 	"*";
 
