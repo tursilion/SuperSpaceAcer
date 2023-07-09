@@ -11,6 +11,8 @@
 #include "enemy.h"
 #include "trampoline.h"
 
+extern unsigned char screenFlashCnt;
+
 // movement pattern for saucers (3-bits)
 const signed char sinemove[32] = {	0,1,2,2,3,3,4,4,
 									4,4,4,3,3,2,2,1,
@@ -27,6 +29,7 @@ const signed char speedtab[16] = {
 	8, 64, -8, -64
 };
 
+// minimum timing for generators
 const unsigned char mincnt[8] = {
     5,  // saucer
     2,  // jet
@@ -189,7 +192,7 @@ void enout() {
 						if (enc[k] > 144) enc[k]-=128;
 						break;
 				} 
-				if (scoremode == 3) c=COLOR_BLACK;	// invisible enemies (TODO: if the background color changes, it may not be black)
+				if (scoremode == 3) c=bgColor;	// invisible enemies
 				ech[k]=esc[k];
 				sprite(k+ENEMY_SPRITE,ech[k],c,enr[k],enc[k]);
             }
@@ -460,11 +463,109 @@ void enemyshot(uint8 x) {
 	enr[x]+=ers[x];
 	enc[x]+=ecs[x];
 
-	if (enr[x]>191) noen(x);	// no worries for top row will invisibly wrap around!
-	if (enc[x]>239) noen(x);	// wider on right edge due to hotspot of sprite (need this to catch the bomb explosion bits)
-	if (enc[x]<5) noen(x);
-	if (ent[x] != ENEMY_NONE) {
+	// no worries for top row will invisibly wrap around!
+	// wider on right edge due to hotspot of sprite (need this to catch the bomb explosion bits)
+	if ((enr[x]>191)||(enc[x]>239)||(enc[x]<5)) {
+		noen(x);
+	} else {
 		sploct(x+ENEMY_SPRITE,enr[x],enc[x]); 
+	}
+}
+
+// ONLY '7' is legal for input, and we assume 8-11 are follower sprites!
+// so we ignore the input and just assume the indexes for better performance
+void enemyhominglaser(uint8 a) {
+	unsigned char oldc = enc[7];
+	char x;
+	(void)a;
+
+	// TODO: the laser isn't dying properly...
+	if (ent[7] == ENEMY_EXPLOSION) {
+		// just fade out the trail
+		for (unsigned char i=11; i>7; --i) {
+			if (ent[i] == ENEMY_EXPLOSION) {
+				if ((i==8)||(ent[i-1]==ENEMY_NONE)) {
+					enr[i]=esc[7];
+					enc[i]=eec[7];
+				} else {
+					enr[i]=enr[i-1];
+					enc[i]=enc[i-1];
+				}
+
+				if ((enr[i]==esc[7])&&(enc[i]==eec[7])) {
+					noen(i);
+					if (i==11) {
+						// we're done
+						noen(7);
+					}
+				} else {
+					sploct(ENEMY_SPRITE+i,enr[i],enc[i]);
+				}
+			} 
+		}
+	} else {
+		/* update the trail first */
+		for (unsigned char i=11; i>7; --i) {
+			enr[i]=enr[i-1];
+			enc[i]=enc[i-1];
+			sploct(ENEMY_SPRITE+i,enr[i],enc[i]);
+		}
+
+		/* move the boss homing shots (much the same as the princess) */
+		if (ech[7]) {
+			// ech is used to limit how long the shot homes for
+			--ech[7];
+			ers[7]+=target(SHIP_R,enr[a]);
+			ecs[7]+=target(SHIP_C,enc[a]);
+			if (ers[7]==0) ers[7]=2;
+			if (ers[7]<-6) ers[7]=-6;
+			if (ers[7]>6) ers[7]=6;
+			if (ecs[7]<-6) ecs[7]=-6;
+			if (ecs[7]>6) ecs[7]=6;
+		}
+		enr[7]+=ers[7];
+		enc[7]+=ecs[7];
+		x=(signed)(oldc>>6)-(signed)(enc[7]>>6);	// divide horizonal into 4 quads and look for wraparound
+		if ((enr[7]==0)||(enr[7]>191)||(abs(x)>1)) {
+			// save position in unused animation vars for trail compare
+			esc[7]=enr[7];
+			eec[7]=enc[7];
+			// remove sprite
+			noen(7);
+			// change type so we keep being called
+			ent[7]=ENEMY_EXPLOSION;
+		} else {
+			sploct(ENEMY_SPRITE+7,enr[7],enc[7]);
+		}
+	}
+}
+
+// boss homing shot - slower than laser and no trail
+void enemyhoming(uint8 a) {
+	unsigned char oldc = enc[a];
+	char x;
+
+	/* move the boss homing shots (much the same as the princess) */
+	/* homes for a short duration, or if they are moving up! */
+	if ((ech[a])||(ers[a]<0)) {
+		// ech is used to limit how long the shot homes for
+		if (ech[a]) --ech[a];
+		ers[a]+=target(SHIP_R,enr[a]);
+		ecs[a]+=target(SHIP_C,enc[a]);
+		if (ers[a]==0) ers[a]=2;
+		if (ers[a]<-4) ers[a]=-4;
+		if (ers[a]>4) ers[a]=4;
+		if (ecs[a]<-4) ecs[a]=-4;
+		if (ecs[a]>4) ecs[a]=4;
+	}
+	enr[a]+=ers[a];
+	enc[a]+=ecs[a];
+	x=(signed)(oldc>>6)-(signed)(enc[a]>>6);	// divide horizonal into 4 quads and look for wraparound
+	if ((enr[a]==0)||(enr[a]>191)||(abs(x)>1)) {
+		// remove sprite
+		noen(a);
+	} else {
+		sploct(ENEMY_SPRITE+a,enr[a],enc[a]);
 	}
 }
 
@@ -548,7 +649,7 @@ void enemybeamgen(uint8 x) {
 	}
 	if (ent[x] != ENEMY_NONE) {
         unsigned char c = COLOR_GRAY;
-        if (scoremode == 3) c=COLOR_BLACK;
+        if (scoremode == 3) c=bgColor;	// invisible enemies
 
 		if (ent[x+6] != ENEMY_BEAM) {
 			// we don't have both sprites available, just draw the one we have
@@ -634,12 +735,6 @@ void enemy()
 	} else {
 		spdel(31);
 	}
-}
- 
-void noen(uint8 x) { 
-	/* remove enemy x from service */
-	spdel(x+ENEMY_SPRITE);
-	ent[x]=ENEMY_NONE;
 }
  
 void shootplayer(unsigned char en, unsigned char shot) {

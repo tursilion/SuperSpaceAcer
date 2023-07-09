@@ -17,6 +17,9 @@
 #include "human.h"
 #include "music.h"
 
+// bg.c
+extern unsigned char screenFlashCnt;
+
 // color of player's ship (was white)
 unsigned char playerColor;
 char shotOffset;
@@ -807,8 +810,8 @@ void playerinit() {
 	}
 }
 
-void dyen(unsigned char x)
-{ /* enemy has been shot */
+void dyen(unsigned char x) { 
+	/* enemy has been shot */
 	uint8 r,c,k;
 
 	if (ep[x] > 0) {
@@ -859,7 +862,8 @@ void dyen(unsigned char x)
 		} else {
 			playsfx_nukebomb(); // overrides previous
 			spposn(x+ENEMY_SPRITE,r,c);
-			screen(15);
+			screen(COLOR_WHITE);
+			screenFlashCnt = 4;
 
 			for (k=0; k<12; k++) {
 				wrapnoen(k);

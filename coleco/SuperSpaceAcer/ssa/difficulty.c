@@ -236,6 +236,7 @@ void soundtest() {
 		centr(r, musText[r>>1]);
 	}
 	wrapinitstars();
+	level = 1;	// to make sure we get stars
 
 	for (;;) {
 		waitforstep();

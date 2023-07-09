@@ -1,4 +1,10 @@
-// TODO: boss cockpit sprite needs to better conform to the boss shape
+// TODO: boss cockpit sprite needs to better conform to the boss shape.
+// If I have the ROM to spare, and I probably do, I could write a little
+// program to generate a lookup table. We currently get a pixel coordinate
+// roughly inside the boss rectangle. If we subtract roff/coff and divide
+// by 8 to get a character position, the lookup table could provide the
+// closest valid pixel position. Then we add back roff/coff and any fractional
+// pixels (mod 8)
 
 // libti99 
 #include <vdp.h>
@@ -20,19 +26,31 @@
 
 // a scaled difficulty level for the boss motion
 uint8 scaledLevel;
+#define HOMINGFRAMES 10
 
 // TODO: slows down when full pulse weapon is damaging body - can we optimize more?
+
+// some graphics copies so we don't need to page flip for graphics during the final boss
+const unsigned char beamleftgfx[] = {
+	// beam moving left (104)
+	0x00,0x00,0x00,0x00,0x04,0x08,0x19,0x11,0x11,0x19,0x08,0x04,0x00,0x00,0x00,0x00,
+	0x00,0x00,0x00,0x20,0x40,0x80,0x80,0x00,0x00,0x80,0x80,0x40,0x20,0x00,0x00,0x00
+};
+const unsigned char hominggfx[] = {
+    0x00,0x00,0x00,0x03,0x04,0x0B,0x17,0x17,0x17,0x17,0x0B,0x04,0x03,0x00,0x00,0x00,
+    0x00,0x00,0x00,0xC0,0x20,0xD0,0xE8,0xE8,0xE8,0xE8,0xD0,0x20,0xC0,0x00,0x00,0x00
+};
 
 //*BOSSES
 // Number Rows, Number Columns
 // 3 sets of Engine Row, Engine Column
 // Color
 const char BOSTAB[] = {
-	8,11,	-8,17,	-8,49,	0,0,	2,
-	11,11,	-5,14,	-7,34,	-5,52,	6,
-	7,11,	-8,2,	-8,34,	-8,64,	5,
-	12,11,	-8,-1,	-2,32,	-8,66,	10,
-	9,15,	5,15,	6,50,	5,84,	13
+	8,11,	-8,17,	-8,49,	0,0,	COLOR_MEDGREEN,
+	11,11,	-5,14,	-7,34,	-5,52,	COLOR_DKRED,
+	7,11,	-8,2,	-8,34,	-8,64,	COLOR_LTBLUE,
+	12,11,	-8,-1,	-2,32,	-8,66,	COLOR_DKYELLOW,
+	9,15,	5,15,	6,50,	5,84,	COLOR_MAGENTA
 };
 
 char br,bd;			// these ones need to be signed
@@ -126,9 +144,11 @@ void boss()
 
 	// set up the scaled movement speed
 	scaledLevel = level;
-	if (scaledLevel > 4) scaledLevel = 4;	// max out boss movement speed
+	if (scaledLevel > 3) scaledLevel = 3;	// max out boss movement speed
 	if ((nDifficulty == DIFFICULTY_EASY)&&(scaledLevel > 2)) scaledLevel=2;
-	if ((nDifficulty == DIFFICULTY_MEDIUM)&&(scaledLevel > 3)) scaledLevel=3;
+
+	// copy in the homing graphics overtop of the beam left
+	vdpmemcpy(104*8+0x0800, hominggfx, 4*8);	// load sprite patterns
 
 	// start the music now
 	StartMusic(BOSSMUS, 1);
@@ -142,8 +162,7 @@ void boss()
 	br=-BNR;
 	if (scoremode == 3) {
 		// invisible enemies
-		// TODO: if the background changes, it won't always be black
-		bosscol(COLOR_BLACK);
+		bosscol(bgColor);
 	} else {
 		bosscol(BOSTAB[p]);
 	}
@@ -224,6 +243,9 @@ void boss()
 
 	// reset boss color set in case it flashed (just always)
 	VDP_SET_ADDRESS(0x830e);		// CT at >0380
+
+	// restore the beam graphics
+	vdpmemcpy(104*8+0x0800, beamleftgfx, 4*8);	// load sprite patterns
 
 	// check if player won the battle
 	if (flag == MAIN_LOOP_ACTIVE) {
@@ -310,6 +332,7 @@ void erboss() {
 
 void mboss() { 
 	/*boss control*/
+	static unsigned char next=32;
 	uint8 x,a;
 
 	// get the update out of the way first
@@ -339,7 +362,39 @@ void mboss() {
 	if (bc>=(31-BNC)<<2) bd=-x;
 	if (bc<=1) bd=x;
 
-	if ((level==3)||(level==5)) { 
+	if (level == 1) {
+		if ((ent[8]==ENEMY_NONE) && ((rndnum()&7)<3)) { 
+			ent[7]=ENEMY_SHOT; ent[8]=ENEMY_SHOT;
+			en_func[7]=enemyshot; en_func[8]=enemyshot;
+			enr[7]=56+(br<<3); enr[8]=enr[7];
+			enc[7]=(bc<<1)+16; enc[8]=enc[7]+40;
+			ecs[7]=0; ecs[8]=0;
+			ers[7]=3+scaledLevel; ers[8]=ers[7];
+			sprite(ENEMY_SPRITE+6+1,84,12,enr[7],enc[7]);
+			sprite(ENEMY_SPRITE+6+2,84,12,enr[8],enc[8]);
+		}
+	} else if (level == 2) {
+		if ((ent[8]==ENEMY_NONE) && ((rndnum()&7)<3)) { 
+			ecs[7]=-3; ecs[8]=0; ecs[9]=3;
+			for (a=7; a<10; a++) { 
+				if ((nDifficulty == DIFFICULTY_EASY) && (a != 8)) {
+					continue;
+				}
+				ent[a]=ENEMY_SHOT; 
+				en_func[a]=enemyshot;
+				enr[a]=80+(br<<3);
+				enr[8]=enr[a]+8;		// no need to do a conditional, just update it each time
+				enc[a]=(bc<<1)+36;
+				ers[7]=3+scaledLevel; ers[8]=ers[7]; ers[9]=ers[7];
+				if (nDifficulty == DIFFICULTY_MEDIUM) {
+					// less steep angle
+					ecs[7]=-2;
+					ecs[10]=2;
+				}
+				sprite(a+ENEMY_SPRITE,84,12,enr[a],enc[a]); 
+			}
+		}
+	} else if (level==3) { 
 		// decide if mines come out
 		if ((rndnum()&7)<3) {
 			x=255;
@@ -361,100 +416,161 @@ void mboss() {
 				enc[x]=(bc<<1)+45;
 				eec[x]=8; esc[x]=8; ech[x]=8;
 				if (scoremode == 3) {
-					sprite(x+ENEMY_SPRITE,8,COLOR_BLACK,enr[x],enc[x]);
+					// invisible enemies
+					sprite(x+ENEMY_SPRITE,8,bgColor,enr[x],enc[x]);
 				} else {
 					sprite(x+ENEMY_SPRITE,8,COLOR_CYAN,enr[x],enc[x]);
 				}
 			}
 		}
-	}
-	
-	// decide if we shoot
-	if ((ent[8]==ENEMY_NONE) && ((rndnum()&7)<3)) { 
-		for (a=7; a<12; a++) { 
-			ech[a]=84; eec[a]=84; esc[a]=84;
-			ers[a]=3+scaledLevel; 
+	} else if (level == 4) {
+		// staggered homing shots from around 35,71
+		if ((next>=0x50)&&((VDP_INT_COUNTER&0x7f)<32)) {
+			next=0x10;
 		}
-		
-		switch (level) { 
-			case 1:
-				ent[7]=ENEMY_SHOT; ent[8]=ENEMY_SHOT;
-				en_func[7]=enemyshot; en_func[8]=enemyshot;
-				enr[7]=56+(br<<3); enr[8]=enr[7];
-				enc[7]=(bc<<1)+16; enc[8]=enc[7]+40;
-				ecs[7]=0; ecs[8]=0;
-				sprite(ENEMY_SPRITE+6+1,84,12,enr[7],enc[7]);
-				sprite(ENEMY_SPRITE+6+2,84,12,enr[8],enc[8]);
-				break;
-
-			case 2:
-				ecs[7]=-3; ecs[8]=0; ecs[9]=3;
-				for (a=7; a<10; a++) { 
-					if ((nDifficulty == DIFFICULTY_EASY) && (a != 8)) {
-						continue;
+		if ((VDP_INT_COUNTER&0x7f) >= next) {
+			unsigned char ok=0;
+			switch(next&0xf0) {
+				case 0x10:	// only hard
+					if (nDifficulty==DIFFICULTY_HARD) ok=1;
+					break;
+				case 0x30:	// medium or hard
+					if (nDifficulty!=DIFFICULTY_EASY) ok=1;
+					break;
+				case 0x50:	// all of them
+					ok=1;
+					break;
+			}
+			next+=0x10;
+			if (ok) {
+				// find a free shot - maximum 3!
+				for (unsigned char a=7; a<10; a++) { 
+					if (ent[a]==ENEMY_NONE) {
+						ers[a]=0;	// start static
+						ecs[a]=0;
+						ent[a]=ENEMY_SHOT; 
+						en_func[a]=enemyhoming;
+						ech[a]=HOMINGFRAMES;
+						enr[a]=71+(br<<3); 
+						enc[a]=(bc<<1)+35;
+						sprite(a+ENEMY_SPRITE,84,COLOR_WHITE,enr[a],enc[a]);
+						break;
 					}
-					ent[a]=ENEMY_SHOT; 
-					en_func[a]=enemyshot;
-					enr[a]=80+(br<<3);
-					enr[8]=enr[a]+8;		// no need to do a conditional, just update it each time
-					enc[a]=(bc<<1)+36;
-					if (nDifficulty == DIFFICULTY_MEDIUM) {
-						ecs[7]=-2;
-						ecs[10]=2;
-					}
-					sprite(a+ENEMY_SPRITE,84,12,enr[a],enc[a]); 
 				}
-				break;
-
-			case 4:
-				for (a=7; a<11; a++) { 
-					if ((nDifficulty == DIFFICULTY_EASY) && ((a==7)||(a==10))) {
-						continue;
-					}
-					ent[a]=ENEMY_SHOT; 
-					en_func[a]=enemyshot;
-					enr[a]=88+(br<<3); 
-				}
-				enr[8]+=8; enr[9]=enr[8];
-				enc[7]=(bc<<1)+24; enc[8]=enc[7]+8;
-				enc[9]=enc[8]+8; enc[10]=enc[9]+8;
-				ecs[7]=-4; ecs[8]=0; ecs[9]=0;
-				ecs[10]=4;
-				if (nDifficulty == DIFFICULTY_MEDIUM) {
-					ecs[7]=-2;
-					ecs[10]=2;
-				}
-				for (a=7; a<11; a++) {
-					if (ent[a] != ENEMY_NONE) {
+			}
+		}
+	} else if (level == 5) {
+		// three phases - drop one mine, fire bullets, or launch up to 3 homing shots
+		if ((next>=0xf0)&&((VDP_INT_COUNTER&0x3f)<32)) {
+			next=16;
+		}
+		if (VDP_INT_COUNTER >= next) {
+			// we step by 16s and space out our actions - note because of previous
+			// bosses, we might start at any pattern
+			// We assume the shots don't conflict for performance, they usually shouldn't...
+			switch (next&0xf0) {
+				case 0x20:
+					// fire guns
+					for (a=7; a<12; a++) {
+						noen(a);	// make sure any lingering homing lasers are killed
+						if ((nDifficulty < DIFFICULTY_HARD) && ((a==7)||(a==11))) {
+							continue;
+						}
+						if ((nDifficulty == DIFFICULTY_EASY) && (a==9)) {
+							continue;
+						}
+						ent[a]=ENEMY_SHOT; 
+						en_func[a]=enemyshot;
+						switch(a) {
+							case 7:
+								enr[7]=56+(br<<3);
+								enc[7]=(bc<<1)+32;
+								ecs[7]=-8;
+								ers[7]=3+scaledLevel;
+								break;
+							case 8:
+								enr[8]=64+(br<<3);
+								enc[8]=(bc<<1)+40;
+								ecs[8]=-4;
+								ers[8]=3+scaledLevel;
+								break;
+							case 9:
+								enr[9]=72+(br<<3);
+								enc[9]=(bc<<1)+48;
+								ecs[9]=0;
+								ers[9]=3+scaledLevel;
+								break;
+							case 10:
+								enr[10]=64+(br<<3);
+								enc[10]=(bc<<1)+64;
+								ecs[10]=4;
+								ers[10]=3+scaledLevel;
+								break;
+							case 11:
+								enr[11]=56+(br<<3);
+								enc[11]=(bc<<1)+72;
+								ecs[11]=8;
+								ers[11]=3+scaledLevel;
+								break;
+						}
 						sprite(a+ENEMY_SPRITE,84,12,enr[a],enc[a]);
 					}
-				}
-				break;
+					break;
 
-			case 5:
-				for (a=7; a<12; a++) {
-					if ((nDifficulty < DIFFICULTY_HARD) && ((a==7)||(a==11))) {
-						continue;
+				case 0x40:
+				{
+					// drop one mine
+					unsigned char x=255;
+					if (ent[3] == ENEMY_NONE) {
+						x=3;
 					}
-					if ((nDifficulty == DIFFICULTY_EASY) && (a==9)) {
-						continue;
+					if ((nDifficulty >= DIFFICULTY_MEDIUM) && (ent[4] == ENEMY_NONE)) {
+						x=4;
 					}
-					ent[a]=ENEMY_SHOT; 
-					en_func[a]=enemyshot;
+					if ((nDifficulty == DIFFICULTY_HARD) && (ent[5] == ENEMY_NONE)) {
+						x=5;
+					}
+					if (x<255) { 
+						ent[x]=ENEMY_MINE;
+						en_func[x]=enemymine;
+						ep[x]=bossminepower++;	// muhaha - harder than in the levels, and worse the longer you stay
+						if (bossminepower > 126) bossminepower=126;
+						enr[x]=64+(br<<3);
+						enc[x]=(bc<<1)+45;
+						eec[x]=8; esc[x]=8; ech[x]=8;
+						if (scoremode == 3) {
+							// invisible enemies
+							sprite(x+ENEMY_SPRITE,8,bgColor,enr[x],enc[x]);
+						} else {
+							sprite(x+ENEMY_SPRITE,8,COLOR_CYAN,enr[x],enc[x]);
+						}
+					}
 				}
-				enr[7]=56+(br<<3); enr[8]=enr[7]+8; enr[9]=enr[8]+8;
-				enr[10]=enr[8]; enr[11]=enr[7];
-				enc[7]=(bc<<1)+32; enc[8]=enc[7]+8;
-				enc[9]=enc[8]+12; enc[10]=enc[9]+12;
-				enc[11]=enc[10]+8; ecs[7]=-8;
-				ecs[8]=-4; ecs[9]=0; ecs[10]=4;
-				ecs[11]=8;
-				for (a=7; a<12; a++) {
-					if (ent[a] != ENEMY_NONE) {
-						sprite(a+ENEMY_SPRITE,84,12,enr[a],enc[a]);
+					break;
+
+				case 0x80:
+					// homing laser shot - we assume the bullets are all free!
+					// TODO: laser sound effect
+					ers[7]=0;	// start static
+					ecs[7]=0;
+					ent[7]=ENEMY_SHOT; 
+					en_func[7]=enemyhominglaser;	// ONLY 7 is legal!
+					ech[7]=HOMINGFRAMES+HOMINGFRAMES;
+					enr[7]=50+(br<<3); 
+					enc[7]=(bc<<1)+48;
+					sprite(7+ENEMY_SPRITE,104,COLOR_WHITE,enr[7],enc[7]);
+					for (unsigned char a=8; a<12; ++a) {
+						ers[a]=0;	// start static
+						ecs[a]=0;
+						ent[a]=ENEMY_EXPLOSION;	// no collision, just a trail
+						en_func[a]=enemynull;
+						enr[a]=enr[7]; 
+						enc[a]=enc[7];
+						sprite(a+ENEMY_SPRITE,104,a<10?COLOR_LTBLUE:COLOR_DKBLUE,enr[a],enc[a]);
 					}
-				}
-				break;
+					break;
+			}
+			next+=16;
 		}
 	}
 }
@@ -733,7 +849,7 @@ void AddDestroyed(unsigned int ptr) {
 }
 
 // copies the boss patterns scrolled into the next cell
-// idx indicates the target scroll table (0-2)
+// idx indicates the target scroll table (0-3)
 // r indicates the boss row (0-(BNR-1))
 void PrepareBoss(unsigned char idx, unsigned char r) {
 	unsigned char idx2;

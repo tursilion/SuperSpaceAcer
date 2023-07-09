@@ -41,7 +41,7 @@ SPRITE PATTERNS
 92-95	- pulse cannon medium
 96-99	- pulse cannon big
 100-103 - player flame
-104-107	- electric wall beam left
+104-107	- electric wall beam left / final boss homing shot
 108-123 - player ship straight
 124-139 - player shield straight
 140-155	- player ship left
@@ -87,7 +87,7 @@ SPRITES
 -------
 0-3 		- Player ship
 4 			- powerup
-8-16		- enemies + shots
+5-16		- enemies + shots (6 each)
 17 			- player flame
 18-21 		- player shield
 22-30 		- player shots

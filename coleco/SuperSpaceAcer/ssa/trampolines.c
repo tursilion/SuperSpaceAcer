@@ -83,11 +83,12 @@ void wrapplayerstraight() {
 void wrapunpackboss(unsigned char level) {
 	unsigned int old = nBank;
 	SWITCH_IN_BANK5;
+	// level 2 is handled at level start
 	switch (level) {
 		case 1:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS1, (BNR*BNC)<<3); break;
 		case 2:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS2, (BNR*BNC)<<3); break;
 		case 3:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS3, (BNR*BNC)<<3); break;
-		case 4:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS4, (BNR*BNC)<<3); break;
+		case 4:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS4, (BNR*BNC)<<3); vdpmemcpy(84*8+0x0800, HOMING, 4*8); break;
 		case 5:	RLEUnpack(gPATTERN+BOSS_START*8, BOSS5, (BNR*BNC)<<3); break;
 	}
 	SWITCH_IN_PREV_BANK(old);

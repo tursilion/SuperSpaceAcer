@@ -45,13 +45,14 @@ enum {
 
 void enout();
 void enemy();
-void noen(uint8 x);
 void shootplayer(unsigned char en, unsigned char shot);
 void helishoot(unsigned char en);
 void enemyinit();
 void enemyexplosion(uint8);
 void enemyengine(uint8);
 void enemyshot(uint8);
+void enemyhominglaser(uint8);
+void enemyhoming(uint8);
 void enemymine(uint8);
 void enemynull(uint8);
 void enemysaucer(uint8 x);

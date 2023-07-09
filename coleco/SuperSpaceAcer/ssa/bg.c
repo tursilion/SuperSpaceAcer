@@ -1,4 +1,4 @@
-// libti99
+ // libti99
 #include <vdp.h>
 #include <sound.h>
 #include <kscan.h>
@@ -14,6 +14,7 @@
 
 uint8 stdata[NUM_SMALL_STARS*3];    // strided array so we can use faster(?) pointer math: row, col, offset
 extern unsigned char tmpbuf[32];
+unsigned char screenFlashCnt;
 
 // do the background effect
 // note the static counter cnt
@@ -24,21 +25,6 @@ void background() {
 
 	/* used to count half frames */
 	cnt++;
-
-#if 0
-	just a dumb test to remove - makes a scrolling background
-	x=cnt&7;
-	tmpbuf[(x+0)&7]=0;
-	tmpbuf[(x+1)&7]=0;
-	tmpbuf[(x+2)&7]=0;
-	tmpbuf[(x+3)&7]=2;
-	tmpbuf[(x+4)&7]=0;
-	tmpbuf[(x+5)&7]=0;
-	tmpbuf[(x+6)&7]=0x20;
-	tmpbuf[(x+7)&7]=0;
-	patcpy(0, 32);
-	// end test
-#endif
 
 	/* move small stars */
 	// Note that there are three speeds of small stars - 1/2 frame, 1 frame, and 2 per frame
@@ -81,7 +67,12 @@ void stars()
 	waitforstep();
 
 	// reset screen color
-	screen(1);
+	if (screenFlashCnt) {
+		--screenFlashCnt;
+		if (screenFlashCnt == 0) {
+			screen(bgColor);
+		}
+	}
 }
  
 // note: does not draw the stars

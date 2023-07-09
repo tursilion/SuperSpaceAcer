@@ -134,11 +134,11 @@ extern const unsigned char colecofont[];
 // shield is 4 sprites
 #define PLAYER_SHIELD 18
 
-// boss data
+// boss data (BOSS start for ships, POD start for level 2 pods)
 #define BOSS_START 121
 extern const unsigned char BOSS1[],BOSS2[],BOSS3[],BOSS4[],BOSS5[];
 
-// player ships (damnit, we'll need different endings now...)
+// player ships
 // function pointers are used for the init, set shield and set normal copies
 // also define color 
 
@@ -238,6 +238,7 @@ void deShieldGnat();
 void deShieldSelena();
 void handleTitlePage();
 void reboot();
+void noen(uint8 x);
 
 // macros to look like the old c99
 #define screen(x) VDP_SET_REGISTER(VDP_REG_COL, x)
@@ -287,6 +288,7 @@ extern uint8 shr[NUM_SHOTS+1], shc[NUM_SHOTS];
 extern uint8 pcr4,ptp4,pr4,pc4,p4Time;
 extern uint8 flag;
 extern unsigned char nDifficulty;
+extern unsigned char bgColor;
 extern unsigned char tmpbuf[32];
 extern const unsigned char damage[8];
 extern int distns;

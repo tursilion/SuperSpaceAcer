@@ -63,9 +63,11 @@ int distns;
 unsigned char nDifficulty;
 unsigned char seed=1;
 unsigned char attractShip = 0;
+unsigned char bgColor = COLOR_BLACK;
 
 extern const unsigned char CHARS[];
 extern const unsigned char ELECTRICWALL[];
+extern unsigned char screenFlashCnt;
 
 // used for patcpy and scroll
 unsigned char tmpbuf[32];
@@ -541,6 +543,12 @@ void RLEUnpackInt(unsigned char *bufp, unsigned char *bufc, unsigned int nMax) {
 		}
 
 	}
+}
+
+void noen(uint8 x) { 
+	/* remove enemy x from service */
+	spdel(x+ENEMY_SPRITE);
+	ent[x]=ENEMY_NONE;
 }
 
 char target(unsigned char dest, unsigned char src)
@@ -1028,18 +1036,26 @@ void space()
 		}
 	}
 }
- 
-void ispace()
-{
+
+void ispace() {
 	/* init space level (stars, music, etc) */
+	/* actually it's any level now, but when first started this game was going to
+	 * include mazes like Major Havoc. Don't think I will have that now...
+	 */
+
 	cls();
 	spdall();
 	screen(1);
 	shutup();
+	sgrint();	// sets color table
+	memset(tmpbuf, 0, 8);
+	patcpy(0, 32);	// clear the space characters
+	screenFlashCnt = 0;
 
-	// load the electric wall sprites
+	// load the electric wall sprites and normal shots
 	SWITCH_IN_BANK5;
 	vdpmemcpy(gSPRITE_PATTERNS+76*8, ELECTRICWALL, 2*4*8);
+	vdpmemcpy(gSPRITE_PATTERNS+84*8, &SPRITES[84*8], 4*8);
 
 	// small stars first
 	SWITCH_IN_BANK6;
@@ -1051,7 +1067,10 @@ void ispace()
 		hchar(23, 2, LIVESCHAR, lives);
 	}
 
-	// set up main music
+	// background color for cloaked enemies
+	bgColor = COLOR_BLACK;
+
+	// set up main music and any stage-specific stuff
 	switch(level) {
 	case 1:	StartMusic(STAGE1MUS, 1); break;
 	case 2:	StartMusic(STAGE2MUS, 1); break;
