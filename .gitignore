@@ -36,3 +36,4 @@ Debug/
 *.user
 *.a99
 .vs/
+.git*

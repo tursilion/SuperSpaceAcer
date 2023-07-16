@@ -1,1 +1,0 @@
-path=".\";"D:\work\coleco\sdcc-4.2.0\bin\";"/mnt/d/work/coleco/sdcc-4.2.0/bin/"
